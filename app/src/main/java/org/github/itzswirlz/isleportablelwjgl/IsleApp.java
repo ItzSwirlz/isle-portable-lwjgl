@@ -10,5 +10,6 @@ public class IsleApp {
 
     public static void main(String[] args) {
         System.out.println(new IsleApp().getGreeting());
+        LEGO1Library.EventManager()
     }
 }

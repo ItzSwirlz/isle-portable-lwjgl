@@ -9,6 +9,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id "io.github.krakowski.jextract" version "0.5.0"
 }
 
 project.ext.lwjglVersion = "3.3.6"
@@ -99,6 +100,9 @@ dependencies {
     implementation "org.lwjgl:lwjgl-xxhash::$lwjglNatives"
     implementation "org.lwjgl:lwjgl-yoga::$lwjglNatives"
     implementation "org.lwjgl:lwjgl-zstd::$lwjglNatives"
+
+    // https://mvnrepository.com/artifact/org.bytedeco/javacpp
+    implementation group: 'org.bytedeco', name: 'javacpp', version: '1.5.12'
 }
 
 repositories {
