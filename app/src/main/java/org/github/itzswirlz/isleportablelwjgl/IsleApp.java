@@ -10,6 +10,9 @@ public class IsleApp {
 
     public static void main(String[] args) {
         System.out.println(new IsleApp().getGreeting());
-        LEGO1Library.EventManager()
+
+        // Simple test
+        LEGO1.MxVideoParam videoParam = new LEGO1.MxVideoParam();
+        System.out.println("Video param addr: " + videoParam.address());
     }
 }

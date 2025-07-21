@@ -9,95 +9,25 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 @Properties(value =
 @Platform(
         includepath = {"/Users/jpeisach/isle-portable/LEGO1/omni/include",
-                "/Users/jpeisach/isle-portable/LEGO1/lego/sources/3dmanager",
                 "/Users/jpeisach/isle-portable/util",
-                "/Users/jpeisach/isle-portable/LEGO1/lego/legoomni/include",
-                "/Users/jpeisach/isle-portable/LEGO1/lego/legoomni/include/actions",
-                "/Users/jpeisach/isle-portable/LEGO1/realtime",
-                "/Users/jpeisach/isle-portable/LEGO1/tgl",
-                "/Users/jpeisach/isle-portable/LEGO1/",
-                "/Users/jpeisach/isle-portable/LEGO1/lego/sources",
-                "/Users/jpeisach/isle-portable/LEGO1/lego/sources/misc",
-                "/Users/jpeisach/isle-portable/LEGO1/lego/sources/roi",
-                "/Users/jpeisach/isle-portable/LEGO1/viewmanager",
-                "/Users/jpeisach/isle-portable/LEGO1/mxdirectx",
-                "/Users/jpeisach/isle-portable/miniwin/include/miniwin",
-                "/Users/jpeisach/isle-portable/miniwin/include",
-                "/Users/jpeisach/isle-portable/build/_deps/sdl3-src/include"},
+                "/Users/jpeisach/isle-portable/build/_deps/sdl3-src/include",
+                "/Users/jpeisach/isle-portable/miniwin/include/",
+                },
         linkpath = {"/Users/jpeisach/isle-portable-lwjgl"},
         include = {
-                // contains LEGO1_EXPORT
-                "legoanimationmanager.h",
-                "legobuildingmanager.h",
-                "legogamestate.h",
-              //  "legoinputmanager.h" breaks generator, this will be done manually
-                "legomain.h",
-                "legomodelpresenter.h",
-                "legopartpresenter.h",
-                "legoplantmanager.h",
-//                "legoroi.h", manual, bc then it needs roi craziness
-                "legotypes.h",
-                "legovideomanager.h",
-                "legoworldpresenter.h",
-                "misc.h",
-                "mxatom.h",
-                "mxbackgroundaudiomanager.h",
-                "mxcore.h",
-                "mxdirectdraw.h",
-                "mxdsaction.h",
-                "mxdsfile.h",
-                "mxmisc.h",
-                "mxomnicreateflags.h",
-                "mxomnicreateparam.h",
-                "mxomni.h",
-                "mxstring.h",
-                "mxstreamer.h",
-                "mxtimer.h",
-                "mxtransitionmanager.h",
-                "mxutilities.h",
-                //"mxvariabletable.h", TODO: stl/types/stuff
                 "mxvideoparam.h",
-                "mxvideoparamflags.h",
-                "realtimeview.h",
-                "viewmanager.h",
-
-
-                // these are dependencies that dont export anything and are lightweight
-
-                // Required dependency for LegoBackgroundColor
-                "mxvariable.h",
-
-                // Required for mxdssfile
-                "mxdssource.h",
-                "mxdsbuffer.h",
-
-                // legopartpresenter
-                "mxmediapresenter.h",
-                "mxpresenter.h",
-
-                // legowroldprresenter
-                "legoentitypresenter.h",
-                "mxcompositepresenter.h",
-
-                // miniwin
-                "windows.h",
-
-                // viewmanager
-                "viewroi.h",
-
-                // ugh
-//                "mxgeometry.h", will do mxrect32 manually
-
                 // decomp types
                 "decomp.h"
         },
+        define = {"MINIWIN"},
         link = {"LEGO1"}
 ),
         target = "org.github.itzswirlz.isleportablelwjgl.LEGO1"
 )
-public class LegoOneConfig implements InfoMapper {
+public class LEGO1Config implements InfoMapper {
     @Override
     public void map(InfoMap infoMap) {
+        infoMap.put(new Info("MINIWIN").cppTypes().annotations());
         infoMap.put(new Info("LEGO1_EXPORT").cppTypes().annotations());
         infoMap.put(new Info("HDC__*").pointerTypes("HDC"));
         infoMap.put(new Info("HDC").valueTypes("HDC__").pointerTypes("@Cast(\"HDC__*\") PointerPointer", "@ByPtrPtr HDC__*"));
