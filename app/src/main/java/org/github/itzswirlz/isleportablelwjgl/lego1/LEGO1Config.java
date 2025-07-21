@@ -1,4 +1,4 @@
-package org.github.itzswirlz.isleportablelwjgl;
+package org.github.itzswirlz.isleportablelwjgl.lego1;
 
 import org.bytedeco.javacpp.annotation.Platform;
 import org.bytedeco.javacpp.annotation.Properties;
@@ -15,39 +15,37 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 },
         linkpath = {"/Users/jpeisach/isle-portable-lwjgl"},
         include = {
+                "mxcore.h",
+                "mxticklemanager.h",
+                "mxtimer.h",
+//                "mxgeometry.h", //TODO: templates and lists
                 "mxvideoparam.h",
+                "mxvideoparamflags.h",
+
                 // decomp types
                 "decomp.h"
         },
         define = {"MINIWIN"},
         link = {"LEGO1"}
 ),
-        target = "org.github.itzswirlz.isleportablelwjgl.LEGO1"
+
+        target = "org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1"
 )
 public class LEGO1Config implements InfoMapper {
     @Override
     public void map(InfoMap infoMap) {
         infoMap.put(new Info("MINIWIN").cppTypes().annotations());
         infoMap.put(new Info("LEGO1_EXPORT").cppTypes().annotations());
-        infoMap.put(new Info("HDC__*").pointerTypes("HDC"));
-        infoMap.put(new Info("HDC").valueTypes("HDC__").pointerTypes("@Cast(\"HDC__*\") PointerPointer", "@ByPtrPtr HDC__*"));
 
-        infoMap.put(new Info("HWND__*").pointerTypes("HWND"));
-        infoMap.put(new Info("HWND").valueTypes("HWND__").pointerTypes("@Cast(\"HWND__*\") PointerPointer", "@ByPtrPtr HWND__* "));
-
-        infoMap.put(new Info("HMENU__*").pointerTypes("HMENU"));
-        infoMap.put(new Info("HMENU").valueTypes("HMENU__").pointerTypes("@Cast(\"HMENU__*\") PointerPointer", "@ByPtrPtr HMENU__* "));
-
-
+        // FIXME: append type templates
         infoMap.put(new Info("BOOL", "LegoBool", "MxBool").cast().valueTypes("boolean"));
         infoMap.put(new Info("LegoChar", "MxS8").cast().valueTypes("char"));
         infoMap.put(new Info("MxS16", "MxU8", "undefined").cast().valueTypes("short"));
-        infoMap.put(new Info("MxS32", "MxU16", "MxResult", "LegoResult", "LegoTime", "undefined2").cast().valueTypes("int"));
+        infoMap.put(new Info("MxS32", "MxU16", "MxResult", "LegoResult", "LegoTime", "undefined2", "MxTime").cast().valueTypes("int"));
         infoMap.put(new Info("MxU32", "MxLong", "Uint32", "LegoU32", "MxULong", "undefined4").cast().valueTypes("long"));
         infoMap.put(new Info("LegoFloat", "MxFloat").cast().valueTypes("float"));
     }
 }
-
 
 
 
