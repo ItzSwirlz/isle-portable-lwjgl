@@ -6,15 +6,49 @@ package org.github.itzswirlz.isleportablelwjgl.isle;
 import org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1;
 
 public class IsleApp {
-    public String getGreeting() {
-        return "Hello World!";
+    private String m_hdPath = null;
+    private String m_cdPath = null;
+    private String m_deviceId = null;
+    private String m_savePath = null;
+    private boolean m_fullScreen = true;
+    private boolean m_flipSurfaces = false;
+    private boolean m_backBuffersInVram = true;
+    private boolean m_using8bit = false;
+    private boolean m_using16bit = true;
+    private boolean m_hasLightSupport = false;
+    private boolean m_use3dSound = false;
+    private boolean m_useMusic = true;
+    private boolean m_wideViewAngle = true;
+    private int m_islandQuality = 2;
+    private int m_islandTexture = 1;
+    private boolean m_gameStarted = false;
+    private long m_frameDelta = 10;
+    private static LEGO1.MxVideoParam m_videoParam = new LEGO1.MxVideoParam(); // FIXME: Construct via MxRect
+    private boolean m_windowActive = true;
+//    private HWND m_windowHandle;
+    private boolean m_drawCursor;
+    // TODO: cursor stuff, everything past line 91 in header
+
+    public void Close() {
+
+    }
+
+    public int SetupLegoOmni() {
+        // TODO
+        return 0;
+    }
+
+    public static long SetupWindow() {
+        // TODO
+        // FIXME: check via MxDirectDraw
+        m_videoParam.Flags().Set16Bit(true);
+
+        // TODO: cursor stuff
+        // TODO: LegoOmni::CreateInstance and afterward
+        return 0;
     }
 
     public static void main(String[] args) {
-        System.out.println(new IsleApp().getGreeting());
-
-        // Simple test
-        LEGO1.MxVideoParam videoParam = new LEGO1.MxVideoParam();
-        System.out.println("Video param addr: " + videoParam.address());
+        SetupWindow();
     }
 }
