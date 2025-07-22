@@ -32,7 +32,7 @@ public class IsleApp {
     private long m_frameDelta = 10;
     private static LEGO1.MxVideoParam m_videoParam = new LEGO1.MxVideoParam(new LEGO1.MxRect32(0, 0, 639, 479), null, 1, new LEGO1.MxVideoParamFlags());
     private boolean m_windowActive = true;
-    private static LEGO1.HWND__ m_windowHandle;
+    private static LEGO1.HWND m_windowHandle;
     private boolean m_drawCursor;
 
     // TODO: cursor stuff, everything past line 91 in header
@@ -110,7 +110,7 @@ public class IsleApp {
 
         long window = SDLVideo.SDL_CreateWindowWithProperties(props);
         Pointer pointer = new Pointer(Pointer.malloc(window));
-        m_windowHandle = new LEGO1.HWND__(pointer);
+        m_windowHandle = new LEGO1.HWND(pointer);
 
         System.out.println("Window handle addr: " + pointer.address());
 

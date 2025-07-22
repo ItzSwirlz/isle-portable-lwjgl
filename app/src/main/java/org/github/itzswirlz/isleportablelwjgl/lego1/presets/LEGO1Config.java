@@ -91,7 +91,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LegoOmni::GetCurrPathInfo").skip());
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
-        infoMap.put(new Info("HWND", "HWND__").define().valueTypes("HWND__"));
+        infoMap.put(new Info("HWND", "HWND__").define().valueTypes("HWND").pointerTypes("HWND"));
         infoMap.put(new Info("HWND_NOTOPMOST", "VOID", "GetDC", "ReleaseDC", "GetMenu", "GetDeviceCaps", "S_OK").skip());
 
     }
