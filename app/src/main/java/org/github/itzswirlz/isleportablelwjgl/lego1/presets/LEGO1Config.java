@@ -1,4 +1,4 @@
-package org.github.itzswirlz.isleportablelwjgl.lego1;
+package org.github.itzswirlz.isleportablelwjgl.lego1.presets;
 
 import org.bytedeco.javacpp.annotation.Platform;
 import org.bytedeco.javacpp.annotation.Properties;
@@ -8,15 +8,25 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 
 @Properties(value =
 @Platform(
-        includepath = {"/Users/jpeisach/isle-portable/LEGO1/omni/include",
-                "/Users/jpeisach/isle-portable/LEGO1/",
-                "/Users/jpeisach/isle-portable/LEGO1/lego/legoomni/include",
-                "/Users/jpeisach/isle-portable/LEGO1/lego/legoomni/include/actions",
-                "/Users/jpeisach/isle-portable/util",
-                "/Users/jpeisach/isle-portable/build/_deps/sdl3-src/include",
-                "/Users/jpeisach/isle-portable/miniwin/include/",
+        includepath = {"../../../isle-portable/LEGO1/omni/include",
+                "../../../isle-portable/LEGO1/",
+                "../../../isle-portable/LEGO1/lego/legoomni/include",
+                "../../../isle-portable/LEGO1/lego/legoomni/include/actions",
+                "../../../isle-portable/util",
+                "../../../SDL/include",
+                "../../../isle-portable/miniwin/include/",
+
+                "../../../../isle-portable/LEGO1/omni/include",
+                "../../../../isle-portable/LEGO1/",
+                "../../../../isle-portable/LEGO1/lego/legoomni/include",
+                "../../../../isle-portable/LEGO1/lego/legoomni/include/actions",
+                "../../../../isle-portable/util",
+                "../../../../SDL/include",
+                "../../../../isle-portable/miniwin/include/",
                 },
-        linkpath = {"/Users/jpeisach/isle-portable-lwjgl"},
+
+        // Pick a path, just trying to be flexible
+        linkpath = {"../../../../", "../../../", "../../../../lib"},
         include = {
                 "mxcore.h",
                 "mxticklemanager.h",
@@ -39,7 +49,6 @@ import org.bytedeco.javacpp.tools.InfoMapper;
         define = {"MINIWIN"},
         link = {"LEGO1"}
 ),
-
         target = "org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1"
 )
 public class LEGO1Config implements InfoMapper {
@@ -70,6 +79,16 @@ public class LEGO1Config implements InfoMapper {
         // FIXME: disabled because lazy
         infoMap.put(new Info("PlayMusic").skip());
 
+        // FIXME: Disabled stuff
+        // ---------
+        // Excuse: need to figure out vector
+        infoMap.put(new Info("MxOmni::GetHDFiles", "MxOmni::GetCDFiles").skip());
+        // ---------
+        // Excuse: Haven't done SoundManager or VideoManager
+        infoMap.put(new Info("LegoOmni::GetVideoManager", "LegoOmni::GetSoundManager").skip());
+        // ---------
+        // Excuse: broken (for now)
+        infoMap.put(new Info("LegoOmni::GetCurrPathInfo").skip());
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
         infoMap.put(new Info("HWND", "HWND__").define().valueTypes("HWND__"));
@@ -86,17 +105,17 @@ public class LEGO1Config implements InfoMapper {
 
 //@Properties(value =
 //@Platform(
-//        includepath = {"/Users/jpeisach/isle-portable/LEGO1/omni/include",
-//                "/Users/jpeisach/isle-portable/LEGO1/lego/sources/3dmanager",
-//                "/Users/jpeisach/isle-portable/util",
-//                "/Users/jpeisach/isle-portable/LEGO1/lego/legoomni/include",
-//                "/Users/jpeisach/isle-portable/LEGO1/realtime",
-//                "/Users/jpeisach/isle-portable/LEGO1/tgl",
-//                "/Users/jpeisach/isle-portable/LEGO1/lego/sources/misc",
-//                "/Users/jpeisach/isle-portable/LEGO1/lego/sources/roi",
-//                "/Users/jpeisach/isle-portable/LEGO1/viewmanager",
-//                "/Users/jpeisach/isle-portable/LEGO1/mxdirectx"},
-//        linkpath = {"/Users/jpeisach/isle-portable-lwjgl"},
+//        includepath = {"../../../../isle-portable/LEGO1/omni/include",
+//                "../../../../isle-portable/LEGO1/lego/sources/3dmanager",
+//                "../../../../isle-portable/util",
+//                "../../../../isle-portable/LEGO1/lego/legoomni/include",
+//                "../../../../isle-portable/LEGO1/realtime",
+//                "../../../../isle-portable/LEGO1/tgl",
+//                "../../../../isle-portable/LEGO1/lego/sources/misc",
+//                "../../../../isle-portable/LEGO1/lego/sources/roi",
+//                "../../../../isle-portable/LEGO1/viewmanager",
+//                "../../../../isle-portable/LEGO1/mxdirectx"},
+//        linkpath = {"../../../../isle-portable-lwjgl"},
 //        include = {
 //                // have LEGO1_EXPORT in them
 //                "legoanimationmanager.h",

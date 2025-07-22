@@ -6,10 +6,15 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.14/userguide/building_java_projects.html in the Gradle documentation.
  */
 
+// Help needed: using javacpp-gradle for whatever reason errors at javacppBuildCompiler
+// so for now in testing, just build manually
+// I also still need to setup POM
+
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-    id "io.github.krakowski.jextract" version "0.5.0"
+//    id 'org.bytedeco.gradle-javacpp-build' version '1.5.10'
+    id 'java-library'
 }
 
 project.ext.lwjglVersion = "3.4.0-SNAPSHOT"
@@ -21,6 +26,8 @@ repositories {
 }
 
 dependencies {
+    api "org.bytedeco:javacpp:1.5.10"
+//    javacppPlatform "org.bytedeco:javacpp-platform:1.5.10"
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
     implementation "org.lwjgl:lwjgl"
@@ -112,7 +119,18 @@ java {
     }
 }
 
+//javacppBuildParser {
+//    classOrPackageNames = ["org.github.itzswirlz.isleportablelwjgl.lego1.presets.*"]
+//    outputDirectory = file("src/main/java/")
+//}
+//
+//javacppBuildCompiler {
+//    classOrPackageNames = ["org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1"]
+//    compile = false
+//    skip = true
+//}
+
 application {
     // Define the main class for the application.
-    mainClass = 'org.github.itzswirlz.isleportablelwjgl.IsleApp'
+    mainClass = 'org.github.itzswirlz.isleportablelwjgl.isle.IsleApp'
 }

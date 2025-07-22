@@ -1,0 +1,6 @@
+[submodule "isle-portable"]
+	path = isle-portable
+	url = https://github.com/isledecomp/isle-portable
+[submodule "SDL"]
+	path = SDL
+	url = https://github.com/libsdl-org/SDL
