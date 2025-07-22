@@ -18,7 +18,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "mxcore.h",
                 "mxticklemanager.h",
                 "mxtimer.h",
-//                "mxgeometry.h", //TODO: templates and lists
+                "mxgeometry.h", //TODO: templates and lists
                 "mxvideoparam.h",
                 "mxvideoparamflags.h",
 
@@ -44,6 +44,17 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxS32", "MxU16", "MxResult", "LegoResult", "LegoTime", "undefined2", "MxTime").cast().valueTypes("int"));
         infoMap.put(new Info("MxU32", "MxLong", "Uint32", "LegoU32", "MxULong", "undefined4").cast().valueTypes("long"));
         infoMap.put(new Info("LegoFloat", "MxFloat").cast().valueTypes("float"));
+
+        infoMap.put(new Info("MxRect<MxS32>").define().valueTypes("MxRectInteger"));
+        infoMap.put(new Info("MxPoint<MxS32>").define().valueTypes("MxPointInteger"));
+        infoMap.put(new Info("MxSize<MxS32>").define().valueTypes("MxSizeInteger"));
+
+        infoMap.put(new Info("MxRect<MxS16>").define().valueTypes("MxRectShort"));
+        infoMap.put(new Info("MxPoint<MxS16>").define().valueTypes("MxPointShort"));
+        infoMap.put(new Info("MxSize<MxS16>").define().valueTypes("MxSizeShort"));
+
+        // TODO: Lists
+        infoMap.put(new Info("MxPoint32List", "MxPoint32ListCursor", "MxSize32List", "MxPoint16List", "MxPoint16ListCursor", "MxSize16List", "MxSize32ListCursor", "MxSize16ListCursor", "MxRect16ListCursor", "MxRect16List", "MxRect32ListCursor", "MxRect32List").skip());
     }
 }
 

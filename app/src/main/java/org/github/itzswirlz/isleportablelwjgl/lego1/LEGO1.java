@@ -192,6 +192,677 @@ public static final int TICKLE_MANAGER_NOT_FOUND = 0x80000000;
 // #endif // MXTIMER_H
 
 
+// Parsed from mxgeometry.h
+
+// #ifndef MXGEOMETRY_H
+// #define MXGEOMETRY_H
+
+// #include "mxlist.h"
+// #include "mxutilities.h"
+
+@Name("MxPoint<MxS32>") @NoOffset public static class MxPointInteger extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxPointInteger(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxPointInteger(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxPointInteger position(long position) {
+        return (MxPointInteger)super.position(position);
+    }
+    @Override public MxPointInteger getPointer(long i) {
+        return new MxPointInteger((Pointer)this).offsetAddress(i);
+    }
+
+	public MxPointInteger() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxPointInteger(MxPointInteger p_p) { super((Pointer)null); allocate(p_p); }
+	private native void allocate(MxPointInteger p_p);
+	public MxPointInteger(@Cast("MxS32") int p_x, @Cast("MxS32") int p_y) { super((Pointer)null); allocate(p_x, p_y); }
+	private native void allocate(@Cast("MxS32") int p_x, @Cast("MxS32") int p_y);
+	public native @Cast("MxS32") int GetX();
+	public native @Cast("MxS32") int GetY();
+	public native void SetX(@Cast("MxS32") int p_x);
+	public native void SetY(@Cast("MxS32") int p_y);
+	public native @Name("operator +=") void addPut(MxPointInteger p_p);
+	public native @Name("operator -=") void subtractPut(MxPointInteger p_p);
+	public native @Name("operator +") MxPointInteger add(MxPointInteger p_p);
+	public native @Name("operator -") MxPointInteger subtract(MxPointInteger p_p);
+}
+
+@Name("MxPoint<MxS16>") @NoOffset public static class MxPointShort extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxPointShort(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxPointShort(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxPointShort position(long position) {
+        return (MxPointShort)super.position(position);
+    }
+    @Override public MxPointShort getPointer(long i) {
+        return new MxPointShort((Pointer)this).offsetAddress(i);
+    }
+
+	public MxPointShort() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxPointShort(MxPointShort p_p) { super((Pointer)null); allocate(p_p); }
+	private native void allocate(MxPointShort p_p);
+	public MxPointShort(@Cast("MxS16") short p_x, @Cast("MxS16") short p_y) { super((Pointer)null); allocate(p_x, p_y); }
+	private native void allocate(@Cast("MxS16") short p_x, @Cast("MxS16") short p_y);
+	public native @Cast("MxS16") short GetX();
+	public native @Cast("MxS16") short GetY();
+	public native void SetX(@Cast("MxS16") short p_x);
+	public native void SetY(@Cast("MxS16") short p_y);
+	public native @Name("operator +=") void addPut(MxPointShort p_p);
+	public native @Name("operator -=") void subtractPut(MxPointShort p_p);
+	public native @Name("operator +") MxPointShort add(MxPointShort p_p);
+	public native @Name("operator -") MxPointShort subtract(MxPointShort p_p);
+}
+
+@Name("MxSize<MxS32>") @NoOffset public static class MxSizeInteger extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxSizeInteger(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxSizeInteger(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxSizeInteger position(long position) {
+        return (MxSizeInteger)super.position(position);
+    }
+    @Override public MxSizeInteger getPointer(long i) {
+        return new MxSizeInteger((Pointer)this).offsetAddress(i);
+    }
+
+	public MxSizeInteger() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxSizeInteger(MxSizeInteger p_s) { super((Pointer)null); allocate(p_s); }
+	private native void allocate(MxSizeInteger p_s);
+	public MxSizeInteger(@Cast("MxS32") int p_width, @Cast("MxS32") int p_height) { super((Pointer)null); allocate(p_width, p_height); }
+	private native void allocate(@Cast("MxS32") int p_width, @Cast("MxS32") int p_height);
+	public native @Cast("MxS32") int GetWidth();
+	public native @Cast("MxS32") int GetHeight();
+	public native void SetWidth(@Cast("MxS32") int p_width);
+	public native void SetHeight(@Cast("MxS32") int p_height);
+}
+
+@Name("MxSize<MxS16>") @NoOffset public static class MxSizeShort extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxSizeShort(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxSizeShort(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxSizeShort position(long position) {
+        return (MxSizeShort)super.position(position);
+    }
+    @Override public MxSizeShort getPointer(long i) {
+        return new MxSizeShort((Pointer)this).offsetAddress(i);
+    }
+
+	public MxSizeShort() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxSizeShort(MxSizeShort p_s) { super((Pointer)null); allocate(p_s); }
+	private native void allocate(MxSizeShort p_s);
+	public MxSizeShort(@Cast("MxS16") short p_width, @Cast("MxS16") short p_height) { super((Pointer)null); allocate(p_width, p_height); }
+	private native void allocate(@Cast("MxS16") short p_width, @Cast("MxS16") short p_height);
+	public native @Cast("MxS16") short GetWidth();
+	public native @Cast("MxS16") short GetHeight();
+	public native void SetWidth(@Cast("MxS16") short p_width);
+	public native void SetHeight(@Cast("MxS16") short p_height);
+}
+
+@Name("MxRect<MxS32>") @NoOffset public static class MxRectInteger extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxRectInteger(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxRectInteger(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxRectInteger position(long position) {
+        return (MxRectInteger)super.position(position);
+    }
+    @Override public MxRectInteger getPointer(long i) {
+        return new MxRectInteger((Pointer)this).offsetAddress(i);
+    }
+
+	public MxRectInteger() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxRectInteger(MxRectInteger p_r) { super((Pointer)null); allocate(p_r); }
+	private native void allocate(MxRectInteger p_r);
+	public MxRectInteger(@Cast("MxS32") int p_l, @Cast("MxS32") int p_t, @Cast("MxS32") int p_r, @Cast("MxS32") int p_b) { super((Pointer)null); allocate(p_l, p_t, p_r, p_b); }
+	private native void allocate(@Cast("MxS32") int p_l, @Cast("MxS32") int p_t, @Cast("MxS32") int p_r, @Cast("MxS32") int p_b);
+	public MxRectInteger(MxPointInteger p_p, MxSizeInteger p_s) { super((Pointer)null); allocate(p_p, p_s); }
+	private native void allocate(MxPointInteger p_p, MxSizeInteger p_s);
+	public native @Cast("MxS32") int GetLeft();
+	public native void SetLeft(@Cast("MxS32") int p_left);
+	public native @Cast("MxS32") int GetTop();
+	public native void SetTop(@Cast("MxS32") int p_top);
+	public native @Cast("MxS32") int GetRight();
+	public native void SetRight(@Cast("MxS32") int p_right);
+	public native @Cast("MxS32") int GetBottom();
+	public native void SetBottom(@Cast("MxS32") int p_bottom);
+	public native @Cast("MxS32") int GetWidth();
+	public native @Cast("MxS32") int GetHeight();
+	public native MxPointInteger GetLT();
+	public native MxPointInteger GetRB();
+	public native @Cast("MxBool") boolean Empty();
+	public native @Cast("MxBool") boolean Contains(MxPointInteger p_p);
+	public native @Cast("MxBool") boolean Intersects(MxRectInteger p_r);
+	public native @Name("operator =") void put(MxRectInteger p_r);
+	public native @Cast("MxBool") @Name("operator ==") boolean equals(MxRectInteger p_r);
+	public native @Cast("MxBool") @Name("operator !=") boolean notEquals(MxRectInteger p_r);
+	public native @Name("operator +=") void addPut(MxPointInteger p_p);
+	public native @Name("operator -=") void subtractPut(MxPointInteger p_p);
+	public native @Name("operator &=") void andPut(MxRectInteger p_r);
+	public native @Name("operator |=") void orPut(MxRectInteger p_r);
+	public native @Name("operator +") MxRectInteger add(MxPointInteger p_p);
+	public native @Name("operator -") MxRectInteger subtract(MxPointInteger p_p);
+	public native @Name("operator &") MxRectInteger and(MxRectInteger p_r);
+	public native @Name("operator |") MxRectInteger or(MxRectInteger p_r);
+}
+
+@Name("MxRect<MxS16>") @NoOffset public static class MxRectShort extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxRectShort(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxRectShort(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxRectShort position(long position) {
+        return (MxRectShort)super.position(position);
+    }
+    @Override public MxRectShort getPointer(long i) {
+        return new MxRectShort((Pointer)this).offsetAddress(i);
+    }
+
+	public MxRectShort() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxRectShort(MxRectShort p_r) { super((Pointer)null); allocate(p_r); }
+	private native void allocate(MxRectShort p_r);
+	public MxRectShort(@Cast("MxS16") short p_l, @Cast("MxS16") short p_t, @Cast("MxS16") short p_r, @Cast("MxS16") short p_b) { super((Pointer)null); allocate(p_l, p_t, p_r, p_b); }
+	private native void allocate(@Cast("MxS16") short p_l, @Cast("MxS16") short p_t, @Cast("MxS16") short p_r, @Cast("MxS16") short p_b);
+	public MxRectShort(MxPointShort p_p, MxSizeShort p_s) { super((Pointer)null); allocate(p_p, p_s); }
+	private native void allocate(MxPointShort p_p, MxSizeShort p_s);
+	public native @Cast("MxS16") short GetLeft();
+	public native void SetLeft(@Cast("MxS16") short p_left);
+	public native @Cast("MxS16") short GetTop();
+	public native void SetTop(@Cast("MxS16") short p_top);
+	public native @Cast("MxS16") short GetRight();
+	public native void SetRight(@Cast("MxS16") short p_right);
+	public native @Cast("MxS16") short GetBottom();
+	public native void SetBottom(@Cast("MxS16") short p_bottom);
+	public native @Cast("MxS16") short GetWidth();
+	public native @Cast("MxS16") short GetHeight();
+	public native MxPointShort GetLT();
+	public native MxPointShort GetRB();
+	public native @Cast("MxBool") boolean Empty();
+	public native @Cast("MxBool") boolean Contains(MxPointShort p_p);
+	public native @Cast("MxBool") boolean Intersects(MxRectShort p_r);
+	public native @Name("operator =") void put(MxRectShort p_r);
+	public native @Cast("MxBool") @Name("operator ==") boolean equals(MxRectShort p_r);
+	public native @Cast("MxBool") @Name("operator !=") boolean notEquals(MxRectShort p_r);
+	public native @Name("operator +=") void addPut(MxPointShort p_p);
+	public native @Name("operator -=") void subtractPut(MxPointShort p_p);
+	public native @Name("operator &=") void andPut(MxRectShort p_r);
+	public native @Name("operator |=") void orPut(MxRectShort p_r);
+	public native @Name("operator +") MxRectShort add(MxPointShort p_p);
+	public native @Name("operator -") MxRectShort subtract(MxPointShort p_p);
+	public native @Name("operator &") MxRectShort and(MxRectShort p_r);
+	public native @Name("operator |") MxRectShort or(MxRectShort p_r);
+}
+
+/******************************* MxPoint16 **********************************/
+
+// SIZE 0x04
+public static class MxPoint16 extends MxPointShort {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxPoint16(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxPoint16(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxPoint16 position(long position) {
+        return (MxPoint16)super.position(position);
+    }
+    @Override public MxPoint16 getPointer(long i) {
+        return new MxPoint16((Pointer)this).offsetAddress(i);
+    }
+
+	public MxPoint16() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxPoint16(@Const @ByRef MxPoint16 p_p) { super((Pointer)null); allocate(p_p); }
+	private native void allocate(@Const @ByRef MxPoint16 p_p);
+	public MxPoint16(@Cast("MxS16") short p_x, @Cast("MxS16") short p_y) { super((Pointer)null); allocate(p_x, p_y); }
+	private native void allocate(@Cast("MxS16") short p_x, @Cast("MxS16") short p_y);
+}
+
+/******************************* MxPoint32 **********************************/
+
+// SIZE 0x08
+public static class MxPoint32 extends MxPointInteger {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxPoint32(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxPoint32(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxPoint32 position(long position) {
+        return (MxPoint32)super.position(position);
+    }
+    @Override public MxPoint32 getPointer(long i) {
+        return new MxPoint32((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x10054d10
+	public MxPoint32() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x10031a50
+	public MxPoint32(@Const @ByRef MxPoint32 p_p) { super((Pointer)null); allocate(p_p); }
+	private native void allocate(@Const @ByRef MxPoint32 p_p);
+
+	// FUNCTION: LEGO1 0x10012170
+	// FUNCTION: BETA10 0x1006aa70
+	public MxPoint32(@Cast("MxS32") int p_x, @Cast("MxS32") int p_y) { super((Pointer)null); allocate(p_x, p_y); }
+	private native void allocate(@Cast("MxS32") int p_x, @Cast("MxS32") int p_y);
+}
+
+// TEMPLATE: BETA10 0x10031a80
+// ??0?$MxPoint@H@@QAE@ABV0@@Z
+
+// TEMPLATE: BETA10 0x100318f0
+// MxPoint<int>::GetX
+
+// TEMPLATE: BETA10 0x10031920
+// MxPoint<int>::GetY
+
+// TEMPLATE: BETA10 0x10031cf0
+// ??0?$MxPoint@H@@QAE@HH@Z
+
+// TEMPLATE: BETA10 0x10054d40
+// ??0?$MxPoint@H@@QAE@XZ
+
+// TEMPLATE: BETA10 0x10142c90
+// MxPoint<int>::SetX
+
+// TEMPLATE: BETA10 0x10142cb0
+// MxPoint<int>::SetY
+
+/******************************** MxSize16 **********************************/
+
+// SIZE 0x04
+public static class MxSize16 extends MxSizeShort {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxSize16(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxSize16(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxSize16 position(long position) {
+        return (MxSize16)super.position(position);
+    }
+    @Override public MxSize16 getPointer(long i) {
+        return new MxSize16((Pointer)this).offsetAddress(i);
+    }
+
+	public MxSize16() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxSize16(@Const @ByRef MxSize16 p_s) { super((Pointer)null); allocate(p_s); }
+	private native void allocate(@Const @ByRef MxSize16 p_s);
+	public MxSize16(@Cast("MxS16") short p_width, @Cast("MxS16") short p_height) { super((Pointer)null); allocate(p_width, p_height); }
+	private native void allocate(@Cast("MxS16") short p_width, @Cast("MxS16") short p_height);
+}
+
+/******************************** MxSize32 **********************************/
+
+// SIZE 0x08
+public static class MxSize32 extends MxSizeInteger {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxSize32(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxSize32(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxSize32 position(long position) {
+        return (MxSize32)super.position(position);
+    }
+    @Override public MxSize32 getPointer(long i) {
+        return new MxSize32((Pointer)this).offsetAddress(i);
+    }
+
+	public MxSize32() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxSize32(@Const @ByRef MxSize32 p_s) { super((Pointer)null); allocate(p_s); }
+	private native void allocate(@Const @ByRef MxSize32 p_s);
+
+	// FUNCTION: BETA10 0x10137030
+	public MxSize32(@Cast("MxS32") int p_width, @Cast("MxS32") int p_height) { super((Pointer)null); allocate(p_width, p_height); }
+	private native void allocate(@Cast("MxS32") int p_width, @Cast("MxS32") int p_height);
+}
+
+// TEMPLATE: BETA10 0x10031820
+// ??0?$MxSize@H@@QAE@HH@Z
+
+// TEMPLATE: BETA10 0x10031950
+// MxSize<int>::GetWidth
+
+// TEMPLATE: BETA10 0x10031980
+// MxSize<int>::GetHeight
+
+/******************************** MxRect16 **********************************/
+
+// SIZE 0x08
+public static class MxRect16 extends MxRectShort {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxRect16(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxRect16(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxRect16 position(long position) {
+        return (MxRect16)super.position(position);
+    }
+    @Override public MxRect16 getPointer(long i) {
+        return new MxRect16((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x10097eb0
+	public MxRect16() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public MxRect16(@Const @ByRef MxRect16 p_r) { super((Pointer)null); allocate(p_r); }
+	private native void allocate(@Const @ByRef MxRect16 p_r);
+	public MxRect16(@Cast("MxS16") short p_l, @Cast("MxS16") short p_t, @Cast("MxS16") short p_r, @Cast("MxS16") short p_b) { super((Pointer)null); allocate(p_l, p_t, p_r, p_b); }
+	private native void allocate(@Cast("MxS16") short p_l, @Cast("MxS16") short p_t, @Cast("MxS16") short p_r, @Cast("MxS16") short p_b);
+	public MxRect16(@ByRef MxPoint16 p_p, @ByRef MxSize16 p_s) { super((Pointer)null); allocate(p_p, p_s); }
+	private native void allocate(@ByRef MxPoint16 p_p, @ByRef MxSize16 p_s);
+}
+
+// TEMPLATE: BETA10 0x10097ee0
+// ??0?$MxRect@F@@QAE@XZ
+
+// TEMPLATE: BETA10 0x100981f0
+// MxRect<short>::SetLeft
+
+// TEMPLATE: BETA10 0x10098220
+// MxRect<short>::SetTop
+
+// TEMPLATE: BETA10 0x10098250
+// MxRect<short>::SetRight
+
+// TEMPLATE: BETA10 0x10098280
+// MxRect<short>::SetBottom
+
+// TEMPLATE: BETA10 0x10098300
+// MxRect<short>::GetLeft
+
+// TEMPLATE: BETA10 0x10098330
+// MxRect<short>::GetTop
+
+// TEMPLATE: BETA10 0x10098360
+// MxRect<short>::GetBottom
+
+// TEMPLATE: BETA10 0x10098390
+// MxRect<short>::GetWidth
+
+// TEMPLATE: BETA10 0x100983c0
+// MxRect<short>::GetHeight
+
+/******************************** MxRect32 **********************************/
+
+// SIZE 0x10
+public static class MxRect32 extends MxRectInteger {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxRect32(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxRect32(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxRect32 position(long position) {
+        return (MxRect32)super.position(position);
+    }
+    @Override public MxRect32 getPointer(long i) {
+        return new MxRect32((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1012df70
+	public MxRect32() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x1012de40
+	public MxRect32(@Const @ByRef MxRect32 p_r) { super((Pointer)null); allocate(p_r); }
+	private native void allocate(@Const @ByRef MxRect32 p_r);
+
+	// FUNCTION: BETA10 0x100d8e90
+	public MxRect32(@Cast("MxS32") int p_l, @Cast("MxS32") int p_t, @Cast("MxS32") int p_r, @Cast("MxS32") int p_b) { super((Pointer)null); allocate(p_l, p_t, p_r, p_b); }
+	private native void allocate(@Cast("MxS32") int p_l, @Cast("MxS32") int p_t, @Cast("MxS32") int p_r, @Cast("MxS32") int p_b);
+
+// #ifndef COMPAT_MODE
+	// FUNCTION: BETA10 0x10137060
+	public MxRect32(@ByRef MxPoint32 p_p, @ByRef MxSize32 p_s) { super((Pointer)null); allocate(p_p, p_s); }
+	private native void allocate(@ByRef MxPoint32 p_p, @ByRef MxSize32 p_s);
+// #else
+// #endif
+}
+
+// VTABLE: LEGO1 0x100dc3f0
+// VTABLE: BETA10 0x101c1fb8
+// SIZE 0x18
+
+// VTABLE: LEGO1 0x100dc438
+// VTABLE: BETA10 0x101c2048
+// class MxListCursor<MxRect32 *>
+
+// VTABLE: LEGO1 0x100dc408
+// VTABLE: BETA10 0x101c2030
+// class MxPtrListCursor<MxRect32>
+
+// VTABLE: LEGO1 0x100dc420
+// VTABLE: BETA10 0x101c2018
+// SIZE 0x10
+
+// TEMPLATE: BETA10 0x10031800
+// ??0?$MxRect@H@@QAE@XZ
+
+// TEMPLATE: LEGO1 0x100b6fc0
+// TEMPLATE: BETA10 0x10031860
+// ??0?$MxRect@H@@QAE@ABV?$MxPoint@H@@ABV?$MxSize@H@@@Z
+
+// TEMPLATE: BETA10 0x100319b0
+// MxRect<int>::operator=
+
+// TEMPLATE: BETA10 0x100d8090
+// MxRect<int>::GetWidth
+
+// TEMPLATE: BETA10 0x100d80c0
+// MxRect<int>::GetHeight
+
+// TEMPLATE: BETA10 0x100d8ed0
+// ??0?$MxRect@H@@QAE@HHHH@Z
+
+// TEMPLATE: BETA10 0x100ec100
+// MxRect<int>::GetLeft
+
+// TEMPLATE: BETA10 0x100ec130
+// MxRect<int>::GetTop
+
+// TEMPLATE: BETA10 0x100ec160
+// MxRect<int>::GetRight
+
+// TEMPLATE: BETA10 0x100ec190
+// MxRect<int>::GetBottom
+
+// TEMPLATE: BETA10 0x100ec1c0
+// MxRect<int>::operator+=
+
+// TEMPLATE: BETA10 0x1012de70
+// ??0?$MxRect@H@@QAE@ABV0@@Z
+
+// TEMPLATE: BETA10 0x1012dec0
+// MxRect<int>::operator&=
+
+// SYNTHETIC: BETA10 0x1012dfa0
+// MxRect32::operator=
+
+// TEMPLATE: BETA10 0x10031d30
+// MxRect<int>::Contains
+
+// TEMPLATE: BETA10 0x10137090
+// MxRect<int>::Intersects
+
+// TEMPLATE: BETA10 0x10137100
+// MxRect<int>::operator-=
+
+// TEMPLATE: BETA10 0x1014b320
+// MxRect<int>::operator|=
+
+// TEMPLATE: BETA10 0x1014b2d0
+// MxRect<int>::Empty
+
+// TEMPLATE: BETA10 0x1014bd80
+// MxRect<int>::SetLeft
+
+// TEMPLATE: BETA10 0x1014b270
+// MxRect<int>::SetTop
+
+// TEMPLATE: BETA10 0x1014bda0
+// MxRect<int>::SetRight
+
+// TEMPLATE: BETA10 0x1014b2a0
+// MxRect<int>::SetBottom
+
+// VTABLE: LEGO1 0x100dc3d8
+// VTABLE: BETA10 0x101c1fd0
+// class MxPtrList<MxRect32>
+
+// VTABLE: LEGO1 0x100dc450
+// VTABLE: BETA10 0x101c1fe8
+// class MxList<MxRect32 *>
+
+// VTABLE: LEGO1 0x100dc468
+// VTABLE: BETA10 0x101c2000
+// class MxCollection<MxRect32 *>
+
+// TEMPLATE: LEGO1 0x100b3c00
+// TEMPLATE: BETA10 0x1013ba00
+// MxCollection<MxRect32 *>::Compare
+
+// TEMPLATE: LEGO1 0x100b3c10
+// TEMPLATE: BETA10 0x1013bb30
+// MxCollection<MxRect32 *>::MxCollection<MxRect32 *>
+
+// TEMPLATE: LEGO1 0x100b3c80
+// TEMPLATE: BETA10 0x1013bbc0
+// MxCollection<MxRect32 *>::~MxCollection<MxRect32 *>
+
+// TEMPLATE: LEGO1 0x100b3cd0
+// TEMPLATE: BETA10 0x1013bc60
+// MxCollection<MxRect32 *>::Destroy
+
+// TEMPLATE: LEGO1 0x100b3ce0
+// TEMPLATE: BETA10 0x1013bc70
+// MxList<MxRect32 *>::~MxList<MxRect32 *>
+
+// TEMPLATE: LEGO1 0x100b3d70
+// TEMPLATE: BETA10 0x1013bd20
+// MxPtrList<MxRect32>::Destroy
+
+// SYNTHETIC: LEGO1 0x100b3d80
+// SYNTHETIC: BETA10 0x1013bd50
+// MxRect32List::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x100b3df0
+// TEMPLATE: BETA10 0x1013bd90
+// MxPtrList<MxRect32>::~MxPtrList<MxRect32>
+
+// SYNTHETIC: LEGO1 0x100b3e40
+// SYNTHETIC: BETA10 0x1013bdf0
+// MxCollection<MxRect32 *>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100b3eb0
+// SYNTHETIC: BETA10 0x1013be30
+// MxList<MxRect32 *>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100b3f60
+// SYNTHETIC: BETA10 0x1013be70
+// MxPtrList<MxRect32>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100b3fd0
+// SYNTHETIC: BETA10 0x1013beb0
+// MxRect32List::~MxRect32List
+
+// SYNTHETIC: LEGO1 0x100b4020
+// SYNTHETIC: BETA10 0x1013c0a0
+// MxRect32ListCursor::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x100b4090
+// TEMPLATE: BETA10 0x1013c0e0
+// MxPtrListCursor<MxRect32>::~MxPtrListCursor<MxRect32>
+
+// SYNTHETIC: LEGO1 0x100b40e0
+// SYNTHETIC: BETA10 0x1013c140
+// MxListCursor<MxRect32 *>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100b4150
+// SYNTHETIC: BETA10 0x1013c180
+// MxPtrListCursor<MxRect32>::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x100b41c0
+// TEMPLATE: BETA10 0x1013c1c0
+// MxListCursor<MxRect32 *>::~MxListCursor<MxRect32 *>
+
+// SYNTHETIC: LEGO1 0x100b4210
+// SYNTHETIC: BETA10 0x1013c220
+// MxRect32ListCursor::~MxRect32ListCursor
+
+// TEMPLATE: BETA10 0x1013ba20
+// MxPtrList<MxRect32>::MxPtrList<MxRect32>
+
+// TEMPLATE: BETA10 0x1013baa0
+// MxList<MxRect32 *>::MxList<MxRect32 *>
+
+// TEMPLATE: BETA10 0x1013bc30
+// MxCollection<MxRect32 *>::SetDestroy
+
+// TEMPLATE: BETA10 0x1013bce0
+// MxPtrList<MxRect32>::SetOwnership
+
+// TEMPLATE: BETA10 0x1013bf90
+// MxPtrListCursor<MxRect32>::MxPtrListCursor<MxRect32>
+
+// TEMPLATE: BETA10 0x1013c010
+// MxListCursor<MxRect32 *>::MxListCursor<MxRect32 *>
+
+// TEMPLATE: BETA10 0x1013c3c0
+// MxList<MxRect32 *>::DeleteAll
+
+// TEMPLATE: BETA10 0x1013c450
+// MxListCursor<MxRect32 *>::Next
+
+// TEMPLATE: BETA10 0x1013c610
+// MxListEntry<MxRect32 *>::GetNext
+
+// TEMPLATE: BETA10 0x1013c630
+// MxListEntry<MxRect32 *>::GetValue
+
+// TEMPLATE: BETA10 0x10152860
+// MxList<MxRect32 *>::Append
+
+// TEMPLATE: BETA10 0x10152890
+// MxList<MxRect32 *>::InsertEntry
+
+// TEMPLATE: BETA10 0x10152980
+// MxListEntry<MxRect32 *>::MxListEntry<MxRect32 *>
+
+// TEMPLATE: BETA10 0x101529c0
+// MxListEntry<MxRect32 *>::SetPrev
+
+// TEMPLATE: BETA10 0x101529f0
+// MxListEntry<MxRect32 *>::SetNext
+
+// #endif // MXGEOMETRY_H
+
+
 // Parsed from mxvideoparam.h
 
 // #ifndef MXVIDEOPARAM_H
@@ -232,18 +903,18 @@ public static final int TICKLE_MANAGER_NOT_FOUND = 0x80000000;
 
 	public MxVideoParam() { super((Pointer)null); allocate(); }
 	private native void allocate();
-//	public MxVideoParam(
-//			@ByRef MxRect32 p_rect,
-//			MxPalette p_palette,
-//			@Cast("MxULong") long p_backBuffers,
-//			@ByRef MxVideoParamFlags p_flags
-//		) { super((Pointer)null); allocate(p_rect, p_palette, p_backBuffers, p_flags); }
-//	private native void allocate(
-//			@ByRef MxRect32 p_rect,
-//			MxPalette p_palette,
-//			@Cast("MxULong") long p_backBuffers,
-//			@ByRef MxVideoParamFlags p_flags
-//		);
+	public MxVideoParam(
+			@ByRef MxRect32 p_rect,
+			MxPalette p_palette,
+			@Cast("MxULong") long p_backBuffers,
+			@ByRef MxVideoParamFlags p_flags
+		) { super((Pointer)null); allocate(p_rect, p_palette, p_backBuffers, p_flags); }
+	private native void allocate(
+			@ByRef MxRect32 p_rect,
+			MxPalette p_palette,
+			@Cast("MxULong") long p_backBuffers,
+			@ByRef MxVideoParamFlags p_flags
+		);
 	public MxVideoParam(@ByRef MxVideoParam p_videoParam) { super((Pointer)null); allocate(p_videoParam); }
 	private native void allocate(@ByRef MxVideoParam p_videoParam);
 	public native void SetDeviceName(@Cast("char*") BytePointer p_deviceId);
@@ -255,7 +926,7 @@ public static final int TICKLE_MANAGER_NOT_FOUND = 0x80000000;
 	public native @ByRef MxVideoParamFlags Flags();
 
 	// FUNCTION: BETA10 0x100d81f0
-//	public native @ByRef MxRect32 GetRect();
+	public native @ByRef MxRect32 GetRect();
 
 	// FUNCTION: BETA10 0x100d8210
 	public native MxPalette GetPalette();
