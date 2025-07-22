@@ -23,18 +23,31 @@ public class IsleApp {
     private int m_islandTexture = 1;
     private boolean m_gameStarted = false;
     private long m_frameDelta = 10;
-    private static LEGO1.MxVideoParam m_videoParam = new LEGO1.MxVideoParam(); // FIXME: Construct via MxRect
+    private static LEGO1.MxVideoParam m_videoParam = new LEGO1.MxVideoParam(new LEGO1.MxRect32(0, 0, 639, 479), null, 1, new LEGO1.MxVideoParamFlags());
     private boolean m_windowActive = true;
-//    private HWND m_windowHandle;
+    private static LEGO1.HWND__ m_windowHandle;
     private boolean m_drawCursor;
+
     // TODO: cursor stuff, everything past line 91 in header
+    private static String m_mediaPath = "";
 
     public void Close() {
 
     }
 
-    public int SetupLegoOmni() {
-        // TODO
+    public static int SetupLegoOmni() {
+        int result = 0;
+        int failure = 0;
+
+        LEGO1.MxOmniCreateParam param = new LEGO1.MxOmniCreateParam(m_mediaPath, m_windowHandle, m_videoParam, new LEGO1.MxOmniCreateFlags());
+        // current status: LEGO1.Lego() returns null
+        failure = LEGO1.Lego().Create(param);
+
+        if(failure != 0) {
+            System.out.println("No failure!");
+        } else {
+            System.out.println("Failure!");
+        }
         return 0;
     }
 
@@ -45,6 +58,8 @@ public class IsleApp {
 
         // TODO: cursor stuff
         // TODO: LegoOmni::CreateInstance and afterward
+
+        SetupLegoOmni();
         return 0;
     }
 

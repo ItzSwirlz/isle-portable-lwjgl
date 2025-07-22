@@ -9,6 +9,9 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 @Properties(value =
 @Platform(
         includepath = {"/Users/jpeisach/isle-portable/LEGO1/omni/include",
+                "/Users/jpeisach/isle-portable/LEGO1/",
+                "/Users/jpeisach/isle-portable/LEGO1/lego/legoomni/include",
+                "/Users/jpeisach/isle-portable/LEGO1/lego/legoomni/include/actions",
                 "/Users/jpeisach/isle-portable/util",
                 "/Users/jpeisach/isle-portable/build/_deps/sdl3-src/include",
                 "/Users/jpeisach/isle-portable/miniwin/include/",
@@ -19,11 +22,19 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "mxticklemanager.h",
                 "mxtimer.h",
                 "mxgeometry.h", //TODO: templates and lists
+                "mxomnicreateflags.h",
+                "mxomnicreateparam.h",
+                "mxstring.h",
+                "mxomni.h",
+                "legomain.h",
                 "mxvideoparam.h",
                 "mxvideoparamflags.h",
 
                 // decomp types
-                "decomp.h"
+                "decomp.h",
+                "misc.h",
+
+                "miniwin/windows.h"
         },
         define = {"MINIWIN"},
         link = {"LEGO1"}
@@ -45,16 +56,25 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxU32", "MxLong", "Uint32", "LegoU32", "MxULong", "undefined4").cast().valueTypes("long"));
         infoMap.put(new Info("LegoFloat", "MxFloat").cast().valueTypes("float"));
 
-        infoMap.put(new Info("MxRect<MxS32>").define().valueTypes("MxRectInteger"));
-        infoMap.put(new Info("MxPoint<MxS32>").define().valueTypes("MxPointInteger"));
-        infoMap.put(new Info("MxSize<MxS32>").define().valueTypes("MxSizeInteger"));
+        infoMap.put(new Info("MxRect<MxS32>").define().pointerTypes("MxRectInteger"));
+        infoMap.put(new Info("MxPoint<MxS32>").define().pointerTypes("MxPointInteger"));
+        infoMap.put(new Info("MxSize<MxS32>").define().pointerTypes("MxSizeInteger"));
 
-        infoMap.put(new Info("MxRect<MxS16>").define().valueTypes("MxRectShort"));
-        infoMap.put(new Info("MxPoint<MxS16>").define().valueTypes("MxPointShort"));
-        infoMap.put(new Info("MxSize<MxS16>").define().valueTypes("MxSizeShort"));
+        infoMap.put(new Info("MxRect<MxS16>").define().pointerTypes("MxRectShort"));
+        infoMap.put(new Info("MxPoint<MxS16>").define().pointerTypes("MxPointShort"));
+        infoMap.put(new Info("MxSize<MxS16>").define().pointerTypes("MxSizeShort"));
 
         // TODO: Lists
         infoMap.put(new Info("MxPoint32List", "MxPoint32ListCursor", "MxSize32List", "MxPoint16List", "MxPoint16ListCursor", "MxSize16List", "MxSize32ListCursor", "MxSize16ListCursor", "MxRect16ListCursor", "MxRect16List", "MxRect32ListCursor", "MxRect32List").skip());
+
+        // FIXME: disabled because lazy
+        infoMap.put(new Info("PlayMusic").skip());
+
+
+        // TODO: Check this. This may be unnecessary as we include more of miniwin
+        infoMap.put(new Info("HWND", "HWND__").define().valueTypes("HWND__"));
+        infoMap.put(new Info("HWND_NOTOPMOST", "VOID", "GetDC", "ReleaseDC", "GetMenu", "GetDeviceCaps", "S_OK").skip());
+
     }
 }
 
