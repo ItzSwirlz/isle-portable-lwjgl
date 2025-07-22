@@ -3,22 +3,29 @@
  */
 package org.github.itzswirlz.isleportablelwjgl.isle;
 
+import org.bytedeco.javacpp.Pointer;
+import org.bytedeco.javacpp.annotation.Cast;
+import org.bytedeco.javacpp.annotation.StdString;
 import org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1;
+import org.lwjgl.sdl.*;
 
 public class IsleApp {
+    private static int TARGET_WIDTH = 600;
+    private static int TARGET_HEIGHT = 480;
+
     private String m_hdPath = null;
     private String m_cdPath = null;
-    private String m_deviceId = null;
+    private static String m_deviceId = "STUB"; // FIXME
     private String m_savePath = null;
-    private boolean m_fullScreen = true;
-    private boolean m_flipSurfaces = false;
-    private boolean m_backBuffersInVram = true;
-    private boolean m_using8bit = false;
-    private boolean m_using16bit = true;
-    private boolean m_hasLightSupport = false;
+    private static boolean m_fullScreen = true;
+    private static boolean m_flipSurfaces = false;
+    private static boolean m_backBuffersInVram = true;
+    private static boolean m_using8bit = false;
+    private static boolean m_using16bit = true;
+    private static boolean m_hasLightSupport = false;
     private boolean m_use3dSound = false;
     private boolean m_useMusic = true;
-    private boolean m_wideViewAngle = true;
+    private static boolean m_wideViewAngle = true;
     private int m_islandQuality = 2;
     private int m_islandTexture = 1;
     private boolean m_gameStarted = false;
@@ -40,7 +47,7 @@ public class IsleApp {
         int failure = 0;
 
         LEGO1.MxOmniCreateParam param = new LEGO1.MxOmniCreateParam(m_mediaPath, m_windowHandle, m_videoParam, new LEGO1.MxOmniCreateFlags());
-        // current status: LEGO1.Lego() returns null
+        // current status: crashes (but calls Create successfully)
         failure = LEGO1.Lego().Create(param);
 
         if(failure != 0) {
@@ -51,10 +58,62 @@ public class IsleApp {
         return 0;
     }
 
+    public static void SetupVideoFlags(
+            boolean fullScreen,
+            boolean flipSurfaces,
+            boolean backBuffers,
+            boolean using8bit,
+            boolean using16bit,
+            boolean hasLightSupport,
+            boolean param_7,
+            boolean wideViewAngle,
+            String deviceId
+    ) {
+        m_videoParam.Flags().SetFullScreen(fullScreen);
+        m_videoParam.Flags().SetFlipSurfaces(flipSurfaces);
+        m_videoParam.Flags().SetBackBuffers(!backBuffers);
+        m_videoParam.Flags().SetLacksLightSupport(!hasLightSupport);
+        m_videoParam.Flags().SetF1bit7(param_7);
+        m_videoParam.Flags().SetWideViewAngle(wideViewAngle);
+        m_videoParam.Flags().SetF2bit1(true);
+        m_videoParam.SetDeviceName(deviceId.getBytes());
+        if (using8bit) {
+            m_videoParam.Flags().Set16Bit(false);
+        }
+        if (using16bit) {
+            m_videoParam.Flags().Set16Bit(true);
+        }
+    }
+
     public static long SetupWindow() {
-        // TODO
+        // TODO: Loading config
+
+        SetupVideoFlags(m_fullScreen,
+                m_flipSurfaces,
+                m_backBuffersInVram,
+                m_using8bit,
+                m_using16bit,
+                m_hasLightSupport,
+                false,
+                m_wideViewAngle,
+                m_deviceId);
+
         // FIXME: check via MxDirectDraw
-        m_videoParam.Flags().Set16Bit(true);
+        // reference: m_videoParam.Flags().Set16Bit(MxDirectDraw::GetPrimaryBitDepth() == 16);
+//        m_videoParam.Flags().Set16Bit(true);
+
+        int props = SDLProperties.SDL_CreateProperties();
+        SDLProperties.SDL_SetNumberProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, TARGET_WIDTH);
+        SDLProperties.SDL_SetNumberProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, TARGET_HEIGHT);
+        SDLProperties.SDL_SetBooleanProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN, m_fullScreen);
+        SDLProperties.SDL_SetStringProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_TITLE_STRING, "LEGO");
+
+        long window = SDLVideo.SDL_CreateWindowWithProperties(props);
+        Pointer pointer = new Pointer(Pointer.malloc(window));
+        m_windowHandle = new LEGO1.HWND__(pointer);
+
+        System.out.println("Window handle addr: " + pointer.address());
+
 
         // TODO: cursor stuff
         // TODO: LegoOmni::CreateInstance and afterward
@@ -64,6 +123,9 @@ public class IsleApp {
     }
 
     public static void main(String[] args) {
+        // TODO: gamepad/haptic
+        SDLInit.SDL_Init(SDLInit.SDL_INIT_VIDEO | SDLInit.SDL_INIT_AUDIO);
+        LEGO1.LegoOmni.CreateInstance();
         SetupWindow();
     }
 }
