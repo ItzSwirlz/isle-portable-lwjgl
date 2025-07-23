@@ -3,6 +3,7 @@
  */
 package org.github.itzswirlz.isleportablelwjgl.isle;
 
+import org.bytedeco.javacpp.BytePointer;
 import org.bytedeco.javacpp.Pointer;
 import org.bytedeco.javacpp.annotation.Cast;
 import org.bytedeco.javacpp.annotation.StdString;
@@ -15,11 +16,11 @@ public class IsleApp {
 
     private String m_hdPath = null;
     private String m_cdPath = null;
-    private static String m_deviceId = "0 0x682656f3 0x0 0x0 0x2000000"; // FIXME: Read from config
+    private static String m_deviceId = "0 0x682656f3 0x0 0x0 0x1000000"; // FIXME: Read from config
     private String m_savePath = null;
-    private static boolean m_fullScreen = true;
+    private static boolean m_fullScreen = false;
     private static boolean m_flipSurfaces = false;
-    private static boolean m_backBuffersInVram = true;
+    private static boolean m_backBuffersInVram = false;
     private static boolean m_using8bit = false;
     private static boolean m_using16bit = true;
     private static boolean m_hasLightSupport = false;
@@ -33,10 +34,10 @@ public class IsleApp {
     private static LEGO1.MxVideoParam m_videoParam = new LEGO1.MxVideoParam(new LEGO1.MxRect32(0, 0, 639, 479), null, 1, new LEGO1.MxVideoParamFlags());
     private boolean m_windowActive = true;
     private static LEGO1.HWND m_windowHandle;
-    private boolean m_drawCursor;
+    private boolean m_drawCursor = false;
 
     // TODO: cursor stuff, everything past line 91 in header
-    private static String m_mediaPath = "";
+    private static String m_mediaPath = "asldkjskj";
 
     public void Close() {
 
@@ -47,6 +48,7 @@ public class IsleApp {
         int failure = 0;
 
         LEGO1.MxOmniCreateParam param = new LEGO1.MxOmniCreateParam(m_mediaPath, m_windowHandle, m_videoParam, new LEGO1.MxOmniCreateFlags());
+        System.out.println("Media path: " + param.GetMediaPath().GetData().getString());
         // current status: crashes (but calls Create successfully)
         failure = LEGO1.Lego().Create(param);
 
@@ -108,11 +110,22 @@ public class IsleApp {
         SDLProperties.SDL_SetBooleanProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN, m_fullScreen);
         SDLProperties.SDL_SetStringProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_TITLE_STRING, "LEGO");
 
-        long window = SDLVideo.SDL_CreateWindowWithProperties(props);
-        Pointer pointer = new Pointer(Pointer.malloc(window));
-        m_windowHandle = new LEGO1.HWND(pointer);
+        // FIXME: PLATFORM DEPENDENT
+        SDLProperties.SDL_SetBooleanProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN, true);
+        SDLVideo.SDL_GL_SetAttribute(SDLVideo.SDL_GL_DOUBLEBUFFER, 1);
+        SDLVideo.SDL_GL_SetAttribute(SDLVideo.SDL_GL_DEPTH_SIZE, 24);
 
-        System.out.println("Window handle addr: " + pointer.address());
+        // todo: full screen stuff
+
+        long window = SDLVideo.SDL_CreateWindowWithProperties(props);
+//        SDLProperties.SDL_SetPointerProperty(SDLVideo.SDL_GetWindowProperties(window))
+//        Pointer pointer = getPointer(SDLProperties.SDL_GetPointerProperty(SDLVideo.SDL_GetWindowProperties(window), SDLVideo.SDL_PROP_WINDOW_WIN32_HWND_POINTER, 0));
+//        System.out.println("Pointer: " + pointer);
+//        System.out.println("Window handle addr: " + pointer.address());
+//        m_windowHandle = new LEGO1.HWND(pointer);
+        System.out.println("HWND: " + m_windowHandle);
+        System.out.println("HWND addr: " + m_windowHandle.address());
+
 
 
         // TODO: cursor stuff
