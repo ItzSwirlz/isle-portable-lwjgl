@@ -101,6 +101,10 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("HWND", "HWND__").define().valueTypes("HWND").pointerTypes("HWND"));
         infoMap.put(new Info("HWND_NOTOPMOST", "VOID", "GetDC", "ReleaseDC", "GetMenu", "GetDeviceCaps", "S_OK").skip());
 
+        // Enums
+        infoMap.put(new Info("LegoOmni::World").enumerate());
+        infoMap.put(new Info("MxPresenter::TickleState").enumerate());
+        infoMap.put(new Info("MxTransitionManager::TransitionType").enumerate());
     }
 }
 

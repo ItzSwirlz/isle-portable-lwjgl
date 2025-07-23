@@ -1546,28 +1546,34 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 		c_disable3d = 0x02,
 		c_clearScreen = 0x04;
 
-	/** enum LegoOmni::World */
-	public static final int
-		e_undefined = -1,
-		e_act1 = 0,
-		e_imain = 1,
-		e_icube = 2,
-		e_ireg = 3,
-		e_ielev = 4,
-		e_iisle = 5,
-		e_hosp = 6,
-		e_police = 7,
-		e_gmain = 8,
-		e_bldh = 9,
-		e_bldd = 10,
-		e_bldj = 11,
-		e_bldr = 12,
-		e_racc = 13,
-		e_racj = 14,
-		e_act2 = 15,
-		e_act3 = 16,
-		e_test = 17,
-		e_numWorlds = e_test + 2; // count e_undefined
+	public enum World {
+		e_undefined(-1),
+		e_act1(0),
+		e_imain(1),
+		e_icube(2),
+		e_ireg(3),
+		e_ielev(4),
+		e_iisle(5),
+		e_hosp(6),
+		e_police(7),
+		e_gmain(8),
+		e_bldh(9),
+		e_bldd(10),
+		e_bldj(11),
+		e_bldr(12),
+		e_racc(13),
+		e_racj(14),
+		e_act2(15),
+		e_act3(16),
+		e_test(17),
+		e_numWorlds(e_test.value + 2);// count e_undefined
+
+	    public final int value;
+	    private World(int v) { this.value = v; }
+	    private World(World e) { this.value = e.value; }
+	    public World intern() { for (World e : values()) if (e.value == value) return e; return this; }
+	    @Override public String toString() { return intern().name(); }
+	}
 
 	// SIZE 0x1c
 	@NoOffset public static class WorldContainer extends Pointer {
@@ -1588,15 +1594,15 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 		public WorldContainer() { super((Pointer)null); allocate(); }
 		private native void allocate();
 
-		public WorldContainer(@Cast("LegoOmni::World") int p_id, @Cast("const char*") BytePointer p_key, MxAtomId p_atomId) { super((Pointer)null); allocate(p_id, p_key, p_atomId); }
-		private native void allocate(@Cast("LegoOmni::World") int p_id, @Cast("const char*") BytePointer p_key, MxAtomId p_atomId);
-		public WorldContainer(@Cast("LegoOmni::World") int p_id, String p_key, MxAtomId p_atomId) { super((Pointer)null); allocate(p_id, p_key, p_atomId); }
-		private native void allocate(@Cast("LegoOmni::World") int p_id, String p_key, MxAtomId p_atomId);
+		public WorldContainer(World p_id, @Cast("const char*") BytePointer p_key, MxAtomId p_atomId) { super((Pointer)null); allocate(p_id, p_key, p_atomId); }
+		private native void allocate(World p_id, @Cast("const char*") BytePointer p_key, MxAtomId p_atomId);
+		public WorldContainer(World p_id, String p_key, MxAtomId p_atomId) { super((Pointer)null); allocate(p_id, p_key, p_atomId); }
+		private native void allocate(World p_id, String p_key, MxAtomId p_atomId);
 
 		// FUNCTION: LEGO1 0x1005ac50
 		public native @ByRef @Name("operator =") WorldContainer put(@Const @ByRef WorldContainer p_container);
 
-		public native @Cast("LegoOmni::World") int m_id(); public native WorldContainer m_id(int setter);         // 0x00
+		public native World m_id(); public native WorldContainer m_id(World setter);         // 0x00
 		public native @Cast("char") byte m_key(int i); public native WorldContainer m_key(int i, byte setter);
 		@MemberGetter public native @Cast("char*") BytePointer m_key();     // 0x04
 		public native MxAtomId m_atomId(); public native WorldContainer m_atomId(MxAtomId setter); // 0x18
@@ -1636,10 +1642,10 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 	public native void CreateBackgroundAudio();
 	public native void RemoveWorld(@Const @ByRef MxAtomId p_atom, @Cast("MxLong") long p_objectId);
 	public native @Cast("MxResult") int RegisterWorlds();
-	public native @Cast("const char*") BytePointer GetWorldName(@Cast("LegoOmni::World") int p_id);
-	public native MxAtomId GetWorldAtom(@Cast("LegoOmni::World") int p_id);
-	public native @Cast("LegoOmni::World") int GetWorldId(@Cast("const char*") BytePointer p_key);
-	public native @Cast("LegoOmni::World") int GetWorldId(String p_key);
+	public native @Cast("const char*") BytePointer GetWorldName(World p_id);
+	public native MxAtomId GetWorldAtom(World p_id);
+	public native World GetWorldId(@Cast("const char*") BytePointer p_key);
+	public native World GetWorldId(String p_key);
 	public native void DeleteAction();
 
 	
@@ -1782,15 +1788,21 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
         return new MxPresenter((Pointer)this).offsetAddress(i);
     }
 
-	/** enum MxPresenter::TickleState */
-	public static final int
-		e_idle = 0,
-		e_ready = 1,
-		e_starting = 2,
-		e_streaming = 3,
-		e_repeating = 4,
-		e_freezing = 5,
-		e_done = 6;
+	public enum TickleState {
+		e_idle(0),
+		e_ready(1),
+		e_starting(2),
+		e_streaming(3),
+		e_repeating(4),
+		e_freezing(5),
+		e_done(6);
+
+	    public final int value;
+	    private TickleState(int v) { this.value = v; }
+	    private TickleState(TickleState e) { this.value = e.value; }
+	    public TickleState intern() { for (TickleState e : values()) if (e.value == value) return e; return this; }
+	    @Override public String toString() { return intern().name(); }
+	}
 
 	public MxPresenter() { super((Pointer)null); allocate(); }
 	private native void allocate();
@@ -1827,10 +1839,10 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 
 	// FUNCTION: LEGO1 0x1000bf90
 	// FUNCTION: BETA10 0x10054a50
-	public native void SetTickleState(@Cast("MxPresenter::TickleState") int p_tickleState); // vtable+0x44
+	public native void SetTickleState(TickleState p_tickleState); // vtable+0x44
 
 	// FUNCTION: LEGO1 0x1000bfb0
-	public native @Cast("MxBool") boolean HasTickleStatePassed(@Cast("MxPresenter::TickleState") int p_tickleState); // vtable+0x48
+	public native @Cast("MxBool") boolean HasTickleStatePassed(TickleState p_tickleState); // vtable+0x48
 
 	// FUNCTION: LEGO1 0x1000bfc0
 	public native @Cast("MxResult") int PutData(); // vtable+0x4c
@@ -1936,21 +1948,27 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
 
 	public native @Cast("MxResult") int GetDDrawSurfaceFromVideoManager(); // vtable+0x14
 
-	/** enum MxTransitionManager::TransitionType */
-	public static final int
-		e_idle = 0, // name verified by BETA10 0x100ec4e6
-		e_noAnimation = 1,
-		e_dissolve = 2,
-		e_mosaic = 3,
-		e_wipeDown = 4,
-		e_windows = 5,
-		e_broken = 6; // Unknown what this is supposed to be, it locks the game up
+	public enum TransitionType {
+		e_idle(0), // name verified by BETA10 0x100ec4e6
+		e_noAnimation(1),
+		e_dissolve(2),
+		e_mosaic(3),
+		e_wipeDown(4),
+		e_windows(5),
+		e_broken(6);// Unknown what this is supposed to be, it locks the game up
 
-	public native @Cast("MxResult") int StartTransition(@Cast("MxTransitionManager::TransitionType") int p_animationType, @Cast("MxS32") int p_speed, @Cast("MxBool") boolean p_doCopy, @Cast("MxBool") boolean p_playMusicInAnim);
+	    public final int value;
+	    private TransitionType(int v) { this.value = v; }
+	    private TransitionType(TransitionType e) { this.value = e.value; }
+	    public TransitionType intern() { for (TransitionType e : values()) if (e.value == value) return e; return this; }
+	    @Override public String toString() { return intern().name(); }
+	}
 
-	public native @Cast("MxTransitionManager::TransitionType") int GetTransitionType();
+	public native @Cast("MxResult") int StartTransition(TransitionType p_animationType, @Cast("MxS32") int p_speed, @Cast("MxBool") boolean p_doCopy, @Cast("MxBool") boolean p_playMusicInAnim);
 
-	public static native void configureMxTransitionManager(@Cast("MxTransitionManager::TransitionType") int p_transitionManagerConfig);
+	public native TransitionType GetTransitionType();
+
+	public static native void configureMxTransitionManager(TransitionType p_transitionManagerConfig);
 }
 
 // #endif // MXTRANSITIONMANAGER_H
