@@ -33,6 +33,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "mxticklemanager.h",
                 "mxtimer.h",
                 "mxgeometry.h", //TODO: templates and lists
+                "mxmisc.h",
                 "mxomnicreateflags.h",
                 "mxomnicreateparam.h",
                 "mxstring.h",
@@ -40,6 +41,8 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "legomain.h",
                 "mxmediamanager.h",
                 "mxpresenter.h",
+                "mxtransitionmanager.h",
+                "mxvariable.h",
                 "mxvideoparam.h",
                 "mxvideoparamflags.h",
 
