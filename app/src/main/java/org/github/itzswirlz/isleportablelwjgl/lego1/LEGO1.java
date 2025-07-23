@@ -2298,6 +2298,677 @@ public static native void DeleteObjects(MxAtomId p_id, @Cast("MxS32") int p_firs
 // #endif // MISC_H
 
 
+// Parsed from miniwin/bitflags.h
+
+// #pragma once
+
+// #include <type_traits>
+
+// Enable bitwise ops only for enum classes with the ENABLE_BITMASK_OPERATORS trait
+
+// #define ENABLE_BITMASK_OPERATORS(x)
+// 	template <>
+// 	struct EnableBitMaskOperators<x> {
+// 		static const bool enable = true;
+// 	};
+
+
+// Parsed from miniwin/ddraw.h
+
+// #pragma once
+
+// #include "bitflags.h"
+// #include "miniwin/windows.h"
+
+// #define DDENUMRET_OK TRUE
+
+public static native long MAKE_DDHRESULT(long code);
+
+// #define DD_OK S_OK
+// #define DDERR_ALREADYINITIALIZED MAKE_DDHRESULT(5)
+// #define DDERR_CANNOTATTACHSURFACE MAKE_DDHRESULT(10)
+// #define DDERR_CANNOTDETACHSURFACE MAKE_DDHRESULT(20)
+// #define DDERR_CURRENTLYNOTAVAIL MAKE_DDHRESULT(40)
+// #define DDERR_EXCEPTION MAKE_DDHRESULT(55)
+// #define DDERR_GENERIC ((HRESULT) 0x80004005)
+// #define DDERR_HEIGHTALIGN MAKE_DDHRESULT(90)
+// #define DDERR_INCOMPATIBLEPRIMARY MAKE_DDHRESULT(95)
+// #define DDERR_INVALIDCAPS MAKE_DDHRESULT(100)
+// #define DDERR_INVALIDCLIPLIST MAKE_DDHRESULT(110)
+// #define DDERR_INVALIDMODE MAKE_DDHRESULT(120)
+// #define DDERR_INVALIDOBJECT MAKE_DDHRESULT(130)
+// #define DDERR_INVALIDPARAMS ((HRESULT) 0x80070057)
+// #define DDERR_INVALIDPIXELFORMAT MAKE_DDHRESULT(145)
+// #define DDERR_INVALIDRECT MAKE_DDHRESULT(150)
+// #define DDERR_LOCKEDSURFACES MAKE_DDHRESULT(160)
+// #define DDERR_NO3D MAKE_DDHRESULT(170)
+// #define DDERR_NOALPHAHW MAKE_DDHRESULT(180)
+// #define DDERR_NOCLIPLIST MAKE_DDHRESULT(205)
+// #define DDERR_NOCOLORCONVHW MAKE_DDHRESULT(210)
+// #define DDERR_NOCOOPERATIVELEVELSET MAKE_DDHRESULT(212)
+// #define DDERR_NOCOLORKEY MAKE_DDHRESULT(215)
+// #define DDERR_NOCOLORKEYHW MAKE_DDHRESULT(220)
+// #define DDERR_NOEXCLUSIVEMODE MAKE_DDHRESULT(225)
+// #define DDERR_NOFLIPHW MAKE_DDHRESULT(230)
+// #define DDERR_NOGDI MAKE_DDHRESULT(240)
+// #define DDERR_NOMIRRORHW MAKE_DDHRESULT(250)
+// #define DDERR_NOTFOUND MAKE_DDHRESULT(255)
+// #define DDERR_NOOVERLAYHW MAKE_DDHRESULT(260)
+// #define DDERR_NORASTEROPHW MAKE_DDHRESULT(280)
+// #define DDERR_NOROTATIONHW MAKE_DDHRESULT(290)
+// #define DDERR_NOSTRETCHHW MAKE_DDHRESULT(310)
+// #define DDERR_NOT4BITCOLOR MAKE_DDHRESULT(316)
+// #define DDERR_NOT4BITCOLORINDEX MAKE_DDHRESULT(317)
+// #define DDERR_NOT8BITCOLOR MAKE_DDHRESULT(320)
+// #define DDERR_NOTEXTUREHW MAKE_DDHRESULT(330)
+// #define DDERR_NOVSYNCHW MAKE_DDHRESULT(335)
+// #define DDERR_NOZBUFFERHW MAKE_DDHRESULT(340)
+// #define DDERR_NOZOVERLAYHW MAKE_DDHRESULT(350)
+// #define DDERR_OUTOFCAPS MAKE_DDHRESULT(360)
+// #define DDERR_OUTOFMEMORY ((HRESULT) 0x8007000E)
+// #define DDERR_OUTOFVIDEOMEMORY MAKE_DDHRESULT(380)
+// #define DDERR_OVERLAYCANTCLIP MAKE_DDHRESULT(382)
+// #define DDERR_OVERLAYCOLORKEYONLYONEACTIVE MAKE_DDHRESULT(384)
+// #define DDERR_PALETTEBUSY MAKE_DDHRESULT(387)
+// #define DDERR_COLORKEYNOTSET MAKE_DDHRESULT(400)
+// #define DDERR_SURFACEALREADYATTACHED MAKE_DDHRESULT(410)
+// #define DDERR_SURFACEALREADYDEPENDENT MAKE_DDHRESULT(420)
+// #define DDERR_SURFACEBUSY MAKE_DDHRESULT(430)
+// #define DDERR_SURFACEISOBSCURED MAKE_DDHRESULT(440)
+// #define DDERR_SURFACELOST MAKE_DDHRESULT(450)
+// #define DDERR_SURFACENOTATTACHED MAKE_DDHRESULT(460)
+// #define DDERR_TOOBIGHEIGHT MAKE_DDHRESULT(470)
+// #define DDERR_TOOBIGSIZE MAKE_DDHRESULT(480)
+// #define DDERR_TOOBIGWIDTH MAKE_DDHRESULT(490)
+// #define DDERR_UNSUPPORTED ((HRESULT) 0x80004001)
+// #define DDERR_UNSUPPORTEDFORMAT MAKE_DDHRESULT(510)
+// #define DDERR_UNSUPPORTEDMASK MAKE_DDHRESULT(520)
+// #define DDERR_VERTICALBLANKINPROGRESS MAKE_DDHRESULT(537)
+// #define DDERR_WASSTILLDRAWING MAKE_DDHRESULT(540)
+// #define DDERR_XALIGN MAKE_DDHRESULT(560)
+// #define DDERR_INVALIDDIRECTDRAWGUID MAKE_DDHRESULT(561)
+// #define DDERR_DIRECTDRAWALREADYCREATED MAKE_DDHRESULT(562)
+// #define DDERR_NODIRECTDRAWHW MAKE_DDHRESULT(563)
+// #define DDERR_PRIMARYSURFACEALREADYEXISTS MAKE_DDHRESULT(564)
+// #define DDERR_NOEMULATION MAKE_DDHRESULT(565)
+// #define DDERR_REGIONTOOSMALL MAKE_DDHRESULT(566)
+// #define DDERR_CLIPPERISUSINGHWND MAKE_DDHRESULT(567)
+// #define DDERR_NOCLIPPERATTACHED MAKE_DDHRESULT(568)
+// #define DDERR_NOHWND MAKE_DDHRESULT(569)
+// #define DDERR_HWNDSUBCLASSED MAKE_DDHRESULT(570)
+// #define DDERR_HWNDALREADYSET MAKE_DDHRESULT(571)
+// #define DDERR_NOPALETTEATTACHED MAKE_DDHRESULT(572)
+// #define DDERR_NOPALETTEHW MAKE_DDHRESULT(573)
+// #define DDERR_BLTFASTCANTCLIP MAKE_DDHRESULT(574)
+// #define DDERR_NOBLTHW MAKE_DDHRESULT(575)
+// #define DDERR_NODDROPSHW MAKE_DDHRESULT(576)
+// #define DDERR_OVERLAYNOTVISIBLE MAKE_DDHRESULT(577)
+// #define DDERR_NOOVERLAYDEST MAKE_DDHRESULT(578)
+// #define DDERR_INVALIDPOSITION MAKE_DDHRESULT(579)
+// #define DDERR_NOTAOVERLAYSURFACE MAKE_DDHRESULT(580)
+// #define DDERR_EXCLUSIVEMODEALREADYSET MAKE_DDHRESULT(581)
+// #define DDERR_NOTFLIPPABLE MAKE_DDHRESULT(582)
+// #define DDERR_CANTDUPLICATE MAKE_DDHRESULT(583)
+// #define DDERR_NOTLOCKED MAKE_DDHRESULT(584)
+// #define DDERR_CANTCREATEDC MAKE_DDHRESULT(585)
+// #define DDERR_NODC MAKE_DDHRESULT(586)
+// #define DDERR_WRONGMODE MAKE_DDHRESULT(587)
+// #define DDERR_IMPLICITLYCREATED MAKE_DDHRESULT(588)
+// #define DDERR_NOTPALETTIZED MAKE_DDHRESULT(589)
+
+// --- GUIDs ---
+
+
+
+// --- Enums ---
+// #define DDCKEY_SRCBLT DDColorKeyFlags::SRCBLT
+public enum DDColorKeyFlags {
+	SRCBLT(1 << 3);
+
+    public final int value;
+    private DDColorKeyFlags(int v) { this.value = v; }
+    private DDColorKeyFlags(DDColorKeyFlags e) { this.value = e.value; }
+    public DDColorKeyFlags intern() { for (DDColorKeyFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDFLIP_WAIT DDFlipFlags::WAIT
+public enum DDFlipFlags {
+	WAIT(1);
+
+    public final int value;
+    private DDFlipFlags(int v) { this.value = v; }
+    private DDFlipFlags(DDFlipFlags e) { this.value = e.value; }
+    public DDFlipFlags intern() { for (DDFlipFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDCAPS2_CERTIFIED DDCaps2Flags::CERTIFIED
+public enum DDCaps2Flags {
+	CERTIFIED(1);
+
+    public final int value;
+    private DDCaps2Flags(int v) { this.value = v; }
+    private DDCaps2Flags(DDCaps2Flags e) { this.value = e.value; }
+    public DDCaps2Flags intern() { for (DDCaps2Flags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDPCAPS_8BIT DDPixelCaps::_8BIT
+// #define DDPCAPS_INITIALIZE DDPixelCaps::INITIALIZE
+// #define DDPCAPS_ALLOW256 DDPixelCaps::ALLOW256
+public enum DDPixelCaps {
+	_8BIT(1 << 2),
+	INITIALIZE(1 << 3),
+	ALLOW256(1 << 6);
+
+    public final int value;
+    private DDPixelCaps(int v) { this.value = v; }
+    private DDPixelCaps(DDPixelCaps e) { this.value = e.value; }
+    public DDPixelCaps intern() { for (DDPixelCaps e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDBLT_NONE DDBltFlags::NONE
+// #define DDBLT_KEYSRC DDBltFlags::KEYSRC
+// #define DDBLT_ROP DDBltFlags::ROP
+// #define DDBLT_COLORFILL DDBltFlags::COLORFILL
+// #define DDBLT_WAIT DDBltFlags::WAIT
+public enum DDBltFlags {
+	NONE(0),
+	COLORFILL(1 << 10),
+	KEYSRC(1 << 15),
+	ROP(1 << 17),
+	WAIT(1 << 24);
+
+    public final int value;
+    private DDBltFlags(int v) { this.value = v; }
+    private DDBltFlags(DDBltFlags e) { this.value = e.value; }
+    public DDBltFlags intern() { for (DDBltFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDPF_ALPHAPIXELS DDPixelFormatFlags::ALPHAPIXELS
+// #define DDPF_PALETTEINDEXED8 DDPixelFormatFlags::PALETTEINDEXED8
+// #define DDPF_RGB DDPixelFormatFlags::RGB
+// #define DDPF_ALPHAPIXELS DDPixelFormatFlags::ALPHAPIXELS
+public enum DDPixelFormatFlags {
+	ALPHAPIXELS(1 << 0),     // dwRGBAlphaBitMask is valid
+	PALETTEINDEXED8(1 << 5), // The texture uses an 8 bit palette
+	RGB(1 << 6);            // dwRGBBitCount, dwRBitMask, dwGBitMask, and dwBBitMask is valid
+
+    public final int value;
+    private DDPixelFormatFlags(int v) { this.value = v; }
+    private DDPixelFormatFlags(DDPixelFormatFlags e) { this.value = e.value; }
+    public DDPixelFormatFlags intern() { for (DDPixelFormatFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDBLTFAST_SRCCOLORKEY DDBltFastFlags::SRCCOLORKEY
+// #define DDBLTFAST_WAIT DDBltFastFlags::WAIT
+public enum DDBltFastFlags {
+	SRCCOLORKEY(1 << 0),
+	WAIT(1 << 4);
+
+    public final int value;
+    private DDBltFastFlags(int v) { this.value = v; }
+    private DDBltFastFlags(DDBltFastFlags e) { this.value = e.value; }
+    public DDBltFastFlags intern() { for (DDBltFastFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDLOCK_SURFACEMEMORYPTR DDLockFlags::SURFACEMEMORYPTR
+// #define DDLOCK_WAIT DDLockFlags::WAIT
+// #define DDLOCK_WRITEONLY DDLockFlags::WRITEONLY
+// #define DDLOCK_READONLY DDLockFlags::READONLY
+public enum DDLockFlags {
+	SURFACEMEMORYPTR(0),
+	WAIT(1 << 0),
+	READONLY(1 << 4),
+	WRITEONLY(1 << 5);
+
+    public final int value;
+    private DDLockFlags(int v) { this.value = v; }
+    private DDLockFlags(DDLockFlags e) { this.value = e.value; }
+    public DDLockFlags intern() { for (DDLockFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDSCL_FULLSCREEN DDSCLFlags::FULLSCREEN
+// #define DDSCL_ALLOWREBOOT DDSCLFlags::ALLOWREBOOT
+// #define DDSCL_NORMAL DDSCLFlags::NORMAL
+// #define DDSCL_EXCLUSIVE DDSCLFlags::EXCLUSIVE
+public enum DDSCLFlags {
+	FULLSCREEN(1 << 0),
+	ALLOWREBOOT(1 << 1),
+	NORMAL(1 << 3),
+	EXCLUSIVE(1 << 4);
+
+    public final int value;
+    private DDSCLFlags(int v) { this.value = v; }
+    private DDSCLFlags(DDSCLFlags e) { this.value = e.value; }
+    public DDSCLFlags intern() { for (DDSCLFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDSD_CAPS DDSurfaceDescFlags::CAPS
+// #define DDSD_HEIGHT DDSurfaceDescFlags::HEIGHT
+// #define DDSD_WIDTH DDSurfaceDescFlags::WIDTH
+// #define DDSD_BACKBUFFERCOUNT DDSurfaceDescFlags::BACKBUFFERCOUNT
+// #define DDSD_ZBUFFERBITDEPTH DDSurfaceDescFlags::ZBUFFERBITDEPTH
+// #define DDSD_PIXELFORMAT DDSurfaceDescFlags::PIXELFORMAT
+public enum DDSurfaceDescFlags {
+	CAPS(1 << 0),            // ddsCaps is valid
+	HEIGHT(1 << 1),          // dwHeight is valid
+	WIDTH(1 << 2),           // dwWidth is valid
+	BACKBUFFERCOUNT(1 << 5), // dwBackBufferCount is valid
+	ZBUFFERBITDEPTH(1 << 6), // dwZBufferBitDepth is valid
+	PIXELFORMAT(1 << 12);   // ddpfPixelFormat is valid
+
+    public final int value;
+    private DDSurfaceDescFlags(int v) { this.value = v; }
+    private DDSurfaceDescFlags(DDSurfaceDescFlags e) { this.value = e.value; }
+    public DDSurfaceDescFlags intern() { for (DDSurfaceDescFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define DDSCAPS_BACKBUFFER DDSCapsFlags::BACKBUFFER
+// #define DDSCAPS_COMPLEX DDSCapsFlags::COMPLEX
+// #define DDSCAPS_FLIP DDSCapsFlags::FLIP
+// #define DDSCAPS_OFFSCREENPLAIN DDSCapsFlags::OFFSCREENPLAIN
+// #define DDSCAPS_PRIMARYSURFACE DDSCapsFlags::PRIMARYSURFACE
+// #define DDSCAPS_SYSTEMMEMORY DDSCapsFlags::SYSTEMMEMORY
+// #define DDSCAPS_TEXTURE DDSCapsFlags::TEXTURE
+// #define DDSCAPS_3DDEVICE DDSCapsFlags::D3DDEVICE
+// #define DDSCAPS_VIDEOMEMORY DDSCapsFlags::VIDEOMEMORY
+// #define DDSCAPS_ZBUFFER DDSCapsFlags::ZBUFFER
+public enum DDSCapsFlags {
+	BACKBUFFER(1 << 2),
+	COMPLEX(1 << 3),
+	FLIP(1 << 4),
+	OFFSCREENPLAIN(1 << 6),
+	PRIMARYSURFACE(1 << 9),
+	SYSTEMMEMORY(1 << 11),
+	TEXTURE(1 << 12),
+	D3DDEVICE(1 << 13),
+	VIDEOMEMORY(1 << 14),
+	ZBUFFER(1 << 17);
+
+    public final int value;
+    private DDSCapsFlags(int v) { this.value = v; }
+    private DDSCapsFlags(DDSCapsFlags e) { this.value = e.value; }
+    public DDSCapsFlags intern() { for (DDSCapsFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define PC_NONE PCFlags::NONE
+// #define PC_NOCOLLAPSE PCFlags::NOCOLLAPSE
+// #define D3DPAL_READONLY PCFlags::D3DREADONLY
+// #define D3DPAL_RESERVED PCFlags::D3DRESERVED
+public enum PCFlags {
+	NONE((byte)(0)),
+	NOCOLLAPSE((byte)(1 << 2)),
+	D3DREADONLY((byte)(1 << 6)),
+	D3DRESERVED((byte)(1 << 7));
+
+    public final byte value;
+    private PCFlags(byte v) { this.value = v; }
+    private PCFlags(PCFlags e) { this.value = e.value; }
+    public PCFlags intern() { for (PCFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// --- Structs ---
+public static class DDCAPS extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public DDCAPS() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DDCAPS(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DDCAPS(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public DDCAPS position(long position) {
+        return (DDCAPS)super.position(position);
+    }
+    @Override public DDCAPS getPointer(long i) {
+        return new DDCAPS((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("DWORD") int dwSize(); public native DDCAPS dwSize(int setter);
+	public native DDCaps2Flags dwCaps2(); public native DDCAPS dwCaps2(DDCaps2Flags setter);
+	
+}
+
+public static class DDSCAPS extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public DDSCAPS() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DDSCAPS(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DDSCAPS(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public DDSCAPS position(long position) {
+        return (DDSCAPS)super.position(position);
+    }
+    @Override public DDSCAPS getPointer(long i) {
+        return new DDSCAPS((Pointer)this).offsetAddress(i);
+    }
+
+	public native DDSCapsFlags dwCaps(); public native DDSCAPS dwCaps(DDSCapsFlags setter);
+}
+
+// #define DDBLTFX_NOTEARING DDBLTFXFlags::NOTEARING
+public enum DDBLTFXFlags {
+	NOTEARING((byte)(1 << 3));
+
+    public final byte value;
+    private DDBLTFXFlags(byte v) { this.value = v; }
+    private DDBLTFXFlags(DDBLTFXFlags e) { this.value = e.value; }
+    public DDBLTFXFlags intern() { for (DDBLTFXFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+public static class DDBLTFX extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public DDBLTFX() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DDBLTFX(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DDBLTFX(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public DDBLTFX position(long position) {
+        return (DDBLTFX)super.position(position);
+    }
+    @Override public DDBLTFX getPointer(long i) {
+        return new DDBLTFX((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("DWORD") int dwSize(); public native DDBLTFX dwSize(int setter);
+	public native DDBLTFXFlags dwDDFX(); public native DDBLTFX dwDDFX(DDBLTFXFlags setter);
+	public native @Cast("DWORD") int dwROP(); public native DDBLTFX dwROP(int setter);
+	public native @Cast("DWORD") int dwFillColor(); public native DDBLTFX dwFillColor(int setter);
+}
+
+public static class DDPIXELFORMAT extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public DDPIXELFORMAT() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DDPIXELFORMAT(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DDPIXELFORMAT(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public DDPIXELFORMAT position(long position) {
+        return (DDPIXELFORMAT)super.position(position);
+    }
+    @Override public DDPIXELFORMAT getPointer(long i) {
+        return new DDPIXELFORMAT((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("DWORD") int dwSize(); public native DDPIXELFORMAT dwSize(int setter);
+	public native DDPixelFormatFlags dwFlags(); public native DDPIXELFORMAT dwFlags(DDPixelFormatFlags setter);
+	public native @Cast("DWORD") int dwRGBBitCount(); public native DDPIXELFORMAT dwRGBBitCount(int setter); // Bit count, Lego Island only handles 8 or 16
+	public native @Cast("DWORD") int dwRBitMask(); public native DDPIXELFORMAT dwRBitMask(int setter);    // Red bit mask (0xF800)
+	public native @Cast("DWORD") int dwGBitMask(); public native DDPIXELFORMAT dwGBitMask(int setter);    // Green bit mask (0x07E0)
+	public native @Cast("DWORD") int dwBBitMask(); public native DDPIXELFORMAT dwBBitMask(int setter);    // Blue bit mask (0x001F)
+	public native @Cast("DWORD") int dwRGBAlphaBitMask(); public native DDPIXELFORMAT dwRGBAlphaBitMask(int setter);
+}
+
+public static class DDCOLORKEY extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public DDCOLORKEY() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DDCOLORKEY(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DDCOLORKEY(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public DDCOLORKEY position(long position) {
+        return (DDCOLORKEY)super.position(position);
+    }
+    @Override public DDCOLORKEY getPointer(long i) {
+        return new DDCOLORKEY((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("DWORD") int dwColorSpaceLowValue(); public native DDCOLORKEY dwColorSpaceLowValue(int setter);
+	public native @Cast("DWORD") int dwColorSpaceHighValue(); public native DDCOLORKEY dwColorSpaceHighValue(int setter);
+}
+
+public static class DDSURFACEDESC extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public DDSURFACEDESC() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DDSURFACEDESC(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DDSURFACEDESC(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public DDSURFACEDESC position(long position) {
+        return (DDSURFACEDESC)super.position(position);
+    }
+    @Override public DDSURFACEDESC getPointer(long i) {
+        return new DDSURFACEDESC((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("DWORD") int dwSize(); public native DDSURFACEDESC dwSize(int setter);
+	public native DDSurfaceDescFlags dwFlags(); public native DDSURFACEDESC dwFlags(DDSurfaceDescFlags setter);
+	public native @Cast("DWORD") int dwHeight(); public native DDSURFACEDESC dwHeight(int setter);
+	public native @Cast("DWORD") int dwWidth(); public native DDSURFACEDESC dwWidth(int setter);
+	public native @Cast("LONG") long lPitch(); public native DDSURFACEDESC lPitch(long setter);
+	public native @Cast("DWORD") int dwBackBufferCount(); public native DDSURFACEDESC dwBackBufferCount(int setter);
+	public native @Cast("DWORD") int dwZBufferBitDepth(); public native DDSURFACEDESC dwZBufferBitDepth(int setter);
+	public native Pointer lpSurface(); public native DDSURFACEDESC lpSurface(Pointer setter);
+	public native @ByRef DDPIXELFORMAT ddpfPixelFormat(); public native DDSURFACEDESC ddpfPixelFormat(DDPIXELFORMAT setter);
+	public native @ByRef DDSCAPS ddsCaps(); public native DDSURFACEDESC ddsCaps(DDSCAPS setter);
+}
+
+public static class PALETTEENTRY extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public PALETTEENTRY() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public PALETTEENTRY(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public PALETTEENTRY(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public PALETTEENTRY position(long position) {
+        return (PALETTEENTRY)super.position(position);
+    }
+    @Override public PALETTEENTRY getPointer(long i) {
+        return new PALETTEENTRY((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("BYTE") byte peRed(); public native PALETTEENTRY peRed(byte setter);
+	public native @Cast("BYTE") byte peGreen(); public native PALETTEENTRY peGreen(byte setter);
+	public native @Cast("BYTE") byte peBlue(); public native PALETTEENTRY peBlue(byte setter);
+	public native PCFlags peFlags(); public native PALETTEENTRY peFlags(PCFlags setter);
+}
+
+public static class LOGPALETTE extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public LOGPALETTE() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LOGPALETTE(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LOGPALETTE(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public LOGPALETTE position(long position) {
+        return (LOGPALETTE)super.position(position);
+    }
+    @Override public LOGPALETTE getPointer(long i) {
+        return new LOGPALETTE((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("WORD") short palVersion(); public native LOGPALETTE palVersion(short setter);
+	public native @Cast("WORD") short palNumEntries(); public native LOGPALETTE palNumEntries(short setter);
+	public native @ByRef PALETTEENTRY palPalEntry(int i); public native LOGPALETTE palPalEntry(int i, PALETTEENTRY setter);
+	@MemberGetter public native PALETTEENTRY palPalEntry();
+}
+public static class IDirectDrawPalette extends IUnknown {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirectDrawPalette(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long GetEntries(@Cast("DWORD") int dwFlags, @Cast("DWORD") int dwBase, @Cast("DWORD") int dwNumEntries, @Cast("LPPALETTEENTRY") PALETTEENTRY lpEntries);
+	public native @Cast("HRESULT") long SetEntries(@Cast("DWORD") int dwFlags, @Cast("DWORD") int dwStartingEntry, @Cast("DWORD") int dwCount, @Cast("LPPALETTEENTRY") PALETTEENTRY lpEntries);
+}
+
+public static class IDirectDrawClipper extends IUnknown {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public IDirectDrawClipper() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public IDirectDrawClipper(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirectDrawClipper(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public IDirectDrawClipper position(long position) {
+        return (IDirectDrawClipper)super.position(position);
+    }
+    @Override public IDirectDrawClipper getPointer(long i) {
+        return new IDirectDrawClipper((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("HRESULT") long SetHWnd(@Cast("DWORD") int unnamedParam1, HWND hWnd);
+}
+public static class IDirectDrawSurface extends IUnknown {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirectDrawSurface(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long AddAttachedSurface(IDirectDrawSurface lpDDSAttachedSurface);
+	public native @Cast("HRESULT") long Blt(
+			@Cast("RECT*") Pointer lpDestRect,
+			IDirectDrawSurface lpDDSrcSurface,
+			@Cast("RECT*") Pointer lpSrcRect,
+			DDBltFlags dwFlags,
+			@Cast("LPDDBLTFX") DDBLTFX lpDDBltFx
+		);
+	public native @Cast("HRESULT") long BltFast(
+			@Cast("DWORD") int dwX,
+			@Cast("DWORD") int dwY,
+			IDirectDrawSurface lpDDSrcSurface,
+			@Cast("RECT*") Pointer lpSrcRect,
+			DDBltFastFlags dwTrans
+		);
+	public native @Cast("HRESULT") long Flip(IDirectDrawSurface lpDDSurfaceTargetOverride, DDFlipFlags dwFlags);
+	public native @Cast("HRESULT") long GetAttachedSurface(DDSCAPS lpDDSCaps, @Cast("IDirectDrawSurface**") PointerPointer lplpDDAttachedSurface);
+	public native @Cast("HRESULT") long GetAttachedSurface(DDSCAPS lpDDSCaps, @ByPtrPtr IDirectDrawSurface lplpDDAttachedSurface);
+	
+	public native @Cast("HRESULT") long GetPalette(@Cast("IDirectDrawPalette**") PointerPointer lplpDDPalette);
+	public native @Cast("HRESULT") long GetPalette(@ByPtrPtr IDirectDrawPalette lplpDDPalette);
+	public native @Cast("HRESULT") long GetPixelFormat(DDPIXELFORMAT lpDDPixelFormat);
+	public native @Cast("HRESULT") long GetSurfaceDesc(DDSURFACEDESC lpDDSurfaceDesc);
+	public native @Cast("HRESULT") long IsLost();
+	public native @Cast("HRESULT") long Lock(@Cast("RECT*") Pointer lpDestRect, DDSURFACEDESC lpDDSurfaceDesc, DDLockFlags dwFlags, Pointer hEvent);
+	public native @Cast("HRESULT") long ReleaseDC(HDC hDC);
+	public native @Cast("HRESULT") long Restore();
+	public native @Cast("HRESULT") long SetClipper(@Cast("LPDIRECTDRAWCLIPPER") IDirectDrawClipper lpDDClipper);
+	public native @Cast("HRESULT") long SetColorKey(DDColorKeyFlags dwFlags, @Cast("LPDDCOLORKEY") DDCOLORKEY lpDDColorKey);
+	public native @Cast("HRESULT") long SetPalette(IDirectDrawPalette lpDDPalette);
+	public native @Cast("HRESULT") long Unlock(Pointer lpSurfaceData);
+}
+
+@Opaque public static class IDirectDrawSurface3 extends IDirectDrawSurface {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirectDrawSurface3() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirectDrawSurface3(Pointer p) { super(p); }
+}
+
+public static class LPDDENUMMODESCALLBACK extends FunctionPointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public    LPDDENUMMODESCALLBACK(Pointer p) { super(p); }
+    protected LPDDENUMMODESCALLBACK() { allocate(); }
+    private native void allocate();
+    public native @Cast("HRESULT") long call(DDSURFACEDESC arg0, Pointer arg1);
+}
+public static class IDirectDraw extends IUnknown {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirectDraw(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long CreateClipper(@Cast("DWORD") int dwFlags, @Cast("LPDIRECTDRAWCLIPPER*") PointerPointer lplpDDClipper, IUnknown pUnkOuter);
+	public native @Cast("HRESULT") long CreatePalette(
+			DDPixelCaps dwFlags,
+			@Cast("LPPALETTEENTRY") PALETTEENTRY lpColorTable,
+			@Cast("IDirectDrawPalette**") PointerPointer lplpDDPalette,
+			IUnknown pUnkOuter
+		);
+	public native @Cast("HRESULT") long CreatePalette(
+			DDPixelCaps dwFlags,
+			@Cast("LPPALETTEENTRY") PALETTEENTRY lpColorTable,
+			@ByPtrPtr IDirectDrawPalette lplpDDPalette,
+			IUnknown pUnkOuter
+		);
+	public native @Cast("HRESULT") long CreateSurface(
+			DDSURFACEDESC lpDDSurfaceDesc,
+			@Cast("IDirectDrawSurface**") PointerPointer lplpDDSurface,
+			IUnknown pUnkOuter
+		);
+	public native @Cast("HRESULT") long CreateSurface(
+			DDSURFACEDESC lpDDSurfaceDesc,
+			@ByPtrPtr IDirectDrawSurface lplpDDSurface,
+			IUnknown pUnkOuter
+		);
+	public native @Cast("HRESULT") long EnumDisplayModes(
+			@Cast("DWORD") int dwFlags,
+			DDSURFACEDESC lpDDSurfaceDesc,
+			Pointer lpContext,
+			LPDDENUMMODESCALLBACK lpEnumModesCallback
+		);
+	public native @Cast("HRESULT") long FlipToGDISurface();
+	public native @Cast("HRESULT") long GetCaps(@Cast("LPDDCAPS") DDCAPS lpDDDriverCaps, @Cast("LPDDCAPS") DDCAPS lpDDHELCaps);
+	public native @Cast("HRESULT") long GetDisplayMode(DDSURFACEDESC lpDDSurfaceDesc);
+	public native @Cast("HRESULT") long RestoreDisplayMode();
+	public native @Cast("HRESULT") long SetCooperativeLevel(HWND hWnd, DDSCLFlags dwFlags);
+	public native @Cast("HRESULT") long SetDisplayMode(@Cast("DWORD") int dwWidth, @Cast("DWORD") int dwHeight, @Cast("DWORD") int dwBPP);
+}
+
+@Opaque public static class IDirectDraw2 extends IDirectDraw {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirectDraw2() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirectDraw2(Pointer p) { super(p); }
+}
+
+// --- Functions ---
+
+public static native @Cast("HRESULT") long DirectDrawCreate(@Cast("GUID*") Pointer lpGuid, @Cast("IDirectDraw**") PointerPointer lplpDD, IUnknown pUnkOuter);
+public static native @Cast("HRESULT") long DirectDrawCreate(@Cast("GUID*") Pointer lpGuid, @ByPtrPtr IDirectDraw lplpDD, IUnknown pUnkOuter);
+
+public static class LPDDENUMCALLBACKA extends FunctionPointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public    LPDDENUMCALLBACKA(Pointer p) { super(p); }
+    protected LPDDENUMCALLBACKA() { allocate(); }
+    private native void allocate();
+    public native @Cast("BOOL") boolean call(GUID arg0, @Cast("LPSTR") String arg1, @Cast("LPSTR") String arg2, Pointer arg3);
+}
+public static native @Cast("HRESULT") long DirectDrawEnumerate(LPDDENUMCALLBACKA cb, Pointer context);
+
+public static native @Cast("UINT") long GetSystemPaletteEntries(HDC hdc, @Cast("UINT") long iStart, @Cast("UINT") long cEntries, @Cast("LPPALETTEENTRY") PALETTEENTRY pPalEntries);
+
+public static native HPALETTE CreatePalette(LOGPALETTE lpLogPalette);
+
+public static native int SelectPalette(HDC hdc, HPALETTE hpal, @Cast("BOOL") boolean bForceBackground);
+
+public static native int RealizePalette(HDC hdc);
+
+
 // Parsed from miniwin/windows.h
 
 // #pragma once
@@ -2308,8 +2979,7 @@ public static native void DeleteObjects(MxAtomId p_id, @Cast("MxS32") int p_firs
 // #include <string.h>
 
 // --- Defines and Macros ---
-// #define MAKE_HRESULT(sev, fac, code)
-// 	((HRESULT) (((uint32_t) (sev) << 31) | ((uint32_t) (fac) << 16) | ((uint32_t) (code))))
+public static native long MAKE_HRESULT(long sev, long fac, long code);
 
 // #define DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8)
 // 	const GUID name = {l, w1, w2, {b1, b2, b3, b4, b5, b6, b7, b8}}
@@ -2401,17 +3071,23 @@ public static final int VARIABLE_PITCH = 2;
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public HWND(Pointer p) { super(p); }
 }
-@Opaque public static class HDC__ extends Pointer {
+@Name("HDC__") @Opaque public static class HDC extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public HDC__() { super((Pointer)null); }
+    public HDC() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public HDC__(Pointer p) { super(p); }
+    public HDC(Pointer p) { super(p); }
 }
-@Opaque public static class HPALETTE__ extends Pointer {
+@Name("HPALETTE__") @Opaque public static class HPALETTE extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public HPALETTE__() { super((Pointer)null); }
+    public HPALETTE() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public HPALETTE__(Pointer p) { super(p); }
+    public HPALETTE(Pointer p) { super(p); }
+}
+@Namespace @Name("void") @Opaque public static class HFILE extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public HFILE() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public HFILE(Pointer p) { super(p); }
 }
 
 // --- Structs ---
@@ -2432,8 +3108,8 @@ public static class tagPOINT extends Pointer {
         return new tagPOINT((Pointer)this).offsetAddress(i);
     }
 
-	public native @Cast("LONG") int x(); public native tagPOINT x(int setter);
-	public native @Cast("LONG") int y(); public native tagPOINT y(int setter);
+	public native @Cast("LONG") long x(); public native tagPOINT x(long setter);
+	public native @Cast("LONG") long y(); public native tagPOINT y(long setter);
 }
 
 public static class SIZE extends Pointer {
@@ -2453,8 +3129,8 @@ public static class SIZE extends Pointer {
         return new SIZE((Pointer)this).offsetAddress(i);
     }
 
-	public native @Cast("LONG") int cx(); public native SIZE cx(int setter);
-	public native @Cast("LONG") int cy(); public native SIZE cy(int setter);
+	public native @Cast("LONG") long cx(); public native SIZE cx(long setter);
+	public native @Cast("LONG") long cy(); public native SIZE cy(long setter);
 }
 
 public static class RECT extends Pointer {
@@ -2474,10 +3150,10 @@ public static class RECT extends Pointer {
         return new RECT((Pointer)this).offsetAddress(i);
     }
 
-	public native @Cast("LONG") int left(); public native RECT left(int setter);
-	public native @Cast("LONG") int top(); public native RECT top(int setter);
-	public native @Cast("LONG") int right(); public native RECT right(int setter);
-	public native @Cast("LONG") int bottom(); public native RECT bottom(int setter);
+	public native @Cast("LONG") long left(); public native RECT left(long setter);
+	public native @Cast("LONG") long top(); public native RECT top(long setter);
+	public native @Cast("LONG") long right(); public native RECT right(long setter);
+	public native @Cast("LONG") long bottom(); public native RECT bottom(long setter);
 }
 
 public static class BITMAPINFOHEADER extends Pointer {
@@ -2498,14 +3174,14 @@ public static class BITMAPINFOHEADER extends Pointer {
     }
 
 	public native @Cast("DWORD") int biSize(); public native BITMAPINFOHEADER biSize(int setter);
-	public native @Cast("LONG") int biWidth(); public native BITMAPINFOHEADER biWidth(int setter);
-	public native @Cast("LONG") int biHeight(); public native BITMAPINFOHEADER biHeight(int setter);
+	public native @Cast("LONG") long biWidth(); public native BITMAPINFOHEADER biWidth(long setter);
+	public native @Cast("LONG") long biHeight(); public native BITMAPINFOHEADER biHeight(long setter);
 	public native @Cast("WORD") short biPlanes(); public native BITMAPINFOHEADER biPlanes(short setter);
 	public native @Cast("WORD") short biBitCount(); public native BITMAPINFOHEADER biBitCount(short setter);
 	public native @Cast("DWORD") int biCompression(); public native BITMAPINFOHEADER biCompression(int setter);
 	public native @Cast("DWORD") int biSizeImage(); public native BITMAPINFOHEADER biSizeImage(int setter);
-	public native @Cast("LONG") int biXPelsPerMeter(); public native BITMAPINFOHEADER biXPelsPerMeter(int setter);
-	public native @Cast("LONG") int biYPelsPerMeter(); public native BITMAPINFOHEADER biYPelsPerMeter(int setter);
+	public native @Cast("LONG") long biXPelsPerMeter(); public native BITMAPINFOHEADER biXPelsPerMeter(long setter);
+	public native @Cast("LONG") long biYPelsPerMeter(); public native BITMAPINFOHEADER biYPelsPerMeter(long setter);
 	public native @Cast("DWORD") int biClrUsed(); public native BITMAPINFOHEADER biClrUsed(int setter);
 	public native @Cast("DWORD") int biClrImportant(); public native BITMAPINFOHEADER biClrImportant(int setter);
 }
@@ -2627,7 +3303,7 @@ public static class GUID extends Pointer {
 	public native @Cast("HRESULT") long QueryInterface(@Const @ByRef GUID riid, @Cast("void**") @ByPtrPtr Pointer ppvObject);
 }
 
-public static native @Cast("BOOL") boolean SetWindowPos(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int cx, int cy, @Cast("UINT") int uFlags);
+public static native @Cast("BOOL") boolean SetWindowPos(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int cx, int cy, @Cast("UINT") long uFlags);
 
 
 
@@ -2657,13 +3333,13 @@ public static native int StretchDIBits(
 	@Cast("uint32_t") int rop
 );
 
-public static native @Cast("LONG") int GetWindowLong(HWND hWnd, int nIndex);
+public static native @Cast("LONG") long GetWindowLong(HWND hWnd, int nIndex);
 
-public static native @Cast("LONG") int SetWindowLong(HWND hWnd, int nIndex, @Cast("LONG") int dwNewLong);
+public static native @Cast("LONG") long SetWindowLong(HWND hWnd, int nIndex, @Cast("LONG") long dwNewLong);
 
 public static native int DeleteObject(Pointer arg0);
 
-public static native @Cast("BOOL") boolean AdjustWindowRectEx(@Cast("LPRECT") RECT lpRect, @Cast("DWORD") int dwStyle, @Cast("BOOL") boolean bMenu, @Cast("DWORD") int dwExStyle);
+public static native @Cast("BOOL") boolean AdjustWindowRectEx(RECT lpRect, @Cast("DWORD") int dwStyle, @Cast("BOOL") boolean bMenu, @Cast("DWORD") int dwExStyle);
 
 public static native int SetRect(RECT rc, int left, int top, int right, int bottom);
 
