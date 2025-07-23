@@ -15,7 +15,7 @@ public class IsleApp {
 
     private String m_hdPath = null;
     private String m_cdPath = null;
-    private static String m_deviceId = "STUB"; // FIXME
+    private static String m_deviceId = "0 0x682656f3 0x0 0x0 0x2000000"; // FIXME: Read from config
     private String m_savePath = null;
     private static boolean m_fullScreen = true;
     private static boolean m_flipSurfaces = false;
@@ -76,7 +76,7 @@ public class IsleApp {
         m_videoParam.Flags().SetF1bit7(param_7);
         m_videoParam.Flags().SetWideViewAngle(wideViewAngle);
         m_videoParam.Flags().SetF2bit1(true);
-        m_videoParam.SetDeviceName(deviceId.getBytes());
+        m_videoParam.SetDeviceName(deviceId.getBytes()); // FIXME: is this correct?
         if (using8bit) {
             m_videoParam.Flags().Set16Bit(false);
         }

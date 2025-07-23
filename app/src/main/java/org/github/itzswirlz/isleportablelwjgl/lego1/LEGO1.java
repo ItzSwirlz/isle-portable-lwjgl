@@ -9,6 +9,130 @@ import org.bytedeco.javacpp.annotation.*;
 public class LEGO1 extends org.github.itzswirlz.isleportablelwjgl.lego1.presets.LEGO1Config {
     static { Loader.load(); }
 
+// Parsed from legovideomanager.h
+
+// #ifndef LEGOVIDEOMANAGER_H
+// #define LEGOVIDEOMANAGER_H
+
+// #include "cursor.h"
+// #include "decomp.h"
+// #include "lego1_export.h"
+// #include "legophonemelist.h"
+// #include "mxvideomanager.h"
+
+// #ifdef MINIWIN
+// #else
+// #include <d3drm.h>
+// #include <ddraw.h>
+// #endif
+
+@Opaque public static class Lego3DManager extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public Lego3DManager() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Lego3DManager(Pointer p) { super(p); }
+}
+@Opaque public static class LegoROI extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LegoROI() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoROI(Pointer p) { super(p); }
+}
+@Opaque public static class MxDirect3D extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxDirect3D() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDirect3D(Pointer p) { super(p); }
+}
+@Opaque public static class MxStopWatch extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxStopWatch() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxStopWatch(Pointer p) { super(p); }
+}
+@Opaque public static class ViewportAppData extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public ViewportAppData() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public ViewportAppData(Pointer p) { super(p); }
+}
+@Namespace("Tgl") @Opaque public static class Renderer extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public Renderer() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Renderer(Pointer p) { super(p); }
+}
+
+
+// VTABLE: LEGO1 0x100d9c88
+// SIZE 0x590
+@NoOffset public static class LegoVideoManager extends MxVideoManager {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoVideoManager(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LegoVideoManager(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LegoVideoManager position(long position) {
+        return (LegoVideoManager)super.position(position);
+    }
+    @Override public LegoVideoManager getPointer(long i) {
+        return new LegoVideoManager((Pointer)this).offsetAddress(i);
+    }
+
+	public LegoVideoManager() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native int EnableRMDevice();
+	public native int DisableRMDevice();
+	public native void EnableFullScreenMovie(@Cast("MxBool") boolean p_enable);
+	public native void EnableFullScreenMovie(@Cast("MxBool") boolean p_enable, @Cast("MxBool") boolean p_scale);
+	public native void MoveCursor(@Cast("MxS32") int p_cursorX, @Cast("MxS32") int p_cursorY);
+	
+	public native void ToggleFPS(@Cast("MxBool") boolean p_visible);
+
+	public native @Cast("MxResult") int Tickle();                                                                       // vtable+0x08
+	public native void Destroy();                                                                          // vtable+0x18
+	public native @Cast("MxResult") int Create(@ByRef MxVideoParam p_videoParam, @Cast("MxU32") long p_frequencyMS, @Cast("MxBool") boolean p_createThread); // vtable+0x2c
+	public native @Cast("MxResult") int RealizePalette(MxPalette arg0);                                                     // vtable+0x30
+	public native void UpdateView(@Cast("MxU32") long p_x, @Cast("MxU32") long p_y, @Cast("MxU32") long p_width, @Cast("MxU32") long p_height);                    // vtable+0x34
+	public native MxPresenter GetPresenterAt(@Cast("MxS32") int p_x, @Cast("MxS32") int p_y);                                        // vtable+0x38
+
+	// FUNCTION: LEGO1 0x1007ab10
+	 // vtable+0x3c
+
+	public native void SetSkyColor(float p_red, float p_green, float p_blue);
+	public native void OverrideSkyColor(@Cast("MxBool") boolean p_shouldOverride);
+	public native @Cast("MxResult") int ResetPalette(@Cast("MxBool") boolean p_ignoreSkyColor);
+	public native MxPresenter GetPresenterByActionObjectName(@Cast("const char*") BytePointer p_char);
+	public native MxPresenter GetPresenterByActionObjectName(String p_char);
+
+	public native void FUN_1007c520();
+
+	public native Renderer GetRenderer();
+
+	// FUNCTION: BETA10 0x100117e0
+	public native Lego3DManager Get3DManager();
+
+	// FUNCTION: BETA10 0x1003a380
+	public native LegoROI GetViewROI();
+
+	public native MxDirect3D GetDirect3D();
+	public native @Cast("MxBool") boolean GetRender3D();
+	public native double GetElapsedSeconds();
+
+	// FUNCTION: BETA10 0x1002e290
+	public native void SetRender3D(@Cast("MxBool") boolean p_render3d);
+
+	public native void SetUnk0x554(@Cast("MxBool") boolean p_unk0x554);
+}
+
+// SYNTHETIC: LEGO1 0x1007ab20
+// LegoVideoManager::`scalar deleting destructor'
+
+// #endif // LEGOVIDEOMANAGER_H
+
+
 // Parsed from mxcore.h
 
 // #ifndef MXCORE_H
@@ -1130,12 +1254,6 @@ public static class MxRect32 extends MxRectInteger {
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MxObjectFactory(Pointer p) { super(p); }
 }
-@Opaque public static class MxPresenter extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxPresenter() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxPresenter(Pointer p) { super(p); }
-}
 @Opaque public static class MxSoundManager extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
     public MxSoundManager() { super((Pointer)null); }
@@ -1338,12 +1456,6 @@ public static class MxRect32 extends MxRectInteger {
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public LegoPlantManager(Pointer p) { super(p); }
 }
-@Opaque public static class LegoROI extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public LegoROI() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public LegoROI(Pointer p) { super(p); }
-}
 @Opaque public static class LegoSoundManager extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
     public LegoSoundManager() { super((Pointer)null); }
@@ -1355,12 +1467,6 @@ public static class MxRect32 extends MxRectInteger {
     public LegoTextureContainer() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public LegoTextureContainer(Pointer p) { super(p); }
-}
-@Opaque public static class LegoVideoManager extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public LegoVideoManager() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public LegoVideoManager(Pointer p) { super(p); }
 }
 @Opaque public static class LegoWorld extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
@@ -1571,6 +1677,189 @@ public static class MxRect32 extends MxRectInteger {
 }
 
 // #endif // LEGOMAIN_H
+
+
+// Parsed from mxmediamanager.h
+
+// #ifndef MXMEDIAMANGER_H
+// #define MXMEDIAMANGER_H
+
+// #include "mxcore.h"
+// #include "mxcriticalsection.h"
+// #include "mxpresenterlist.h"
+// #include "mxtypes.h"
+
+@Opaque public static class MxThread extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxThread() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxThread(Pointer p) { super(p); }
+}
+
+// VTABLE: LEGO1 0x100dc6b0
+// SIZE 0x2c
+@NoOffset public static class MxMediaManager extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxMediaManager(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxMediaManager(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxMediaManager position(long position) {
+        return (MxMediaManager)super.position(position);
+    }
+    @Override public MxMediaManager getPointer(long i) {
+        return new MxMediaManager((Pointer)this).offsetAddress(i);
+    }
+
+	public MxMediaManager() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("MxResult") int Tickle();                                 // vtable+08
+	public native @Cast("MxResult") int Create();                                  // vtable+14
+	public native void Destroy();                                     // vtable+18
+	public native void RegisterPresenter(@ByRef MxPresenter p_presenter);   // vtable+1c
+	public native void UnregisterPresenter(@ByRef MxPresenter p_presenter); // vtable+20
+	public native void StopPresenters();                              // vtable+24
+
+	public native @Cast("MxResult") int Init();
+}
+
+// #endif // MXMEDIAMANGER_H
+
+
+// Parsed from mxpresenter.h
+
+// #ifndef MXPRESENTER_H
+// #define MXPRESENTER_H
+
+// #include "decomp.h"
+// #include "mxcore.h"
+// #include "mxcriticalsection.h"
+// #include "mxgeometry.h"
+// #include "mxutilities.h"
+
+// #include <SDL3/SDL_events.h>
+
+@Opaque public static class MxCompositePresenter extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxCompositePresenter() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxCompositePresenter(Pointer p) { super(p); }
+}
+
+// VTABLE: LEGO1 0x100d4d38
+// SIZE 0x40
+@NoOffset public static class MxPresenter extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxPresenter(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxPresenter(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxPresenter position(long position) {
+        return (MxPresenter)super.position(position);
+    }
+    @Override public MxPresenter getPointer(long i) {
+        return new MxPresenter((Pointer)this).offsetAddress(i);
+    }
+
+	/** enum MxPresenter::TickleState */
+	public static final int
+		e_idle = 0,
+		e_ready = 1,
+		e_starting = 2,
+		e_streaming = 3,
+		e_repeating = 4,
+		e_freezing = 5,
+		e_done = 6;
+
+	public MxPresenter() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("MxResult") int Tickle(); // vtable+0x08
+
+	// FUNCTION: LEGO1 0x1000be30
+	public native void VTable0x14(); // vtable+0x14
+
+	// FUNCTION: LEGO1 0x1000be40
+	public native void ReadyTickle(); // vtable+0x18
+
+	// FUNCTION: LEGO1 0x1000be60
+	public native void StartingTickle(); // vtable+0x1c
+
+	// FUNCTION: LEGO1 0x1000be80
+	public native void StreamingTickle(); // vtable+0x20
+
+	// FUNCTION: LEGO1 0x1000bea0
+	public native void RepeatingTickle(); // vtable+0x24
+
+	// FUNCTION: LEGO1 0x1000bec0
+	public native void FreezingTickle();
+	// FUNCTION: LEGO1 0x1000bf00 // vtable+0x00
+
+	// FUNCTION: LEGO1 0x1000bf70
+	public native @Cast("MxResult") int AddToManager(); // vtable+0x34
+
+	// FUNCTION: LEGO1 0x1000bf80
+	public native void Destroy(); // vtable+0x38
+
+	public native @Cast("MxResult") int StartAction(MxStreamController arg0, MxDSAction arg1); // vtable+0x3c
+	public native void EndAction();                                       // vtable+0x40
+
+	// FUNCTION: LEGO1 0x1000bf90
+	// FUNCTION: BETA10 0x10054a50
+	public native void SetTickleState(@Cast("MxPresenter::TickleState") int p_tickleState); // vtable+0x44
+
+	// FUNCTION: LEGO1 0x1000bfb0
+	public native @Cast("MxBool") boolean HasTickleStatePassed(@Cast("MxPresenter::TickleState") int p_tickleState); // vtable+0x48
+
+	// FUNCTION: LEGO1 0x1000bfc0
+	public native @Cast("MxResult") int PutData(); // vtable+0x4c
+
+	// FUNCTION: LEGO1 0x1000bfd0
+	public native @Cast("MxBool") boolean IsHit(@Cast("MxS32") int p_x, @Cast("MxS32") int p_y); // vtable+0x50
+
+	public native void Enable(@Cast("MxBool") boolean p_enable); // vtable+0x54
+
+	// FUNCTION: BETA10 0x1004d9e0
+	public static native @Cast("const char*") BytePointer HandlerClassName();
+
+	// FUNCTION: LEGO1 0x1000bfe0
+	// FUNCTION: BETA10 0x1004d9b0
+	public native @Cast("const char*") BytePointer ClassName();
+
+	// FUNCTION: LEGO1 0x1000bff0
+	public native @Cast("MxBool") boolean IsA(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxBool") boolean IsA(String p_name);
+
+	public native MxEntity CreateEntity(@Cast("const char*") BytePointer p_defaultName);
+	public native MxEntity CreateEntity(String p_defaultName);
+	public native void SendToCompositePresenter(MxOmni p_omni);
+	public native @Cast("MxBool") boolean IsEnabled();
+
+	public native @Cast("MxS32") int GetCurrentTickleState();
+	public native @ByVal MxPoint32 GetLocation();
+	public native @Cast("MxS32") int GetX();
+	public native @Cast("MxS32") int GetY();
+
+	// FUNCTION: BETA10 0x10031b70
+	public native @Cast("MxS32") int GetDisplayZ();
+
+	// FUNCTION: BETA10 0x10028430
+	public native MxDSAction GetAction();
+
+	public native void SetAction(MxDSAction p_action);
+
+	public native void SetCompositePresenter(MxCompositePresenter p_compositePresenter);
+
+	// FUNCTION: BETA10 0x10031b40
+	public native void SetDisplayZ(@Cast("MxS32") int p_displayZ);
+}
+
+public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Const @ByRef MxDSAction arg0);
+
+// #endif // MXPRESENTER_H
 
 
 // Parsed from mxvideoparam.h

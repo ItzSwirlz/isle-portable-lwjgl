@@ -28,6 +28,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
         // Pick a path, just trying to be flexible
         linkpath = {"../../../../", "../../../", "../../../../lib"},
         include = {
+                "legovideomanager.h",
                 "mxcore.h",
                 "mxticklemanager.h",
                 "mxtimer.h",
@@ -37,6 +38,8 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "mxstring.h",
                 "mxomni.h",
                 "legomain.h",
+                "mxmediamanager.h",
+                "mxpresenter.h",
                 "mxvideoparam.h",
                 "mxvideoparamflags.h",
 
@@ -78,6 +81,7 @@ public class LEGO1Config implements InfoMapper {
 
         // FIXME: disabled because lazy
         infoMap.put(new Info("PlayMusic").skip());
+        infoMap.put(new Info("LegoVideoManager::SetCursorBitmap", "LegoVideoManager::GetPhonemeList").skip());
 
         // FIXME: Disabled stuff
         // ---------
