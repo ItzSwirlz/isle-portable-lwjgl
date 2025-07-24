@@ -3,20 +3,27 @@
  */
 package org.github.itzswirlz.isleportablelwjgl.isle;
 
-import org.bytedeco.javacpp.BytePointer;
-import org.bytedeco.javacpp.Pointer;
+import org.bytedeco.javacpp.*;
 import org.bytedeco.javacpp.annotation.Cast;
+import org.bytedeco.javacpp.annotation.SharedPtr;
 import org.bytedeco.javacpp.annotation.StdString;
 import org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1;
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.sdl.*;
+import org.lwjgl.system.SharedLibrary;
+import org.lwjgl.system.SharedLibraryUtil;
+
+import java.nio.ByteBuffer;
+
+import static org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1.Lego;
 
 public class IsleApp {
-    private static int TARGET_WIDTH = 600;
+    private static int TARGET_WIDTH = 640;
     private static int TARGET_HEIGHT = 480;
 
     private String m_hdPath = null;
     private String m_cdPath = null;
-    private static String m_deviceId = "0 0x682656f3 0x0 0x0 0x1000000"; // FIXME: Read from config
+    private static String m_deviceId = "0 0x682656f3 0x0 0x0 0x2000000"; // FIXME: Read from config
     private String m_savePath = null;
     private static boolean m_fullScreen = false;
     private static boolean m_flipSurfaces = false;
@@ -33,11 +40,11 @@ public class IsleApp {
     private long m_frameDelta = 10;
     private static LEGO1.MxVideoParam m_videoParam = new LEGO1.MxVideoParam(new LEGO1.MxRect32(0, 0, 639, 479), null, 1, new LEGO1.MxVideoParamFlags());
     private boolean m_windowActive = true;
-    private static LEGO1.HWND m_windowHandle;
+    private static LEGO1.HWND m_windowHandle = null;
     private boolean m_drawCursor = false;
 
     // TODO: cursor stuff, everything past line 91 in header
-    private static String m_mediaPath = "asldkjskj";
+    private static String m_mediaPath = "";
 
     public void Close() {
 
@@ -46,16 +53,30 @@ public class IsleApp {
     public static int SetupLegoOmni() {
         int result = 0;
         int failure = 0;
+        if(LEGO1.LegoOmni.GetInstance().isNull()) {
+            System.out.println("INSTANCE IS NULL");
+        }
 
-        LEGO1.MxOmniCreateParam param = new LEGO1.MxOmniCreateParam(m_mediaPath, m_windowHandle, m_videoParam, new LEGO1.MxOmniCreateFlags());
-        System.out.println("Media path: " + param.GetMediaPath().GetData().getString());
-        // current status: crashes (but calls Create successfully)
-        failure = LEGO1.Lego().Create(param);
+        if(m_windowHandle != null) {
+            LEGO1.MxOmniCreateParam param = new LEGO1.MxOmniCreateParam(m_mediaPath, m_windowHandle, m_videoParam, new LEGO1.MxOmniCreateFlags());
+            System.out.println("Media path: " + param.GetMediaPath().GetData().getString());
+            // current status: crashes (but calls Create successfully)
+            Thread t = new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Lego().Create(param);
+            });
+            t.start();
 
-        if(failure != 0) {
-            System.out.println("No failure!");
+            SDL_Event event = SDL_Event.create();
+            while(SDLEvents.SDL_PollEvent(event)) {
+                System.out.println("type: " + event.type());
+            }
         } else {
-            System.out.println("Failure!");
+            System.out.println("window hanle null");
         }
         return 0;
     }
@@ -77,7 +98,7 @@ public class IsleApp {
         m_videoParam.Flags().SetLacksLightSupport(!hasLightSupport);
         m_videoParam.Flags().SetF1bit7(param_7);
         m_videoParam.Flags().SetWideViewAngle(wideViewAngle);
-        m_videoParam.Flags().SetF2bit1(true);
+        m_videoParam.Flags().SetEnabled(true);
         m_videoParam.SetDeviceName(deviceId.getBytes()); // FIXME: is this correct?
         if (using8bit) {
             m_videoParam.Flags().Set16Bit(false);
@@ -112,19 +133,36 @@ public class IsleApp {
 
         // FIXME: PLATFORM DEPENDENT
         SDLProperties.SDL_SetBooleanProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_OPENGL_BOOLEAN, true);
+        SDLProperties.SDL_SetBooleanProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_EXTERNAL_GRAPHICS_CONTEXT_BOOLEAN, true);
         SDLVideo.SDL_GL_SetAttribute(SDLVideo.SDL_GL_DOUBLEBUFFER, 1);
         SDLVideo.SDL_GL_SetAttribute(SDLVideo.SDL_GL_DEPTH_SIZE, 24);
+
 
         // todo: full screen stuff
 
         long window = SDLVideo.SDL_CreateWindowWithProperties(props);
-//        SDLProperties.SDL_SetPointerProperty(SDLVideo.SDL_GetWindowProperties(window))
-//        Pointer pointer = getPointer(SDLProperties.SDL_GetPointerProperty(SDLVideo.SDL_GetWindowProperties(window), SDLVideo.SDL_PROP_WINDOW_WIN32_HWND_POINTER, 0));
-//        System.out.println("Pointer: " + pointer);
-//        System.out.println("Window handle addr: " + pointer.address());
-//        m_windowHandle = new LEGO1.HWND(pointer);
+        Pointer wP = new Pointer() {
+            { address = window;}
+        };
+        SDLProperties.SDL_SetPointerProperty(SDLVideo.SDL_GetWindowProperties(window), LEGO1.ISLE_PROP_WINDOW_CREATE_VIDEO_PARAM, m_videoParam.address());
+
+        int displayId = SDLVideo.SDL_GetDisplayForWindow(window);
+        SDL_DisplayMode mode = SDL_DisplayMode.malloc();
+        SDLVideo.SDL_GetClosestFullscreenDisplayMode(displayId, 640, 480, 60, true, mode);
+        SDLVideo.SDL_SetWindowFullscreenMode(window, mode);
+
+
+        m_windowHandle = new LEGO1.HWND(wP);
         System.out.println("HWND: " + m_windowHandle);
-        System.out.println("HWND addr: " + m_windowHandle.address());
+        System.out.println("Video param: " + m_videoParam);
+        System.out.println("Video param addr: " + m_videoParam.address());
+
+        SDLProperties.SDL_DestroyProperties(props);
+
+        if(m_windowHandle.isNull()) {
+            System.err.println("window handle is null");
+            return 0;
+        }
 
 
 
@@ -137,7 +175,11 @@ public class IsleApp {
 
     public static void main(String[] args) {
         // TODO: gamepad/haptic
-        SDLInit.SDL_Init(SDLInit.SDL_INIT_VIDEO | SDLInit.SDL_INIT_AUDIO);
+        if(!SDLInit.SDL_Init(SDLInit.SDL_INIT_VIDEO | SDLInit.SDL_INIT_AUDIO | SDLInit.SDL_INIT_EVENTS | SDLInit.SDL_INIT_JOYSTICK)) {
+            System.exit(1);
+            System.err.println("error");
+        }
+
         LEGO1.LegoOmni.CreateInstance();
         SetupWindow();
     }

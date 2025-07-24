@@ -1703,55 +1703,6 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 // #endif // LEGOMAIN_H
 
 
-// Parsed from mxmediamanager.h
-
-// #ifndef MXMEDIAMANGER_H
-// #define MXMEDIAMANGER_H
-
-// #include "mxcore.h"
-// #include "mxcriticalsection.h"
-// #include "mxpresenterlist.h"
-// #include "mxtypes.h"
-
-@Opaque public static class MxThread extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxThread() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxThread(Pointer p) { super(p); }
-}
-
-// VTABLE: LEGO1 0x100dc6b0
-// SIZE 0x2c
-@NoOffset public static class MxMediaManager extends MxCore {
-    static { Loader.load(); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxMediaManager(Pointer p) { super(p); }
-    /** Native array allocator. Access with {@link Pointer#position(long)}. */
-    public MxMediaManager(long size) { super((Pointer)null); allocateArray(size); }
-    private native void allocateArray(long size);
-    @Override public MxMediaManager position(long position) {
-        return (MxMediaManager)super.position(position);
-    }
-    @Override public MxMediaManager getPointer(long i) {
-        return new MxMediaManager((Pointer)this).offsetAddress(i);
-    }
-
-	public MxMediaManager() { super((Pointer)null); allocate(); }
-	private native void allocate();
-
-	public native @Cast("MxResult") int Tickle();                                 // vtable+08
-	public native @Cast("MxResult") int Create();                                  // vtable+14
-	public native void Destroy();                                     // vtable+18
-	public native void RegisterPresenter(@ByRef MxPresenter p_presenter);   // vtable+1c
-	public native void UnregisterPresenter(@ByRef MxPresenter p_presenter); // vtable+20
-	public native void StopPresenters();                              // vtable+24
-
-	public native @Cast("MxResult") int Init();
-}
-
-// #endif // MXMEDIAMANGER_H
-
-
 // Parsed from mxpresenter.h
 
 // #ifndef MXPRESENTER_H
@@ -1892,6 +1843,56 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
 // #endif // MXPRESENTER_H
 
 
+// Parsed from mxpresentationmanager.h
+
+// #ifndef MXPRESENTATIONMANAGER_H
+// #define MXPRESENTATIONMANAGER_H
+
+// #include "mxcore.h"
+// #include "mxcriticalsection.h"
+// #include "mxpresenterlist.h"
+// #include "mxtypes.h"
+
+@Opaque public static class MxThread extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxThread() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxThread(Pointer p) { super(p); }
+}
+
+// VTABLE: LEGO1 0x100dc6b0
+// VTABLE: BETA10 0x101c2318
+// SIZE 0x2c
+@NoOffset public static class MxPresentationManager extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxPresentationManager(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxPresentationManager(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxPresentationManager position(long position) {
+        return (MxPresentationManager)super.position(position);
+    }
+    @Override public MxPresentationManager getPointer(long i) {
+        return new MxPresentationManager((Pointer)this).offsetAddress(i);
+    }
+
+	public MxPresentationManager() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("MxResult") int Tickle();                                 // vtable+08
+	public native @Cast("MxResult") int Create();                                  // vtable+14
+	public native void Destroy();                                     // vtable+18
+	public native void RegisterPresenter(@ByRef MxPresenter p_presenter);   // vtable+1c
+	public native void UnregisterPresenter(@ByRef MxPresenter p_presenter); // vtable+20
+	public native void StopPresenters();                              // vtable+24
+
+	public native @Cast("MxResult") int Init();
+}
+
+// #endif // MXPRESENTATIONMANAGER_H
+
+
 // Parsed from mxtransitionmanager.h
 
 // #ifndef MXTRANSITIONMANAGER_H
@@ -1999,6 +2000,7 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
         return new MxVariable((Pointer)this).offsetAddress(i);
     }
 
+	// FUNCTION: BETA10 0x1007b750
 	public MxVariable() { super((Pointer)null); allocate(); }
 	private native void allocate();
 
@@ -2032,6 +2034,7 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
 }
 
 // SYNTHETIC: LEGO1 0x1003bf40
+// SYNTHETIC: BETA10 0x1007b910
 // MxVariable::~MxVariable
 
 // #endif // MXVARIABLE_H
@@ -2059,6 +2062,8 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MxPalette(Pointer p) { super(p); }
 }
+
+public static final String ISLE_PROP_WINDOW_CREATE_VIDEO_PARAM = "ISLE.window.create.videoParam";
 
 // SIZE 0x24
 @NoOffset public static class MxVideoParam extends Pointer {
@@ -2116,6 +2121,12 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
 
 	// FUNCTION: BETA10 0x10141fe0
 	public native void SetBackBuffers(@Cast("MxU32") long p_backBuffers);
+
+	public native void SetMSAASamples(@Cast("MxU32") long p_msaaSamples);
+	public native @Cast("MxU32") long GetMSAASamples();
+
+	public native void SetAnisotropic(@Cast("MxFloat") float p_anisotropic);
+	public native @Cast("MxFloat") float GetAnisotropic();
 }
 
 // #endif // MXVIDEOPARAM_H
@@ -2161,7 +2172,7 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
 	public native void SetBackBuffers(@Cast("MxBool") boolean p_e);
 
 	// FUNCTION: BETA10 0x100d9250
-	public native void SetF1bit3(@Cast("MxBool") boolean p_e);
+	public native void SetDoubleScaling(@Cast("MxBool") boolean p_e);
 
 	// inlined in ISLE
 	public native void Set16Bit(@Cast("MxBool") boolean p_e);
@@ -2176,7 +2187,7 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
 	public native void SetLacksLightSupport(@Cast("MxBool") boolean p_e);
 
 	// inlined in ISLE
-	public native void SetF2bit1(@Cast("MxBool") boolean p_e);
+	public native void SetEnabled(@Cast("MxBool") boolean p_e);
 
 	// FUNCTION: BETA10 0x1009e770
 	public native @Cast("MxBool") boolean GetFullScreen();
@@ -2188,7 +2199,7 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
 	public native @Cast("MxBool") boolean GetBackBuffers();
 
 	// FUNCTION: BETA10 0x10142010
-	public native @Cast("MxBool") boolean GetF1bit3();
+	public native @Cast("MxBool") boolean GetDoubleScaling();
 
 	// FUNCTION: BETA10 0x100d8150
 	public native @Cast("MxBool") boolean Get16Bit();
@@ -2200,7 +2211,7 @@ public static native @Cast("const char*") BytePointer PresenterNameDispatch(@Con
 	public native @Cast("MxBool") boolean GetLacksLightSupport();
 
 	// FUNCTION: BETA10 0x10142050
-	public native @Cast("MxBool") boolean GetF2bit1();
+	public native @Cast("MxBool") boolean GetEnabled();
 }
 
 // #endif // MXVIDEOPARAMFLAGS_H
