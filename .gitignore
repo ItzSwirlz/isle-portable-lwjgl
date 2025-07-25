@@ -25,3 +25,12 @@ build
 
 .idea
 *.class
+
+# logs
+*.log
+
+# dylib
+*.dylib
+
+# platform
+macosx-arm64
