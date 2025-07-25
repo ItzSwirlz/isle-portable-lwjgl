@@ -27,6 +27,10 @@ repositories {
 
 dependencies {
     api "org.bytedeco:javacpp:1.5.10"
+
+    // https://mvnrepository.com/artifact/com.github.vincentrussell/java-ini-parser
+    implementation 'com.github.vincentrussell:java-ini-parser:1.7'
+
 //    javacppPlatform "org.bytedeco:javacpp-platform:1.5.10"
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 

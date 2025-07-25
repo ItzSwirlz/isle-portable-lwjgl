@@ -3,6 +3,7 @@
  */
 package org.github.itzswirlz.isleportablelwjgl.isle;
 
+import com.github.vincentrussell.ini.Ini;
 import org.bytedeco.javacpp.*;
 import org.bytedeco.javacpp.annotation.Cast;
 import org.bytedeco.javacpp.annotation.SharedPtr;
@@ -13,29 +14,33 @@ import org.lwjgl.sdl.*;
 import org.lwjgl.system.SharedLibrary;
 import org.lwjgl.system.SharedLibraryUtil;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 import static org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1.Lego;
+import static org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1.Streamer;
 
 public class IsleApp {
     private static int TARGET_WIDTH = 640;
     private static int TARGET_HEIGHT = 480;
 
-    private String m_hdPath = null;
-    private String m_cdPath = null;
-    private static String m_deviceId = "0 0x682656f3 0x0 0x0 0x2000000"; // FIXME: Read from config
-    private String m_savePath = null;
+    private static String m_hdPath = null;
+    private static String m_cdPath = null;
+    private static String m_deviceId = null;
+    private static String m_mediaPath = null;
+    private static String m_savePath = null;
     private static boolean m_fullScreen = false;
     private static boolean m_flipSurfaces = false;
     private static boolean m_backBuffersInVram = false;
     private static boolean m_using8bit = false;
     private static boolean m_using16bit = true;
     private static boolean m_hasLightSupport = false;
-    private boolean m_use3dSound = false;
-    private boolean m_useMusic = true;
+    private static boolean m_use3dSound = false;
+    private static boolean m_useMusic = true;
     private static boolean m_wideViewAngle = true;
-    private int m_islandQuality = 2;
-    private int m_islandTexture = 1;
+    private static int m_islandQuality = 2;
+    private static int m_islandTexture = 1;
     private boolean m_gameStarted = false;
     private long m_frameDelta = 10;
     private static LEGO1.MxVideoParam m_videoParam = new LEGO1.MxVideoParam(new LEGO1.MxRect32(0, 0, 639, 479), null, 1, new LEGO1.MxVideoParamFlags());
@@ -43,8 +48,66 @@ public class IsleApp {
     private static LEGO1.HWND m_windowHandle = null;
     private boolean m_drawCursor = false;
 
-    // TODO: cursor stuff, everything past line 91 in header
-    private static String m_mediaPath = "";
+    private static String m_iniPath = null;
+    private static float m_maxLod = 0.0f;
+    private static int m_maxAllowedExtras = 0;
+    private static LEGO1.MxTransitionManager.TransitionType m_transitionType = LEGO1.MxTransitionManager.TransitionType.e_mosaic;
+
+    // TODO: Touch scheme
+
+    // TODO: cursor, bitmaps, argumenthelp
+
+    // FIXME: Currently really only tested against my defaults on my system. Support missing keys/values/categories and INI creation
+    private static boolean LoadConfig() {
+        String prefPath = SDLFileSystem.SDL_GetPrefPath("isledecomp", "isle");
+
+        m_iniPath = prefPath + "isle.ini";
+
+        System.out.println("Reading configuration from " + m_iniPath);
+        Ini ini = new Ini();
+        try {
+            // TODO: When INI is empty/DNE
+            ini.load(new FileInputStream(m_iniPath));
+        } catch(IOException e) {
+            e.printStackTrace();
+            System.out.println("TODO: Handling when INI is empty or sections/keys DNE");
+            return false;
+        }
+
+        m_deviceId = ini.getValue("isle", "3d device id").toString();
+
+        m_hdPath = ini.getValue("isle", "diskpath").toString();
+        m_cdPath = ini.getValue("isle", "cdpath").toString();
+        m_mediaPath = ini.getValue("isle", "mediapath").toString();
+        m_savePath = ini.getValue("isle", "savepath").toString();
+
+        m_flipSurfaces = ini.getValue("isle", "flip surfaces").equals("true");
+        m_fullScreen = ini.getValue("isle", "full screen").equals("true");
+        m_wideViewAngle = ini.getValue("isle", "wide view angle").equals("true");
+        m_use3dSound = ini.getValue("isle", "3dsound").equals("true");
+        m_useMusic = ini.getValue("isle", "music").equals("true");
+
+        System.out.println("TODO: Joystick");
+        System.out.println("TODO: Cursor");
+
+        m_backBuffersInVram = ini.getValue("isle", "back buffers in video ram").equals("true");
+
+        switch(ini.getValue("isle", "display bit depth").toString()) {
+            case "8":
+                m_using8bit = true;
+                break;
+            case "16":
+                m_using16bit = true;
+                break;
+        }
+
+        m_islandQuality = Integer.parseInt(ini.getValue("isle", "island quality").toString());
+        m_islandTexture = Integer.parseInt(ini.getValue("isle", "island texture").toString());
+        m_maxLod = Float.parseFloat(ini.getValue("isle", "max lod").toString());
+        m_maxAllowedExtras = Integer.parseInt(ini.getValue("isle", "max allowed extras").toString());
+
+        return true;
+    }
 
     public void Close() {
 
@@ -60,8 +123,6 @@ public class IsleApp {
         if(m_windowHandle != null) {
             LEGO1.MxOmniCreateParam param = new LEGO1.MxOmniCreateParam(m_mediaPath, m_windowHandle, m_videoParam, new LEGO1.MxOmniCreateFlags());
             System.out.println("Media path: " + param.GetMediaPath().GetData().getString());
-
-            Lego().Create(param);
 
             // event loop
             // should probably move this to another function?
@@ -103,7 +164,9 @@ public class IsleApp {
     }
 
     public static long SetupWindow() {
-        // TODO: Loading config
+        if(!LoadConfig()) {
+            return -1;
+        }
 
         SetupVideoFlags(m_fullScreen,
                 m_flipSurfaces,
