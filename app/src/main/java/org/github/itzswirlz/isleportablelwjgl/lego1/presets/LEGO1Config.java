@@ -45,9 +45,11 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "mxgeometry.h", //TODO: templates and lists
                 "mxmisc.h",
                 "mxnextactiondatastart.h",
+                "mxnotificationparam.h",
                 "mxomnicreateflags.h",
                 "mxomnicreateparam.h",
                 "mxstreamcontroller.h",
+                "mxstreamer.h",
                 "mxstring.h",
                 "mxomni.h",
                 "legomain.h",
@@ -135,6 +137,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxDSBuffer::FUN_100c6fa0").skip());
         infoMap.put(new Info("MxDSBuffer::GetBuffer").skip());
         infoMap.put(new Info("MxDSBuffer::SkipToData").skip());
+        infoMap.put(new Info("MxStreamer::GetMemoryBlock").skip());
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
         // FIXME: like, check all of it
@@ -158,6 +161,8 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxPresenter::TickleState").enumerate());
         infoMap.put(new Info("MxTransitionManager::TransitionType").enumerate());
         infoMap.put(new Info("MxDSObject::Type").enumerate());
+        infoMap.put(new Info("NotificationId").enumerate());
+        infoMap.put(new Info("MxStreamer::OpenMode").enumerate());
         infoMap.put(new Info("DDPixelCaps", "DDColorKeyFlags", "DDFlipFlags", "DDCaps2Flags", "DDSCapsFlags", "DDPixelFormatFlags", "DDBLTFXFlags", "PCFlags", "DDBltFlags", "DDLockFlags", "DDBltFastFlags", "DDSCLFlags", "DDSurfaceDescFlags").enumerate());
 
         // Definition skips

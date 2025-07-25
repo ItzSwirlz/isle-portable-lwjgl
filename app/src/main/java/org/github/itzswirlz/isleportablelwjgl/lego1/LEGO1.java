@@ -2228,12 +2228,6 @@ public static class MxRect32 extends MxRectInteger {
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MxSoundManager(Pointer p) { super(p); }
 }
-@Opaque public static class MxStreamer extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxStreamer() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxStreamer(Pointer p) { super(p); }
-}
 @Opaque public static class MxVideoManager extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
     public MxVideoManager() { super((Pointer)null); }
@@ -2291,6 +2285,101 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 }
 
 // #endif // MXNEXTACTIONDATASTART_H
+
+
+// Parsed from mxnotificationparam.h
+
+// #ifndef MXNOTIFICATIONPARAM_H
+// #define MXNOTIFICATIONPARAM_H
+
+// #include "compat.h"
+// #include "mxparam.h"
+// #include "mxtypes.h"
+
+// Several of those should be defined in LegoOmni
+public enum NotificationId {
+	c_notificationType0(0),
+	c_notificationStartAction(1), // 100dc210:100d8350
+	c_notificationEndAction(2),   // 100d8358:100d8350
+	c_notificationType4(4),       // 100dc208:100d8350
+	c_notificationPresenter(5),
+	c_notificationStreamer(6),   // 100dc760
+	c_notificationKeyPress(7),   // 100d6aa0
+	c_notificationButtonUp(8),   // 100d6aa0
+	c_notificationButtonDown(9), // 100d6aa0
+	c_notificationMouseMove(10), // 100d6aa0
+	c_notificationClick(11),     // 100d6aa0
+	c_notificationDragStart(12),
+	c_notificationDrag(13),
+	c_notificationDragEnd(14),
+	c_notificationTimer(15), // 100d6aa0
+	c_notificationControl(17),
+	c_notificationEndAnim(18),    // 100d7e80
+	c_notificationPathStruct(19), // 100d6230
+	c_notificationType20(20),
+	c_notificationNewPresenter(21),
+	c_notificationType22(22),
+	c_notificationType23(23),
+	c_notificationTransitioned(24);
+
+    public final int value;
+    private NotificationId(int v) { this.value = v; }
+    private NotificationId(NotificationId e) { this.value = e.value; }
+    public NotificationId intern() { for (NotificationId e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// VTABLE: LEGO1 0x100d56e0
+// VTABLE: BETA10 0x101b86a8
+// SIZE 0x0c
+@NoOffset public static class MxNotificationParam extends MxParam {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxNotificationParam(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxNotificationParam(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxNotificationParam position(long position) {
+        return (MxNotificationParam)super.position(position);
+    }
+    @Override public MxNotificationParam getPointer(long i) {
+        return new MxNotificationParam((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x100702d0
+	public MxNotificationParam() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x10013490
+	public MxNotificationParam(NotificationId p_type, MxCore p_sender) { super((Pointer)null); allocate(p_type, p_sender); }
+	private native void allocate(NotificationId p_type, MxCore p_sender);
+
+	// FUNCTION: LEGO1 0x10010390
+	// FUNCTION: BETA10 0x100135f0
+	public native MxNotificationParam Clone(); // vtable+0x04
+
+	// FUNCTION: BETA10 0x100135c0
+	public native NotificationId GetNotification();
+
+	// FUNCTION: BETA10 0x1003c960
+	public native MxCore GetSender();
+
+	// FUNCTION: BETA10 0x1007d5c0
+	public native void SetNotification(NotificationId p_type);
+
+	// FUNCTION: BETA10 0x1007d5f0
+	public native void SetSender(MxCore p_sender);
+}
+
+// SYNTHETIC: LEGO1 0x10010430
+// SYNTHETIC: BETA10 0x100136c0
+// MxNotificationParam::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100104a0
+// SYNTHETIC: BETA10 0x10013740
+// MxNotificationParam::~MxNotificationParam
+
+// #endif // MXNOTIFICATIONPARAM_H
 
 
 // Parsed from mxomnicreateflags.h
@@ -2566,6 +2655,155 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 // #endif // MXSTREAMCONTROLLER_H
 
 
+// Parsed from mxstreamer.h
+
+// #ifndef MXSTREAMER_H
+// #define MXSTREAMER_H
+
+// #include "decomp.h"
+// #include "lego1_export.h"
+// #include "mxcore.h"
+// #include "mxmemorypool.h"
+// #include "mxnotificationparam.h"
+// #include "mxstl/stlcompat.h"
+// #include "mxstreamcontroller.h"
+// #include "mxtypes.h"
+
+// #include <assert.h>
+
+// VTABLE: LEGO1 0x100dc760
+// VTABLE: BETA10 0x101c23c8
+// SIZE 0x10
+@NoOffset public static class MxStreamerNotification extends MxNotificationParam {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxStreamerNotification(Pointer p) { super(p); }
+
+	// FUNCTION: BETA10 0x10146e40
+	public MxStreamerNotification(NotificationId p_type, MxCore p_sender, MxStreamController p_ctrlr) { super((Pointer)null); allocate(p_type, p_sender, p_ctrlr); }
+	private native void allocate(NotificationId p_type, MxCore p_sender, MxStreamController p_ctrlr);
+
+	public native MxNotificationParam Clone();
+
+	// FUNCTION: BETA10 0x10147190
+	public native MxStreamController GetController();
+}
+
+// VTABLE: LEGO1 0x100dc710
+// VTABLE: BETA10 0x101c2378
+// SIZE 0x2c
+@NoOffset public static class MxStreamer extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxStreamer(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxStreamer(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxStreamer position(long position) {
+        return (MxStreamer)super.position(position);
+    }
+    @Override public MxStreamer getPointer(long i) {
+        return new MxStreamer((Pointer)this).offsetAddress(i);
+    }
+
+	public enum OpenMode {
+		e_diskStream(0),
+		e_RAMStream(1);
+
+	    public final int value;
+	    private OpenMode(int v) { this.value = v; }
+	    private OpenMode(OpenMode e) { this.value = e.value; }
+	    public OpenMode intern() { for (OpenMode e : values()) if (e.value == value) return e; return this; }
+	    @Override public String toString() { return intern().name(); }
+	}
+
+	public MxStreamer() { super((Pointer)null); allocate(); }
+	private native void allocate(); // vtable+0x00
+
+	public native MxStreamController Open(@Cast("const char*") BytePointer p_name, @Cast("MxU16") int p_openMode);
+	public native MxStreamController Open(String p_name, @Cast("MxU16") int p_openMode);
+	public native @Cast("MxLong") long Close(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxLong") long Close(String p_name);
+
+	public native @Cast("MxLong") long Notify(@ByRef MxParam p_param); // vtable+0x04
+
+	// FUNCTION: LEGO1 0x100b9000
+	// FUNCTION: BETA10 0x10145ee0
+	public native @Cast("const char*") BytePointer ClassName();
+
+	// FUNCTION: LEGO1 0x100b9010
+	// FUNCTION: BETA10 0x10145f00
+	public native @Cast("MxBool") boolean IsA(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxBool") boolean IsA(String p_name);
+
+	public native @Cast("MxResult") int Create(); // vtable+0x14
+
+	public native @Cast("MxBool") boolean FUN_100b9b30(@ByRef MxDSObject p_dsObject);
+	public native MxStreamController GetOpenStream(@Cast("const char*") BytePointer p_name);
+	public native MxStreamController GetOpenStream(String p_name);
+	public native void FUN_100b98f0(MxDSAction p_action);
+	public native @Cast("MxResult") int AddStreamControllerToOpenList(MxStreamController p_stream);
+	public native @Cast("MxResult") int FUN_100b99b0(MxDSAction p_action);
+	public native @Cast("MxResult") int DeleteObject(MxDSAction p_dsAction);
+
+	// FUNCTION: BETA10 0x10158db0
+	
+
+	// FUNCTION: BETA10 0x10158570
+	public native void ReleaseMemoryBlock(@Cast("MxU8*") short p_block, @Cast("MxU32") long p_blockSize);
+}
+
+// clang-format off
+// TEMPLATE: LEGO1 0x100b9090
+// TEMPLATE: BETA10 0x10146020
+// list<MxStreamController *,allocator<MxStreamController *> >::~list<MxStreamController *,allocator<MxStreamController *> >
+// clang-format on
+
+// TEMPLATE: BETA10 0x10146090
+// list<MxStreamController *,allocator<MxStreamController *> >::begin
+
+// TEMPLATE: BETA10 0x10146120
+// list<MxStreamController *,allocator<MxStreamController *> >::end
+
+// TEMPLATE: BETA10 0x101461b0
+// ??Eiterator@?$list@PAVMxStreamController@@V?$allocator@PAVMxStreamController@@@@@@QAE?AV01@H@Z
+
+// SYNTHETIC: LEGO1 0x100b9120
+// SYNTHETIC: BETA10 0x101466e0
+// MxStreamer::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x100b9140
+// TEMPLATE: BETA10 0x10146720
+// List<MxStreamController *>::~List<MxStreamController *>
+
+// TEMPLATE: BETA10 0x10146ab0
+// list<MxStreamController *,allocator<MxStreamController *> >::iterator::operator*
+
+// SYNTHETIC: LEGO1 0x100b97b0
+// SYNTHETIC: BETA10 0x10146f80
+// MxStreamerNotification::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100b9820
+// SYNTHETIC: BETA10 0x10146fc0
+// MxStreamerNotification::~MxStreamerNotification
+
+// TEMPLATE: BETA10 0x10147020
+// list<MxStreamController *,allocator<MxStreamController *> >::iterator::operator==
+
+// TEMPLATE: BETA10 0x10147060
+// list<MxStreamController *,allocator<MxStreamController *> >::push_back
+
+// TEMPLATE: BETA10 0x10147200
+// ??9@YAHABViterator@?$list@PAVMxStreamController@@V?$allocator@PAVMxStreamController@@@@@@0@Z
+
+// clang-format off
+// TEMPLATE: BETA10 0x10147230
+// ?find@@YA?AViterator@?$list@PAVMxStreamController@@V?$allocator@PAVMxStreamController@@@@@@V12@0ABQAVMxStreamController@@@Z
+// clang-format on
+
+// #endif // MXSTREAMER_H
+
+
 // Parsed from mxstring.h
 
 // #ifndef MXSTRING_H
@@ -2662,12 +2900,6 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
     public MxEntity() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MxEntity(Pointer p) { super(p); }
-}
-@Opaque public static class MxNotificationParam extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxNotificationParam() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxNotificationParam(Pointer p) { super(p); }
 }
 
 // VTABLE: LEGO1 0x100dc168
