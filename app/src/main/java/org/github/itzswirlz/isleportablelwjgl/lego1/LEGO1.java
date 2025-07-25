@@ -9,6 +9,169 @@ import org.bytedeco.javacpp.annotation.*;
 public class LEGO1 extends org.github.itzswirlz.isleportablelwjgl.lego1.presets.LEGO1Config {
     static { Loader.load(); }
 
+// Parsed from vector.h
+
+// #ifndef VECTOR_H
+// #define VECTOR_H
+
+// #include "compat.h"
+
+// Note: virtual function overloads appear in the virtual table
+// in reverse order of appearance.
+
+// VTABLE: LEGO1 0x100d4288
+// VTABLE: BETA10 0x101b8440
+// SIZE 0x08
+@NoOffset public static class Vector2 extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Vector2(Pointer p) { super(p); }
+
+	// FUNCTION: LEGO1 0x1000c0f0
+	// FUNCTION: BETA10 0x100116a0
+	public Vector2(FloatPointer p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(FloatPointer p_data);
+	public Vector2(FloatBuffer p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(FloatBuffer p_data);
+	public Vector2(float[] p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(float[] p_data);
+
+	// FUNCTION: BETA10 0x100109e0
+
+	public native FloatPointer GetData();                                        // vtable+0x28                            // vtable+0x24
+	public native void Clear();                                            // vtable+0x2c
+	public native float Dot(@Const FloatPointer p_a, @Const FloatPointer p_b);
+	public native float Dot(@Const FloatBuffer p_a, @Const FloatBuffer p_b);
+	public native float Dot(@Const float[] p_a, @Const float[] p_b);     // vtable+0x3c
+	public native float Dot(@Const @ByRef Vector2 p_a, @Const @ByRef Vector2 p_b); // vtable+0x38
+	public native float Dot(@Const FloatPointer p_a, @Const @ByRef Vector2 p_b);
+	public native float Dot(@Const FloatBuffer p_a, @Const @ByRef Vector2 p_b);
+	public native float Dot(@Const float[] p_a, @Const @ByRef Vector2 p_b);   // vtable+0x34
+	public native float Dot(@Const @ByRef Vector2 p_a, @Const FloatPointer p_b);
+	public native float Dot(@Const @ByRef Vector2 p_a, @Const FloatBuffer p_b);
+	public native float Dot(@Const @ByRef Vector2 p_a, @Const float[] p_b);   // vtable+0x30
+	public native float LenSquared();                                // vtable+0x40
+	public native int Unitize();                                           // vtable+0x44
+	public native @Name("operator +=") void addPut(float p_value);                          // vtable+0x50
+	public native @Name("operator +=") void addPut(@Const FloatPointer p_other);
+	public native @Name("operator +=") void addPut(@Const FloatBuffer p_other);
+	public native @Name("operator +=") void addPut(@Const float[] p_other);                   // vtable+0x4c
+	public native @Name("operator +=") void addPut(@Const @ByRef Vector2 p_other);                 // vtable+0x48
+	public native @Name("operator -=") void subtractPut(@Const FloatPointer p_other);
+	public native @Name("operator -=") void subtractPut(@Const FloatBuffer p_other);
+	public native @Name("operator -=") void subtractPut(@Const float[] p_other);                   // vtable+0x58
+	public native @Name("operator -=") void subtractPut(@Const @ByRef Vector2 p_other);                 // vtable+0x54
+	public native @Name("operator *=") void multiplyPut(@Const FloatPointer p_other);
+	public native @Name("operator *=") void multiplyPut(@Const FloatBuffer p_other);
+	public native @Name("operator *=") void multiplyPut(@Const float[] p_other);                   // vtable+0x64
+	public native @Name("operator *=") void multiplyPut(@Const @ByRef Vector2 p_other);                 // vtable+0x60
+	public native @Name("operator *=") void multiplyPut(float p_value);                   // vtable+0x5c
+	public native @Name("operator /=") void dividePut(float p_value);                   // vtable+0x68
+	public native @Name("operator =") void put(@Const FloatPointer p_other);
+	public native @Name("operator =") void put(@Const FloatBuffer p_other);
+	public native @Name("operator =") void put(@Const float[] p_other);                    // vtable+0x70
+	public native @Name("operator =") void put(@Const @ByRef Vector2 p_other);                  // vtable+0x6c
+
+	// SYNTHETIC: LEGO1 0x10010be0
+	// SYNTHETIC: BETA10 0x100121e0
+	// Vector3::operator=
+
+	// SYNTHETIC: BETA10 0x1004af40
+	// Vector4::operator=
+
+	// FUNCTION: BETA10 0x1001d140
+	public native @ByRef @Name("operator []") FloatPointer get(int idx);
+
+	// FUNCTION: BETA10 0x1001d170
+}
+
+// VTABLE: LEGO1 0x100d4518
+// VTABLE: BETA10 0x101b8398
+// SIZE 0x08
+public static class Vector3 extends Vector2 {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Vector3(Pointer p) { super(p); }
+
+	// FUNCTION: LEGO1 0x1001d150
+	// FUNCTION: BETA10 0x10011660
+	public Vector3(FloatPointer p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(FloatPointer p_data);
+	public Vector3(FloatBuffer p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(FloatBuffer p_data);
+	public Vector3(float[] p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(float[] p_data);
+
+	// Hack: Some code initializes a Vector3 from a (most likely) const float* source.
+	// Example: LegoCameraController::GetWorldUp
+	// Vector3 however is a class that can mutate its underlying source, making
+	// initialization with a const source fundamentally incompatible.
+
+	// FUNCTION: BETA10 0x100109a0
+
+	public native void Clear();                                            // vtable+0x2c
+	public native float LenSquared();                                // vtable+0x40
+	public native void EqualsCross(@Const @ByRef Vector3 p_a, @Const @ByRef Vector3 p_b); // vtable+0x80
+	public native void EqualsCross(@Const @ByRef Vector3 p_a, @Const FloatPointer p_b);
+	public native void EqualsCross(@Const @ByRef Vector3 p_a, @Const FloatBuffer p_b);
+	public native void EqualsCross(@Const @ByRef Vector3 p_a, @Const float[] p_b);   // vtable+0x7c
+	public native void EqualsCross(@Const FloatPointer p_a, @Const @ByRef Vector3 p_b);
+	public native void EqualsCross(@Const FloatBuffer p_a, @Const @ByRef Vector3 p_b);
+	public native void EqualsCross(@Const float[] p_a, @Const @ByRef Vector3 p_b);   // vtable+0x78
+	public native void Fill(float p_value);                          // vtable+0x84
+}
+
+// VTABLE: LEGO1 0x100d45a0
+// VTABLE: BETA10 0x101bac38
+// SIZE 0x08
+public static class Vector4 extends Vector3 {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Vector4(Pointer p) { super(p); }
+
+	// FUNCTION: BETA10 0x10048780
+	public Vector4(FloatPointer p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(FloatPointer p_data);
+	public Vector4(FloatBuffer p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(FloatBuffer p_data);
+	public Vector4(float[] p_data) { super((Pointer)null); allocate(p_data); }
+	private native void allocate(float[] p_data);
+
+	// Some code initializes a Vector4 from a `const float*` source.
+	// Example: `LegoCarBuild::VTable0x6c`
+	// Vector4 however is a class that can mutate its underlying source, making
+	// initialization with a const source fundamentally incompatible.
+	// BETA10 appears to have two separate constructors for Vector4 as well,
+	// supporting the theory that this decompilation is correct.
+
+	// FUNCTION: BETA10 0x100701b0
+
+	public native void Clear();                                                     // vtable+0x2c
+	public native float LenSquared();                                         // vtable+0x40
+	public native void Fill(float p_value);                                  // vtable+0x84
+	public native void SetMatrixProduct(@Const FloatPointer p_vec, @Const FloatPointer p_mat);
+	public native void SetMatrixProduct(@Const FloatBuffer p_vec, @Const FloatBuffer p_mat);
+	public native void SetMatrixProduct(@Const float[] p_vec, @Const float[] p_mat);     // vtable+0x8c
+	public native void SetMatrixProduct(@Const @ByRef Vector4 p_a, @Const FloatPointer p_b);
+	public native void SetMatrixProduct(@Const @ByRef Vector4 p_a, @Const FloatBuffer p_b);
+	public native void SetMatrixProduct(@Const @ByRef Vector4 p_a, @Const float[] p_b);       // vtable+0x88
+	public native int NormalizeQuaternion();                                         // vtable+0x90
+	public native int EqualsHamiltonProduct(@Const @ByRef Vector4 p_a, @Const @ByRef Vector4 p_b); // vtable+0x94
+
+	public native @ByRef @Name("operator []") FloatPointer get(int idx);
+
+	// FUNCTION: BETA10 0x10010890
+}
+
+// #ifdef COMPAT_MODE
+// #include "vector2d.inl.h"
+// #include "vector3d.inl.h"
+// #include "vector4d.inl.h"
+// #endif
+
+// #endif // VECTOR_H
+
+
 // Parsed from legogamestate.h
 
 // #ifndef LEGOGAMESTATE_H
@@ -683,6 +846,257 @@ public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @C
 }
 
 // #endif // MXDIRECTDRAW_H
+
+
+// Parsed from mxdsaction.h
+
+// #ifndef MXDSACTION_H
+// #define MXDSACTION_H
+
+// #include "lego1_export.h"
+// #include "mxdsobject.h"
+// #include "mxgeometry/mxgeometry3d.h"
+// #include "mxtypes.h"
+
+// VTABLE: LEGO1 0x100dc098
+// VTABLE: BETA10 0x101c1b68
+// SIZE 0x94
+@NoOffset public static class MxDSAction extends MxDSObject {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDSAction(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxDSAction(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxDSAction position(long position) {
+        return (MxDSAction)super.position(position);
+    }
+    @Override public MxDSAction getPointer(long i) {
+        return new MxDSAction((Pointer)this).offsetAddress(i);
+    }
+
+	/** enum MxDSAction:: */
+	public static final int
+		c_looping = 0x01,
+		c_bit3 = 0x04,
+		c_bit4 = 0x08,
+		c_bit5 = 0x10,
+		c_enabled = 0x20,
+		c_bit7 = 0x40,
+		c_world = 0x80,
+		c_bit9 = 0x100,
+		c_bit10 = 0x200,
+		c_bit11 = 0x400;
+
+	public MxDSAction() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public MxDSAction(@ByRef MxDSAction p_dsAction) { super((Pointer)null); allocate(p_dsAction); }
+	private native void allocate(@ByRef MxDSAction p_dsAction);
+	public native void CopyFrom(@ByRef MxDSAction p_dsAction);
+	public native @ByRef @Name("operator =") MxDSAction put(@ByRef MxDSAction p_dsAction);
+
+	// FUNCTION: LEGO1 0x100ad980
+	// FUNCTION: BETA10 0x1012bcf0
+	public native @Cast("const char*") BytePointer ClassName();
+
+	// FUNCTION: LEGO1 0x100ad990
+	// FUNCTION: BETA10 0x1012bd10
+	public native @Cast("MxBool") boolean IsA(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxBool") boolean IsA(String p_name);
+
+	public native @Cast("undefined4") long VTable0x14();                            // vtable+0x14
+	public native @Cast("MxU32") long GetSizeOnDisk();                              // vtable+0x18
+	public native void Deserialize(@Cast("MxU8*&") short p_source, @Cast("MxS16") short p_unk0x24); // vtable+0x1c
+	public native @Cast("MxLong") long GetDuration();                                // vtable+0x24
+	public native void SetDuration(@Cast("MxLong") long p_duration);                 // vtable+0x28
+	public native MxDSAction Clone();                                 // vtable+0x2c
+	public native void MergeFrom(@ByRef MxDSAction p_dsAction);              // vtable+0x30
+	public native @Cast("MxBool") boolean HasId(@Cast("MxU32") long p_objectId);                      // vtable+0x34
+	public native void SetTimeStarted(@Cast("MxLong") long p_timeStarted);           // vtable+0x38
+	public native @Cast("MxLong") long GetTimeStarted();                             // vtable+0x3c
+	public native @Cast("MxLong") long GetElapsedTime();                             // vtable+0x40
+
+	public native void AppendExtra(@Cast("MxU16") int p_extraLength, @Cast("const char*") BytePointer p_extraData);
+	public native void AppendExtra(@Cast("MxU16") int p_extraLength, String p_extraData);
+
+	// FUNCTION: BETA10 0x1003a560
+	
+
+	// FUNCTION: BETA10 0x1003cf70
+	public native @Cast("MxU32") long GetFlags();
+
+	// FUNCTION: BETA10 0x1004daa0
+	public native void SetFlags(@Cast("MxU32") long p_flags);
+
+	public native @Cast("char*") BytePointer GetExtraData();
+	public native @Cast("MxU16") int GetExtraLength();
+
+	// FUNCTION: BETA10 0x1005a560
+	public native @Cast("MxLong") long GetStartTime();
+
+	// FUNCTION: BETA10 0x1012be80
+	public native @Cast("MxS32") int GetLoopCount();
+
+	// FUNCTION: BETA10 0x100f27f0
+	public native void SetLoopCount(@Cast("MxS32") int p_loopCount);
+
+	// FUNCTION: BETA10 0x1003db50
+	public native @Const @ByRef Vector3 GetLocation();
+
+	// FUNCTION: BETA10 0x1003db80
+	public native @Const @ByRef Vector3 GetDirection();
+
+	// FUNCTION: BETA10 0x1003dbb0
+	public native @Const @ByRef Vector3 GetUp();
+
+	// FUNCTION: BETA10 0x100153b0
+	public native void SetLocation(@Const @ByRef Vector3 p_location);
+
+	// FUNCTION: BETA10 0x100153f0
+	public native void SetDirection(@Const @ByRef Vector3 p_direction);
+
+	// FUNCTION: BETA10 0x10015430
+	public native void SetUp(@Const @ByRef Vector3 p_up);
+
+	public native MxCore GetNotificationObject();
+	public native void SetNotificationObject(MxCore p_notificationObject);
+	public native MxCore GetOrigin();
+	public native void SetOrigin(MxCore p_origin);
+
+	public native @Cast("MxBool") boolean IsLooping();
+	public native @Cast("MxBool") boolean IsBit3();
+}
+
+// #endif // MXDSACTION_H
+
+
+// Parsed from mxdsobject.h
+
+// #ifndef MXDSOBJECT_H
+// #define MXDSOBJECT_H
+
+// #include "decomp.h"
+// #include "mxatom.h"
+// #include "mxcore.h"
+// #include "mxutilitylist.h"
+
+@Opaque public static class MxDSFile extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxDSFile() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDSFile(Pointer p) { super(p); }
+}
+
+// SIZE 0x0c
+
+// VTABLE: LEGO1 0x100dc868
+// VTABLE: BETA10 0x101c23f0
+// SIZE 0x2c
+@NoOffset public static class MxDSObject extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDSObject(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxDSObject(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxDSObject position(long position) {
+        return (MxDSObject)super.position(position);
+    }
+    @Override public MxDSObject getPointer(long i) {
+        return new MxDSObject((Pointer)this).offsetAddress(i);
+    }
+
+	public enum Type {
+		e_object(0),
+		e_action(1),
+		e_mediaAction(2),
+		e_anim(3),
+		e_sound(4),
+		e_multiAction(5),
+		e_serialAction(6),
+		e_parallelAction(7),
+		e_event(8),
+		e_selectAction(9),
+		e_still(10),
+		e_objectAction(11);
+
+	    public final int value;
+	    private Type(int v) { this.value = v; }
+	    private Type(Type e) { this.value = e.value; }
+	    public Type intern() { for (Type e : values()) if (e.value == value) return e; return this; }
+	    @Override public String toString() { return intern().name(); }
+	}
+
+	public MxDSObject() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native void CopyFrom(@ByRef MxDSObject p_dsObject);
+	public MxDSObject(@ByRef MxDSObject p_dsObject) { super((Pointer)null); allocate(p_dsObject); }
+	private native void allocate(@ByRef MxDSObject p_dsObject);
+	public native @ByRef @Name("operator =") MxDSObject put(@ByRef MxDSObject p_dsObject);
+
+	public native void SetObjectName(@Cast("const char*") BytePointer p_objectName);
+	public native void SetObjectName(String p_objectName);
+	public native void SetSourceName(@Cast("const char*") BytePointer p_sourceName);
+	public native void SetSourceName(String p_sourceName);
+
+	// FUNCTION: LEGO1 0x100bf730
+	// FUNCTION: BETA10 0x1012bdd0
+	public native @Cast("const char*") BytePointer ClassName(); // vtable+0x0c
+
+	// FUNCTION: LEGO1 0x100bf740
+	// FUNCTION: BETA10 0x1012bd70
+	public native @Cast("MxBool") boolean IsA(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxBool") boolean IsA(String p_name); // vtable+0x10
+
+	public native @Cast("undefined4") long VTable0x14();                            // vtable+0x14
+	public native @Cast("MxU32") long GetSizeOnDisk();                              // vtable+0x18
+	public native void Deserialize(@Cast("MxU8*&") short p_source, @Cast("MxS16") short p_unk0x24); // vtable+0x1c
+
+	// FUNCTION: ISLE 0x401c40
+	// FUNCTION: LEGO1 0x10005530
+	// FUNCTION: BETA10 0x100152e0
+	public native void SetAtomId(@ByVal MxAtomId p_atomId); // vtable+0x20
+
+	// FUNCTION: BETA10 0x1012ef90
+	public native Type GetType();
+
+	// FUNCTION: BETA10 0x1012efb0
+	public native @Cast("const char*") BytePointer GetSourceName();
+
+	// FUNCTION: BETA10 0x10028460
+	public native @Cast("const char*") BytePointer GetObjectName();
+
+	// FUNCTION: BETA10 0x10017910
+	public native @Cast("MxU32") long GetObjectId();
+
+	// FUNCTION: BETA10 0x10017940
+	public native @Const @ByRef MxAtomId GetAtomId();
+
+	public native @Cast("MxS16") short GetUnknown24();
+	public native MxPresenter GetUnknown28();
+
+	public native void SetType(Type p_type);
+
+	// FUNCTION: BETA10 0x100152b0
+	public native void SetObjectId(@Cast("MxU32") long p_objectId);
+
+	// FUNCTION: BETA10 0x10039570
+	public native void SetUnknown24(@Cast("MxS16") short p_unk0x24);
+
+	public native void SetUnknown28(MxPresenter p_unk0x28);
+
+	public native void ClearAtom();
+}
+
+public static native MxDSObject DeserializeDSObjectDispatch(@Cast("MxU8*&") short arg0, @Cast("MxS16") short arg1);
+public static native MxDSObject CreateStreamObject(MxDSFile arg0, @Cast("MxS16") short arg1);
+
+// TEMPLATE: BETA10 0x10150950
+// MxUtilityList<MxDSObject *>::PopFront
+
+// #endif // MXDSOBJECT_H
 
 
 // Parsed from mxticklemanager.h
@@ -1493,12 +1907,6 @@ public static class MxRect32 extends MxRectInteger {
     public MxAtomSet() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MxAtomSet(Pointer p) { super(p); }
-}
-@Opaque public static class MxDSAction extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxDSAction() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxDSAction(Pointer p) { super(p); }
 }
 @Opaque public static class MxEventManager extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */

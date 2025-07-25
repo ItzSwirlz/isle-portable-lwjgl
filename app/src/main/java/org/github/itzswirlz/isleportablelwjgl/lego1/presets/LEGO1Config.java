@@ -19,6 +19,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "../../../../isle-portable/LEGO1/omni/include",
                 "../../../../isle-portable/LEGO1/",
                 "../../../../isle-portable/LEGO1/mxdirectx/",
+                "../../../../isle-portable/LEGO1/realtime/",
                 "../../../../isle-portable/LEGO1/lego/legoomni/include",
                 "../../../../isle-portable/LEGO1/lego/legoomni/include/actions",
                 "../../../../isle-portable/util",
@@ -29,10 +30,13 @@ import org.bytedeco.javacpp.tools.InfoMapper;
         // Pick a path, just trying to be flexible
         linkpath = {"../../../../", "../../../", "../../../../lib"},
         include = {
+                "vector.h",
                 "legogamestate.h",
                 "legovideomanager.h",
                 "mxcore.h",
                 "mxdirectdraw.h",
+                "mxdsaction.h",
+                "mxdsobject.h",
                 "mxticklemanager.h",
                 "mxtimer.h",
                 "mxgeometry.h", //TODO: templates and lists
@@ -87,6 +91,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxSize<MxS16>").define().pointerTypes("MxSizeShort"));
 
         // TODO: Lists
+        infoMap.put(new Info("MxDSObjectList").skip());
         infoMap.put(new Info("MxPoint32List", "MxPoint32ListCursor", "MxSize32List", "MxPoint16List", "MxPoint16ListCursor", "MxSize16List", "MxSize32ListCursor", "MxSize16ListCursor", "MxRect16ListCursor", "MxRect16List", "MxRect32ListCursor", "MxRect32List").skip());
 
         // FIXME: disabled because lazy
@@ -118,6 +123,8 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LegoGameState::ScoreItem::m_name").skip());
         infoMap.put(new Info("LegoGameState::Username::m_letters").skip()); // FIXME: Most likely a symptom of some other basic typing issue
         infoMap.put(new Info("LegoGameState::History::FindPlayerInScoreHistory").skip());
+        // Excuse: compiler error not needed for isle
+        infoMap.put(new Info("MxDSAction::GetExtra").skip());
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
         // FIXME: like, check all of it
@@ -140,6 +147,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LegoOmni::World").enumerate());
         infoMap.put(new Info("MxPresenter::TickleState").enumerate());
         infoMap.put(new Info("MxTransitionManager::TransitionType").enumerate());
+        infoMap.put(new Info("MxDSObject::Type").enumerate());
         infoMap.put(new Info("DDPixelCaps", "DDColorKeyFlags", "DDFlipFlags", "DDCaps2Flags", "DDSCapsFlags", "DDPixelFormatFlags", "DDBLTFXFlags", "PCFlags", "DDBltFlags", "DDLockFlags", "DDBltFastFlags", "DDSCLFlags", "DDSurfaceDescFlags").enumerate());
 
         // Definition skips
