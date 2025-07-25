@@ -231,7 +231,6 @@ public class IsleApp {
         }
 
         if(!Lego().IsPaused()) {
-            System.out.println("Lego is not paused");
             TickleManager().Tickle();
         }
 
@@ -245,16 +244,6 @@ public class IsleApp {
         if(STARTUP_DELAY != 0) {
             return true;
         }
-
-        LegoOmni.GetInstance().CreateBackgroundAudio();
-        MxStreamController stream = Streamer().Open("\\lego\\scripts\\isle\\isle", MxStreamer.OpenMode.e_diskStream.ordinal());
-
-        MxDSAction ds = new MxDSAction();
-
-        ds.SetAtomId(stream.GetAtom());
-        ds.SetUnknown24((short)-1);
-        ds.SetObjectId(0);
-        Start(ds);
 
         return true;
     }
@@ -433,8 +422,11 @@ public class IsleApp {
     }
 
     public static void main(String[] args) {
+        SDLHints.SDL_SetHint(SDLHints.SDL_HINT_MOUSE_TOUCH_EVENTS, "0");
+        SDLHints.SDL_SetHint(SDLHints.SDL_HINT_TOUCH_MOUSE_EVENTS, "0");
+
         // TODO: gamepad/haptic
-        if(!SDLInit.SDL_Init(SDLInit.SDL_INIT_VIDEO | SDLInit.SDL_INIT_AUDIO | SDLInit.SDL_INIT_EVENTS | SDLInit.SDL_INIT_JOYSTICK)) {
+        if(!SDLInit.SDL_Init(SDLInit.SDL_INIT_VIDEO | SDLInit.SDL_INIT_AUDIO | SDLInit.SDL_INIT_JOYSTICK | SDLInit.SDL_INIT_HAPTIC)) {
             System.exit(1);
             System.err.println("error");
         }
@@ -449,6 +441,18 @@ public class IsleApp {
         }
 
         SDL_Event event = SDL_Event.create();
+        LegoOmni.GetInstance().CreateBackgroundAudio();
+        MxDSAction ds = new MxDSAction();
+        MxStreamController stream = Streamer().Open("\\lego\\scripts\\isle\\isle", MxStreamer.OpenMode.e_diskStream.ordinal());
+        if(stream == null) {
+            System.out.println("Waiting");
+//            return true;
+        }
+
+        ds.SetAtomId(stream.GetAtom());
+        ds.SetUnknown24((short)-1);
+        ds.SetObjectId(0);
+        Start(ds);
         loop: while(true) {
             Tick();
             SDLEvents.SDL_PollEvent(event);
