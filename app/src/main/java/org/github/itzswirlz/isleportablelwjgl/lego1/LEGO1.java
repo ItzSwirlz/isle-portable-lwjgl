@@ -971,6 +971,150 @@ public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @C
 // #endif // MXDSACTION_H
 
 
+// Parsed from mxdsbuffer.h
+
+// #ifndef MXDSBUFFER_H
+// #define MXDSBUFFER_H
+
+// #include "decomp.h"
+// #include "mxcore.h"
+
+@Opaque public static class MxStreamController extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxStreamController() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxStreamController(Pointer p) { super(p); }
+}
+@Opaque public static class MxDSStreamingAction extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxDSStreamingAction() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDSStreamingAction(Pointer p) { super(p); }
+}
+@Opaque public static class MxStreamChunk extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxStreamChunk() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxStreamChunk(Pointer p) { super(p); }
+}
+@Opaque public static class MxDSChunk extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxDSChunk() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDSChunk(Pointer p) { super(p); }
+}
+
+// VTABLE: LEGO1 0x100dcca0
+// VTABLE: BETA10 0x101c2898
+// SIZE 0x34
+@NoOffset public static class MxDSBuffer extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDSBuffer(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxDSBuffer(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxDSBuffer position(long position) {
+        return (MxDSBuffer)super.position(position);
+    }
+    @Override public MxDSBuffer getPointer(long i) {
+        return new MxDSBuffer((Pointer)this).offsetAddress(i);
+    }
+
+	/** enum MxDSBuffer::Type */
+	public static final int
+		e_chunk = 0,
+		e_allocate = 1,
+		e_preallocated = 2,
+		e_unknown = 3;
+
+	public MxDSBuffer() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: LEGO1 0x100c6500
+	// FUNCTION: BETA10 0x10158510
+	public native @Cast("const char*") BytePointer ClassName();
+
+	public native @Cast("MxResult") int AllocateBuffer(@Cast("MxU32") long p_bufferSize, @Cast("MxDSBuffer::Type") int p_mode);
+	public native @Cast("MxResult") int SetBufferPointer(@Cast("MxU8*") short p_buffer, @Cast("MxU32") long p_size);
+	public native @Cast("MxResult") int FUN_100c67b0(
+			MxStreamController p_controller,
+			MxDSAction p_action,
+			@Cast("MxDSStreamingAction**") PointerPointer p_streamingAction
+		);
+	public native @Cast("MxResult") int FUN_100c67b0(
+			MxStreamController p_controller,
+			MxDSAction p_action,
+			@ByPtrPtr MxDSStreamingAction p_streamingAction
+		);
+	public native @Cast("MxResult") int CreateObject(
+			MxStreamController p_controller,
+			@Cast("MxU32*") long p_data,
+			MxDSAction p_action,
+			@Cast("MxDSStreamingAction**") PointerPointer p_streamingAction
+		);
+	public native @Cast("MxResult") int CreateObject(
+			MxStreamController p_controller,
+			@Cast("MxU32*") long p_data,
+			MxDSAction p_action,
+			@ByPtrPtr MxDSStreamingAction p_streamingAction
+		);
+	public native @Cast("MxResult") int StartPresenterFromAction(MxStreamController p_controller, MxDSAction p_action1, MxDSAction p_action2);
+	public native @Cast("MxResult") int ParseChunk(
+			MxStreamController p_controller,
+			@Cast("MxU32*") long p_data,
+			MxDSAction p_action,
+			@Cast("MxDSStreamingAction**") PointerPointer p_streamingAction,
+			MxStreamChunk p_header
+		);
+	public native @Cast("MxResult") int ParseChunk(
+			MxStreamController p_controller,
+			@Cast("MxU32*") long p_data,
+			MxDSAction p_action,
+			@ByPtrPtr MxDSStreamingAction p_streamingAction,
+			MxStreamChunk p_header
+		);
+	
+	public native @Cast("MxU8") short ReleaseRef(MxDSChunk arg0);
+	public native void AddRef(MxDSChunk p_chunk);
+	public native @Cast("MxResult") int CalcBytesRemaining(@Cast("MxU8*") short p_data);
+	public native void FUN_100c6f80(@Cast("MxU32") long p_writeOffset);
+	
+	public native @Cast("MxResult") int FUN_100c7090(MxDSBuffer p_buf);
+
+	public static native MxCore ReadChunk(MxDSBuffer p_buffer, @Cast("MxU32*") long p_chunkData, @Cast("MxU16") int p_flags);
+	
+
+	// FUNCTION: BETA10 0x10148c60
+	
+
+	// FUNCTION: BETA10 0x10164240
+	public native @Cast("undefined4") long GetUnknown14();
+
+	// FUNCTION: BETA10 0x10156420
+	public native @Cast("MxBool") boolean HasRef();
+
+	public native @Cast("MxU16") int GetRefCount();
+	public native @Cast("MxDSBuffer::Type") int GetMode();
+
+	// FUNCTION: BETA10 0x10148c40
+	public native @Cast("MxU32") long GetWriteOffset();
+
+	// FUNCTION: BETA10 0x101590d0
+	public native @Cast("MxU32") long GetBytesRemaining();
+
+	public native void SetUnknown14(@Cast("undefined4") long p_unk0x14);
+	public native void SetUnknown1c(@Cast("undefined4") long p_unk0x1c);
+
+	// FUNCTION: BETA10 0x10164260
+	public native void SetMode(@Cast("MxDSBuffer::Type") int p_mode);
+
+	public native void SetUnk30(MxDSStreamingAction p_unk0x30);
+}
+
+// #endif // MXDSBUFFER_H
+
+
 // Parsed from mxdsobject.h
 
 // #ifndef MXDSOBJECT_H
@@ -2195,12 +2339,6 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
     public MxNotificationParam() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MxNotificationParam(Pointer p) { super(p); }
-}
-@Opaque public static class MxStreamController extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxStreamController() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxStreamController(Pointer p) { super(p); }
 }
 
 // VTABLE: LEGO1 0x100dc168

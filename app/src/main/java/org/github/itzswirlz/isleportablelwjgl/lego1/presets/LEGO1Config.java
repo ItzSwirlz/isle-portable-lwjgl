@@ -36,6 +36,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "mxcore.h",
                 "mxdirectdraw.h",
                 "mxdsaction.h",
+                "mxdsbuffer.h",
                 "mxdsobject.h",
                 "mxticklemanager.h",
                 "mxtimer.h",
@@ -123,8 +124,13 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LegoGameState::ScoreItem::m_name").skip());
         infoMap.put(new Info("LegoGameState::Username::m_letters").skip()); // FIXME: Most likely a symptom of some other basic typing issue
         infoMap.put(new Info("LegoGameState::History::FindPlayerInScoreHistory").skip());
-        // Excuse: compiler error not needed for isle
+        // Excuse: compiler error not needed for isle. Streaming things here are often because of casting
+        // and the generator not setting the correct type when it is a pointer
         infoMap.put(new Info("MxDSAction::GetExtra").skip());
+        infoMap.put(new Info("MxDSBuffer::Append").skip());
+        infoMap.put(new Info("MxDSBuffer::FUN_100c6fa0").skip());
+        infoMap.put(new Info("MxDSBuffer::GetBuffer").skip());
+        infoMap.put(new Info("MxDSBuffer::SkipToData").skip());
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
         // FIXME: like, check all of it
