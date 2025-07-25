@@ -60,17 +60,11 @@ public class IsleApp {
         if(m_windowHandle != null) {
             LEGO1.MxOmniCreateParam param = new LEGO1.MxOmniCreateParam(m_mediaPath, m_windowHandle, m_videoParam, new LEGO1.MxOmniCreateFlags());
             System.out.println("Media path: " + param.GetMediaPath().GetData().getString());
-            // current status: crashes (but calls Create successfully)
-            Thread t = new Thread(() -> {
-                try {
-                    Thread.sleep(1000);
-                } catch(InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Lego().Create(param);
-            });
-            t.start();
 
+            Lego().Create(param);
+
+            // event loop
+            // should probably move this to another function?
             SDL_Event event = SDL_Event.create();
             while(SDLEvents.SDL_PollEvent(event)) {
                 System.out.println("type: " + event.type());
@@ -121,9 +115,7 @@ public class IsleApp {
                 m_wideViewAngle,
                 m_deviceId);
 
-        // FIXME: check via MxDirectDraw
-        // reference: m_videoParam.Flags().Set16Bit(MxDirectDraw::GetPrimaryBitDepth() == 16);
-//        m_videoParam.Flags().Set16Bit(true);
+        m_videoParam.Flags().Set16Bit(LEGO1.MxDirectDraw.GetPrimaryBitDepth() == 16);
 
         int props = SDLProperties.SDL_CreateProperties();
         SDLProperties.SDL_SetNumberProperty(props, SDLVideo.SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, TARGET_WIDTH);

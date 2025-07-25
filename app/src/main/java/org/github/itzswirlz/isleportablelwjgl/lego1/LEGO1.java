@@ -193,6 +193,92 @@ public class LEGO1 extends org.github.itzswirlz.isleportablelwjgl.lego1.presets.
 // #endif // MXCORE_H
 
 
+// Parsed from mxdirectdraw.h
+
+// #ifndef MXDIRECTDRAW_H
+// #define MXDIRECTDRAW_H
+
+// #include "lego1_export.h"
+// #include "mxdirectxinfo.h"
+
+// #ifdef MINIWIN
+// #else
+// #include <ddraw.h>
+// #include <windows.h>
+// #endif
+
+// VTABLE: LEGO1 0x100db818
+// VTABLE: BETA10 0x101c1b10
+// SIZE 0x880
+@NoOffset public static class MxDirectDraw extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDirectDraw(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxDirectDraw(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxDirectDraw position(long position) {
+        return (MxDirectDraw)super.position(position);
+    }
+    @Override public MxDirectDraw getPointer(long i) {
+        return new MxDirectDraw((Pointer)this).offsetAddress(i);
+    }
+
+	public static class ErrorHandler extends FunctionPointer {
+	    static { Loader.load(); }
+	    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+	    public    ErrorHandler(Pointer p) { super(p); }
+	    protected ErrorHandler() { allocate(); }
+	    private native void allocate();
+	    public native void call(@Cast("const char*") BytePointer arg0, @Cast("HRESULT") long arg1, Pointer arg2);
+	}
+
+	public static native int GetPrimaryBitDepth();
+
+	public MxDirectDraw() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("BOOL") boolean Create(
+			HWND hWnd,
+			@Cast("BOOL") boolean fullscreen_1,
+			@Cast("BOOL") boolean surface_fullscreen,
+			@Cast("BOOL") boolean onlySystemMemory,
+			int width,
+			int height,
+			int bpp,
+			@Const PALETTEENTRY pPaletteEntries,
+			int paletteEntryCount
+		);                                      // vtable+0x04
+	public native void Destroy();                 // vtable+0x08
+	public native void DestroyButNotDirectDraw(); // vtable+0x0c
+
+	public native IDirectDraw DirectDraw();
+
+	// FUNCTION: BETA10 0x100d8ab0
+	public native IDirectDrawSurface FrontBuffer();
+
+	// FUNCTION: BETA10 0x100d8ae0
+	public native IDirectDrawSurface BackBuffer();
+
+	// FUNCTION: BETA10 0x100d8b10
+	public native IDirectDrawClipper Clipper();
+
+	// FUNCTION: BETA10 0x1011c190
+	
+
+	// FUNCTION: BETA10 0x1011c170
+	public native @Cast("BOOL") boolean IsFullScreen();
+
+	public native int Pause(@Cast("BOOL") boolean arg0);
+	public native @Cast("BOOL") boolean RestoreSurfaces();
+
+	public native @Cast("const char*") BytePointer ErrorToString(@Cast("HRESULT") long p_error); // vtable+0x10
+	public native int FlipToGDISurface();
+}
+
+// #endif // MXDIRECTDRAW_H
+
+
 // Parsed from mxticklemanager.h
 
 // #ifndef MXTICKLEMANAGER_H

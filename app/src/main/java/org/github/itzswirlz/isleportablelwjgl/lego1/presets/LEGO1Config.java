@@ -18,6 +18,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 
                 "../../../../isle-portable/LEGO1/omni/include",
                 "../../../../isle-portable/LEGO1/",
+                "../../../../isle-portable/LEGO1/mxdirectx/",
                 "../../../../isle-portable/LEGO1/lego/legoomni/include",
                 "../../../../isle-portable/LEGO1/lego/legoomni/include/actions",
                 "../../../../isle-portable/util",
@@ -30,6 +31,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
         include = {
                 "legovideomanager.h",
                 "mxcore.h",
+                "mxdirectdraw.h",
                 "mxticklemanager.h",
                 "mxtimer.h",
                 "mxgeometry.h", //TODO: templates and lists
@@ -104,6 +106,8 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("IDirectDrawSurface::GetDC").skip());
         // Excuse: Something with HRESULT type data loss, but this should be fixed eventually
         infoMap.put(new Info("DDCAPS::dwSVBRops").skip());
+        // Excuse: Not currently needed, but we should come back to this. Including mxdirectxinfo.h will fix this
+        infoMap.put(new Info("MxDirectDraw::CurrentMode").skip());
 
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
