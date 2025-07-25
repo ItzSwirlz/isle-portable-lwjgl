@@ -18,12 +18,83 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import static org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1.Lego;
-import static org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1.Streamer;
+import static org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1.*;
 
 public class IsleApp {
     private static int TARGET_WIDTH = 640;
     private static int TARGET_HEIGHT = 480;
+    private static int LAST_FRAME_TIME = 0;
+    private static int STARTUP_DELAY = 1;
+
+    private static String[] FILES = {
+        "/LEGO/Scripts/CREDITS.SI",
+                "/LEGO/Scripts/INTRO.SI",
+                "/LEGO/Scripts/NOCD.SI",
+                "/LEGO/Scripts/SNDANIM.SI",
+                "/LEGO/Scripts/Act2/ACT2MAIN.SI",
+                "/LEGO/Scripts/Act3/ACT3.SI",
+                "/LEGO/Scripts/Build/COPTER.SI",
+                "/LEGO/Scripts/Build/DUNECAR.SI",
+                "/LEGO/Scripts/Build/JETSKI.SI",
+                "/LEGO/Scripts/Build/RACECAR.SI",
+                "/LEGO/Scripts/Garage/GARAGE.SI",
+                "/LEGO/Scripts/Hospital/HOSPITAL.SI",
+                "/LEGO/Scripts/Infocntr/ELEVBOTT.SI",
+                "/LEGO/Scripts/Infocntr/HISTBOOK.SI",
+                "/LEGO/Scripts/Infocntr/INFODOOR.SI",
+                "/LEGO/Scripts/Infocntr/INFOMAIN.SI",
+                "/LEGO/Scripts/Infocntr/INFOSCOR.SI",
+                "/LEGO/Scripts/Infocntr/REGBOOK.SI",
+                "/LEGO/Scripts/Isle/ISLE.SI",
+                "/LEGO/Scripts/Isle/JUKEBOX.SI",
+                "/LEGO/Scripts/Isle/JUKEBOXW.SI",
+                "/LEGO/Scripts/Police/POLICE.SI",
+                "/LEGO/Scripts/Race/CARRACE.SI",
+                "/LEGO/Scripts/Race/CARRACER.SI",
+                "/LEGO/Scripts/Race/JETRACE.SI",
+                "/LEGO/Scripts/Race/JETRACER.SI",
+                "/LEGO/data/ACT1INF.DTA",
+                "/LEGO/data/ACT2INF.DTA",
+                "/LEGO/data/ACT3INF.DTA",
+                "/LEGO/data/BLDDINF.DTA",
+                "/LEGO/data/BLDHINF.DTA",
+                "/LEGO/data/BLDJINF.DTA",
+                "/LEGO/data/BLDRINF.DTA",
+                "/LEGO/data/GMAININF.DTA",
+                "/LEGO/data/HOSPINF.DTA",
+                "/LEGO/data/ICUBEINF.DTA",
+                "/LEGO/data/IELEVINF.DTA",
+                "/LEGO/data/IISLEINF.DTA",
+                "/LEGO/data/IMAININF.DTA",
+                "/LEGO/data/IREGINF.DTA",
+                "/LEGO/data/OBSTINF.DTA",
+                "/LEGO/data/PMAININF.DTA",
+                "/LEGO/data/RACCINF.DTA",
+                "/LEGO/data/RACJINF.DTA",
+                "/LEGO/data/WORLD.WDB",
+                "/LEGO/data/testinf.dta",
+    };
+
+    private static String[] TEXTURES = {
+        "bank01.gif",   "beach.gif",    "black.gif",     "bowtie.gif",   "brela_01.gif", "bth1chst.gif", "bth2chst.gif",
+                "capch.gif",    "capdb.gif",    "capjs.gif",     "capmd.gif",    "caprc.gif",    "cave_24x.gif", "caverocx.gif",
+                "caverokx.gif", "cheker01.gif", "construct.gif", "copchest.gif", "dbfrfn.gif",   "doctor.gif",   "dogface.gif",
+                "dummy.gif",    "e.gif",        "flowers.gif",   "fruit.gif",    "gasroad.gif",  "gdface.gif",   "g.gif",
+                "grassx.gif",   "infochst.gif", "infoface.gif",  "jailpad.gif",  "jfrnt.gif",    "jsfrnt4.gif",  "jsfrnt.gif",
+                "jside.gif",    "jswnsh5.gif",  "jswnsh.gif",    "l6.gif",       "l.gif",        "mamachst.gif", "mamaface.gif",
+                "mamamap.gif",  "mech.gif",     "medic01.gif",   "mitesx.gif",   "mustache.gif", "nickchst.gif", "nickface.gif",
+                "nickmap.gif",  "nopizza.gif",  "norachst.gif",  "noraface.gif", "noramap.gif",  "nwcurve.gif",  "octan01.gif",
+                "octsq01.gif",  "o.gif",        "papachst.gif",  "papaface.gif", "papamap.gif",  "pebblesx.gif", "pepperha.gif",
+                "peppizza.gif", "peppmap.gif",  "peprchst.gif",  "peprface.gif", "pianokys.gif", "pizcurve.gif", "pizza01.gif",
+                "pizza.gif",    "polbar01.gif", "polbla01.gif",  "polkadot.gif", "polwhi01.gif", "postchst.gif", "post.gif",
+                "rac1chst.gif", "rac2chst.gif", "radar.gif",     "raddis01.gif", "rcback.gif",   "rc-butn.gif",  "rcfrnt5.gif",
+                "rcfrnt6.gif",  "rcfrnt7.gif",  "rcfrnt.gif",    "rcside1.gif",  "rcside2.gif",  "rcside3.gif",  "rctail.gif",
+                "redskul.gif",  "relrel01.gif", "road1way.gif",  "road3wa2.gif", "road3wa3.gif", "road3way.gif", "road4way.gif",
+                "roadstr8.gif", "rockx.gif",    "roofpiz.gif",   "sandredx.gif", "se_curve.gif", "shftchst.gif", "shftface2.gif",
+                "shftface.gif", "shldwn02.gif", "skull.gif",     "smile.gif",    "smileshd.gif", "supr2_01.gif", "tightcrv.gif",
+                "unkchst.gif",  "val_02.gif",   "vest.gif",      "water2x.gif",  "w_curve.gif",  "wnbars.gif",   "woman.gif",
+                "womanshd.gif"
+    };
 
     private static String m_hdPath = null;
     private static String m_cdPath = null;
@@ -42,9 +113,9 @@ public class IsleApp {
     private static int m_islandQuality = 2;
     private static int m_islandTexture = 1;
     private boolean m_gameStarted = false;
-    private long m_frameDelta = 10;
+    private static long m_frameDelta = 10;
     private static LEGO1.MxVideoParam m_videoParam = new LEGO1.MxVideoParam(new LEGO1.MxRect32(0, 0, 639, 479), null, 1, new LEGO1.MxVideoParamFlags());
-    private boolean m_windowActive = true;
+    private static boolean m_windowActive = true;
     private static LEGO1.HWND m_windowHandle = null;
     private boolean m_drawCursor = false;
 
@@ -106,11 +177,86 @@ public class IsleApp {
         m_maxLod = Float.parseFloat(ini.getValue("isle", "max lod").toString());
         m_maxAllowedExtras = Integer.parseInt(ini.getValue("isle", "max allowed extras").toString());
 
+        MxOmni.SetCD(m_cdPath);
+        MxOmni.SetHD(m_hdPath);
         return true;
     }
 
     public void Close() {
 
+    }
+
+    private static boolean Tick() {
+        // TODO: Implement
+        LAST_FRAME_TIME = 0;
+        STARTUP_DELAY = 1;
+
+        // unnecessary? not seem to be set or modified anyehre else
+        if(!m_windowActive) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            return true;
+        }
+
+        if(Lego() == null) {
+            System.out.println("Lego is null");
+            return true;
+        }
+
+        if(TickleManager() == null) {
+            System.out.println("TickleManager is null");
+            return true;
+        }
+
+        if(Timer() == null) {
+            System.out.println("Timer is null");
+            return true;
+        }
+
+        long currentTime = Timer().GetRealTime();
+        if(currentTime < LAST_FRAME_TIME) {
+            LAST_FRAME_TIME = Math.toIntExact(-m_frameDelta);
+        }
+
+        if (m_frameDelta + LAST_FRAME_TIME >= currentTime) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            return true;
+        }
+
+        if(!Lego().IsPaused()) {
+            System.out.println("Lego is not paused");
+            TickleManager().Tickle();
+        }
+
+        LAST_FRAME_TIME = Math.toIntExact(currentTime);
+
+        if(STARTUP_DELAY == 0) {
+            return true;
+        }
+
+        STARTUP_DELAY--;
+        if(STARTUP_DELAY != 0) {
+            return true;
+        }
+
+        LegoOmni.GetInstance().CreateBackgroundAudio();
+        MxStreamController stream = Streamer().Open("\\lego\\scripts\\isle\\isle", MxStreamer.OpenMode.e_diskStream.ordinal());
+
+        MxDSAction ds = new MxDSAction();
+
+        ds.SetAtomId(stream.GetAtom());
+        ds.SetUnknown24((short)-1);
+        ds.SetObjectId(0);
+        Start(ds);
+
+        return true;
     }
 
     public static int SetupLegoOmni() {
@@ -123,12 +269,11 @@ public class IsleApp {
         if(m_windowHandle != null) {
             LEGO1.MxOmniCreateParam param = new LEGO1.MxOmniCreateParam(m_mediaPath, m_windowHandle, m_videoParam, new LEGO1.MxOmniCreateFlags());
             System.out.println("Media path: " + param.GetMediaPath().GetData().getString());
+            failure = Lego().Create(param);
 
-            // event loop
-            // should probably move this to another function?
-            SDL_Event event = SDL_Event.create();
-            while(SDLEvents.SDL_PollEvent(event)) {
-                System.out.println("type: " + event.type());
+            if(failure == 0) {
+                System.out.println("TODO: Variable table");
+//                TickleManager().SetClientTickleInterval(VideoManager().getPointer(), 0);
             }
         } else {
             System.out.println("window hanle null");
@@ -160,6 +305,57 @@ public class IsleApp {
         }
         if (using16bit) {
             m_videoParam.Flags().Set16Bit(true);
+        }
+    }
+
+    private static long VerifyFilesystem() {
+        for(String file : FILES) {
+            String[] searchPaths = {".", m_hdPath, m_cdPath};
+            boolean found = false;
+
+            for(String base : searchPaths) {
+                MxString path = new MxString(base);
+                path.addPut(file);
+                path.MapPathToFilesystem();
+
+                if(SDLFileSystem.SDL_GetPathInfo(path.GetData().getString(), null)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if(!found) {
+                System.out.println("TODO: error dialog for missing files");
+                return -1;
+            }
+        }
+
+        return 0;
+    }
+
+    private static void DetectGameVersion() {
+        String file = "/lego/scripts/infocntr/infomain.si";
+        SDL_PathInfo pathInfo = SDL_PathInfo.create();
+        boolean success = false;
+
+        MxString path = new MxString(m_hdPath).addPut(file);
+        path.MapPathToFilesystem();
+
+        if(!(success = SDLFileSystem.SDL_GetPathInfo(path.GetData().getString(), pathInfo))) {
+            path = new MxString(m_cdPath).addPut(file);
+            path.MapPathToFilesystem();
+            success = SDLFileSystem.SDL_GetPathInfo(path.GetData().getString(), pathInfo);
+        }
+
+        assert success;
+
+        Lego().SetVersion10(pathInfo.size() == 58130432 || pathInfo.size() == 57737216);
+
+        if(Lego().IsVersion10()) {
+            System.out.println("Detected game version 1.0");
+            // TODO: Set window tilte
+        } else {
+            System.out.println("Detected game version 1.1");
         }
     }
 
@@ -216,15 +412,23 @@ public class IsleApp {
 
         if(m_windowHandle.isNull()) {
             System.err.println("window handle is null");
-            return 0;
+            return -1;
         }
 
+        if(SetupLegoOmni() != 0) {
+            System.err.println("SetupLegoOmni() failed");
+            return -1;
+        }
 
+        GameState().SetSavePath(m_savePath.getBytes());
+        if(VerifyFilesystem() != 0) {
+            return -1;
+        }
 
-        // TODO: cursor stuff
-        // TODO: LegoOmni::CreateInstance and afterward
+        DetectGameVersion();
 
-        SetupLegoOmni();
+        // TODO: cursor stuff and afterwards
+
         return 0;
     }
 
@@ -236,6 +440,26 @@ public class IsleApp {
         }
 
         LEGO1.LegoOmni.CreateInstance();
-        SetupWindow();
+
+        if(SetupWindow() != 0) {
+            System.exit(1);
+            System.err.println("Error setting up window");
+            // TODO: message box
+            SDLMessageBox.SDL_ShowSimpleMessageBox(SDLMessageBox.SDL_MESSAGEBOX_ERROR, "LEGO® Island Error", "\"LEGO® Island\" failed to start.\nPlease quit all other applications and try again.", m_windowHandle.address());
+        }
+
+        SDL_Event event = SDL_Event.create();
+        loop: while(true) {
+            Tick();
+            SDLEvents.SDL_PollEvent(event);
+            switch(event.type()) {
+                case SDLEvents.SDL_EVENT_QUIT:
+                    System.out.println("Quit (TODO: Handle properly)");
+                    break loop;
+                default:
+//                    System.out.println("Unknown event type: " + event.type());
+                    break;
+            }
+        }
     }
 }
