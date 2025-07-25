@@ -29,6 +29,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
         // Pick a path, just trying to be flexible
         linkpath = {"../../../../", "../../../", "../../../../lib"},
         include = {
+                "legogamestate.h",
                 "legovideomanager.h",
                 "mxcore.h",
                 "mxdirectdraw.h",
@@ -108,7 +109,15 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("DDCAPS::dwSVBRops").skip());
         // Excuse: Not currently needed, but we should come back to this. Including mxdirectxinfo.h will fix this
         infoMap.put(new Info("MxDirectDraw::CurrentMode").skip());
-
+        // Excuse: haven't done scripts yet (something is a bit weird with how javacpp is generating them)
+        infoMap.put(new Info("LegoGameState::m_jukeboxMusic").skip());
+        // Excuse: Compiler errors, but ISLE does not need to deal with these.
+        infoMap.put(new Info("LegoGameState::History::m_indices").skip());
+        infoMap.put(new Info("LegoGameState::History::m_scores").skip());
+        infoMap.put(new Info("LegoGameState::ScoreItem::m_scores").skip());
+        infoMap.put(new Info("LegoGameState::ScoreItem::m_name").skip());
+        infoMap.put(new Info("LegoGameState::Username::m_letters").skip()); // FIXME: Most likely a symptom of some other basic typing issue
+        infoMap.put(new Info("LegoGameState::History::FindPlayerInScoreHistory").skip());
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
         // FIXME: like, check all of it
@@ -126,6 +135,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LPLOGPALETTE").pointerTypes("@Cast(\"LOGPALETTE*\") Pointer").cppTypes("LOGPALETTE*"));
         infoMap.put(new Info("LPDDSCAPS").pointerTypes("@Cast(\"DDSCAPS*\") Pointer").cppTypes("DDSCAPS*"));
         infoMap.put(new Info("LPDDPIXELFORMAT").pointerTypes("@Cast(\"DDPIXELFORMAT*\") Pointer").cppTypes("DDPIXELFORMAT*"));
+
         // Enums
         infoMap.put(new Info("LegoOmni::World").enumerate());
         infoMap.put(new Info("MxPresenter::TickleState").enumerate());

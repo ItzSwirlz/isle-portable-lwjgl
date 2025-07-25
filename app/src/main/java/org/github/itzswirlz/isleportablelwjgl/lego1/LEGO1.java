@@ -9,6 +9,412 @@ import org.bytedeco.javacpp.annotation.*;
 public class LEGO1 extends org.github.itzswirlz.isleportablelwjgl.lego1.presets.LEGO1Config {
     static { Loader.load(); }
 
+// Parsed from legogamestate.h
+
+// #ifndef LEGOGAMESTATE_H
+// #define LEGOGAMESTATE_H
+
+// #include "actionsfwd.h"
+// #include "decomp.h"
+// #include "lego1_export.h"
+// #include "mxtypes.h"
+// #include "mxvariable.h"
+
+// #include <string.h>
+
+@Opaque public static class LegoFile extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LegoFile() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoFile(Pointer p) { super(p); }
+}
+@Opaque public static class LegoState extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LegoState() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoState(Pointer p) { super(p); }
+}
+@Opaque public static class LegoStorage extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LegoStorage() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoStorage(Pointer p) { super(p); }
+}
+@Opaque public static class MxVariableTable extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxVariableTable() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxVariableTable(Pointer p) { super(p); }
+}
+
+public static native @Cast("const char*") BytePointer g_actorNames(int i); public static native void g_actorNames(int i, BytePointer setter);
+@MemberGetter public static native @Cast("const char**") PointerPointer g_actorNames();
+
+// SIZE 0x08
+public static class ColorStringStruct extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public ColorStringStruct() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public ColorStringStruct(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public ColorStringStruct(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public ColorStringStruct position(long position) {
+        return (ColorStringStruct)super.position(position);
+    }
+    @Override public ColorStringStruct getPointer(long i) {
+        return new ColorStringStruct((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("const char*") BytePointer m_targetName(); public native ColorStringStruct m_targetName(BytePointer setter); // 0x00
+	public native @Cast("const char*") BytePointer m_colorName(); public native ColorStringStruct m_colorName(BytePointer setter);  // 0x04
+}
+
+public static class InternationalCharacter extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public InternationalCharacter() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public InternationalCharacter(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public InternationalCharacter(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public InternationalCharacter position(long position) {
+        return (InternationalCharacter)super.position(position);
+    }
+    @Override public InternationalCharacter getPointer(long i) {
+        return new InternationalCharacter((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("unsigned char") byte m_character(); public native InternationalCharacter m_character(byte setter);
+	public native @Cast("const char*") BytePointer m_bitmap(); public native InternationalCharacter m_bitmap(BytePointer setter);
+	public native @Cast("MxU32") long m_buttonId(); public native InternationalCharacter m_buttonId(long setter);
+}
+
+// VTABLE: LEGO1 0x100d74a8
+// VTABLE: BETA10 0x101bc4f0
+// SIZE 0x30
+@NoOffset public static class LegoBackgroundColor extends MxVariable {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoBackgroundColor(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LegoBackgroundColor(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LegoBackgroundColor position(long position) {
+        return (LegoBackgroundColor)super.position(position);
+    }
+    @Override public LegoBackgroundColor getPointer(long i) {
+        return new LegoBackgroundColor((Pointer)this).offsetAddress(i);
+    }
+
+	public LegoBackgroundColor() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public LegoBackgroundColor(@Cast("const char*") BytePointer p_key, @Cast("const char*") BytePointer p_value) { super((Pointer)null); allocate(p_key, p_value); }
+	private native void allocate(@Cast("const char*") BytePointer p_key, @Cast("const char*") BytePointer p_value);
+	public LegoBackgroundColor(String p_key, String p_value) { super((Pointer)null); allocate(p_key, p_value); }
+	private native void allocate(String p_key, String p_value);
+
+	public native void SetValue(@Cast("const char*") BytePointer p_colorString);
+	public native void SetValue(String p_colorString); // vtable+0x04
+
+	public native void SetLightColor(float p_r, float p_g, float p_b);
+	public native void SetLightColor();
+	public native void ToggleDayNight(@Cast("MxBool") boolean p_sun);
+	public native void ToggleSkyColor();
+}
+
+// VTABLE: LEGO1 0x100d74b8
+// VTABLE: BETA10 0x101bc500
+// SIZE 0x24
+public static class LegoFullScreenMovie extends MxVariable {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoFullScreenMovie(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LegoFullScreenMovie(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LegoFullScreenMovie position(long position) {
+        return (LegoFullScreenMovie)super.position(position);
+    }
+    @Override public LegoFullScreenMovie getPointer(long i) {
+        return new LegoFullScreenMovie((Pointer)this).offsetAddress(i);
+    }
+
+	public LegoFullScreenMovie() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public LegoFullScreenMovie(@Cast("const char*") BytePointer p_key, @Cast("const char*") BytePointer p_value) { super((Pointer)null); allocate(p_key, p_value); }
+	private native void allocate(@Cast("const char*") BytePointer p_key, @Cast("const char*") BytePointer p_value);
+	public LegoFullScreenMovie(String p_key, String p_value) { super((Pointer)null); allocate(p_key, p_value); }
+	private native void allocate(String p_key, String p_value);
+
+	public native void SetValue(@Cast("const char*") BytePointer p_option);
+	public native void SetValue(String p_option); // vtable+0x04
+}
+
+// SIZE 0x430
+@NoOffset public static class LegoGameState extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoGameState(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LegoGameState(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LegoGameState position(long position) {
+        return (LegoGameState)super.position(position);
+    }
+    @Override public LegoGameState getPointer(long i) {
+        return new LegoGameState((Pointer)this).offsetAddress(i);
+    }
+
+	/** enum LegoGameState::Act */
+	public static final int
+		e_actNotFound = -1,
+		e_act1 = 0,
+		e_act2 = 1,
+		e_act3 = 2;
+
+	/** enum LegoGameState::Area */
+	public static final int
+		e_undefined = 0,
+		e_previousArea = 0,
+		e_isle = 1,
+		e_infomain = 2,
+		e_infodoor = 3,
+		e_infocenterExited = 4,
+		e_elevbott = 5,
+		e_elevride = 6,
+		e_elevride2 = 7,
+		e_elevopen = 8,
+		e_seaview = 9,
+		e_observe = 10,
+		e_elevdown = 11,
+		e_regbook = 12,
+		e_infoscor = 13,
+		e_jetrace = 14,
+		e_jetrace2 = 15,
+		e_jetraceExterior = 16,
+		e_jetskibuildExited = 17,
+		e_carrace = 18,
+		e_carraceExterior = 19,
+		e_racecarbuildExited = 20,
+		e_unk21 = 21,
+		e_pizzeriaExterior = 22,
+		e_unk23 = 23,
+		e_unk24 = 24,
+		e_garageExterior = 25,
+		e_garage = 26,
+		e_garadoor = 27,
+		e_garageExited = 28,
+		e_hospitalExterior = 29,
+		e_hospital = 30,
+		e_hospitalExited = 31,
+		e_policeExterior = 32,
+		e_policeExited = 33,
+		e_police = 34,
+		e_polidoor = 35,
+		e_copterbuild = 36,
+		e_dunecarbuild = 37,
+		e_jetskibuild = 38,
+		e_racecarbuild = 39,
+		e_helicopterSpawn = 40,
+		e_unk41 = 41,
+		e_unk42 = 42,
+		e_dunebuggySpawn = 43,
+		e_racecarSpawn = 44,
+		e_jetskiSpawn = 45,
+		e_act2main = 46,
+		e_act3script = 47,
+		e_unk48 = 48,
+		e_unk49 = 49,
+		e_unk50 = 50,
+		e_unk51 = 51,
+		e_towTrackHookedUp = 52,
+		e_jukeboxw = 53,
+		e_jukeboxExterior = 54,
+		e_unk55 = 55,
+		e_histbook = 56,
+		e_bike = 57,
+		e_dunecar = 58,
+		e_motocycle = 59,
+		e_copter = 60,
+		e_skateboard = 61,
+		e_ambulance = 62,
+		e_towtrack = 63,
+		e_jetski = 64,
+
+		e_vehicleExited = 66;
+
+	// SIZE 0x0e
+	public static class Username extends Pointer {
+	    static { Loader.load(); }
+	    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+	    public Username(Pointer p) { super(p); }
+	    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+	    public Username(long size) { super((Pointer)null); allocateArray(size); }
+	    private native void allocateArray(long size);
+	    @Override public Username position(long position) {
+	        return (Username)super.position(position);
+	    }
+	    @Override public Username getPointer(long i) {
+	        return new Username((Pointer)this).offsetAddress(i);
+	    }
+	
+		public Username() { super((Pointer)null); allocate(); }
+		private native void allocate();
+		public native void Set(@ByRef Username p_other);
+
+		public native @Cast("MxResult") int Serialize(LegoStorage p_storage);
+		public native @ByRef @Name("operator =") Username put(@Const @ByRef Username p_other);
+
+		 // 0x00
+	}
+
+	// SIZE 0x2c
+	public static class ScoreItem extends Pointer {
+	    static { Loader.load(); }
+	    /** Default native constructor. */
+	    public ScoreItem() { super((Pointer)null); allocate(); }
+	    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+	    public ScoreItem(long size) { super((Pointer)null); allocateArray(size); }
+	    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+	    public ScoreItem(Pointer p) { super(p); }
+	    private native void allocate();
+	    private native void allocateArray(long size);
+	    @Override public ScoreItem position(long position) {
+	        return (ScoreItem)super.position(position);
+	    }
+	    @Override public ScoreItem getPointer(long i) {
+	        return new ScoreItem((Pointer)this).offsetAddress(i);
+	    }
+	
+		public native @Cast("MxResult") int Serialize(LegoStorage p_storage);
+
+		public native @Cast("MxS16") short m_totalScore(); public native ScoreItem m_totalScore(short setter);  // 0x00
+		 // 0x02
+		     // 0x1c
+		public native @Cast("MxS16") short m_playerId(); public native ScoreItem m_playerId(short setter);    // 0x2a
+
+		public native @ByRef @Name("operator =") ScoreItem put(@Const @ByRef ScoreItem p_other);
+	}
+
+	// SIZE 0x372
+	@NoOffset public static class History extends Pointer {
+	    static { Loader.load(); }
+	    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+	    public History(Pointer p) { super(p); }
+	    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+	    public History(long size) { super((Pointer)null); allocateArray(size); }
+	    private native void allocateArray(long size);
+	    @Override public History position(long position) {
+	        return (History)super.position(position);
+	    }
+	    @Override public History getPointer(long i) {
+	        return new History((Pointer)this).offsetAddress(i);
+	    }
+	
+		public History() { super((Pointer)null); allocate(); }
+		private native void allocate();
+		public native void WriteScoreHistory();
+		public native @Cast("MxResult") int Serialize(LegoStorage p_storage);
+		
+
+		// FUNCTION: BETA10 0x1002c2b0
+		public native @Cast("MxS16") short GetCount();
+
+		// TODO: Not yet correct
+		// FUNCTION: BETA10 0x1002c540
+		public native ScoreItem GetScore(@Cast("MxS32") int p_index);
+
+		public native @Cast("MxS16") short m_count(); public native History m_count(short setter); // 0x00
+// #ifdef BETA10
+		 // 0x02
+// #endif
+		 // 0x02 (0x22 for BETA10)
+		public native @Cast("MxS16") short m_nextPlayerId(); public native History m_nextPlayerId(short setter);   // 0x372 (0x392 for BETA10)
+	}
+
+	public LegoGameState() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native void SetActor(@Cast("MxU8") short p_actorId);
+	public native void RemoveActor();
+	public native void ResetROI();
+
+	public native @Cast("MxResult") int Save(@Cast("MxULong") long arg0);
+	public native @Cast("MxResult") int DeleteState();
+	public native @Cast("MxResult") int Load(@Cast("MxULong") long arg0);
+
+	public native void SerializePlayersInfo(@Cast("MxS16") short p_flags);
+	public native @Cast("MxResult") int AddPlayer(@ByRef Username p_player);
+	public native void SwitchPlayer(@Cast("MxS16") short p_playerId);
+	public native @Cast("MxS16") short FindPlayer(@ByRef Username p_player);
+
+	public native void SerializeScoreHistory(@Cast("MxS16") short p_flags);
+	public native void SetSavePath(@Cast("char*") BytePointer arg0);
+	public native void SetSavePath(@Cast("char*") ByteBuffer arg0);
+	public native void SetSavePath(@Cast("char*") byte[] arg0);
+
+	public native LegoState GetState(@Cast("const char*") BytePointer p_stateName);
+	public native LegoState GetState(String p_stateName);
+	public native LegoState CreateState(@Cast("const char*") BytePointer p_stateName);
+	public native LegoState CreateState(String p_stateName);
+
+	public native void GetFileSavePath(MxString p_outPath, @Cast("MxS16") short p_slotn);
+	public native void StopArea(@Cast("LegoGameState::Area") int p_area);
+	public native void SwitchArea(@Cast("LegoGameState::Area") int p_area);
+	public native void Init();
+
+	// FUNCTION: BETA10 0x10083ff5
+	public native @Cast("MxU8") short GetActorId();
+
+	// FUNCTION: BETA10 0x1004a2d0
+	public native @Cast("const char*") BytePointer GetActorName();
+
+	// FUNCTION: BETA10 0x1002b4c0
+	public native @Cast("LegoGameState::Act") int GetCurrentAct();
+
+	public native @Cast("LegoGameState::Act") int GetLoadedAct();
+
+	public native void SetActorId(@Cast("MxU8") short p_actorId);
+	public native LegoBackgroundColor GetBackgroundColor();
+
+	public native void SetCurrentAct(@Cast("LegoGameState::Act") int p_currentAct);
+	public native void FindLoadedAct();
+	public native void RegisterState(LegoState p_state);
+
+	public native @Cast("const char*") BytePointer GetSavePath();
+	public native @Cast("MxS16") short m_currentPlayerId(); public native LegoGameState m_currentPlayerId(short setter);              // 0x24
+	public native @Cast("MxS16") short m_playerCount(); public native LegoGameState m_playerCount(short setter);                  // 0x26
+	public native @ByRef Username m_players(int i); public native LegoGameState m_players(int i, Username setter);
+	@MemberGetter public native Username m_players();                // 0x28
+	public native @ByRef History m_history(); public native LegoGameState m_history(History setter);                    // 0xa6
+	 // 0x41c
+	public native @Cast("MxBool") boolean m_isDirty(); public native LegoGameState m_isDirty(boolean setter);                     // 0x420
+	public native @Cast("LegoGameState::Area") int m_currentArea(); public native LegoGameState m_currentArea(int setter);                   // 0x424
+	public native @Cast("LegoGameState::Area") int m_previousArea(); public native LegoGameState m_previousArea(int setter);                  // 0x428
+	public native @Cast("LegoGameState::Area") int m_unk0x42c(); public native LegoGameState m_unk0x42c(int setter);                      // 0x42c
+
+	@MemberGetter public static native @Const @ByRef InternationalCharacter g_intCharacters(int i);
+	@MemberGetter public static native @Const InternationalCharacter g_intCharacters();
+}
+
+public static native @Cast("MxBool") boolean ROIColorOverride(@Cast("const char*") BytePointer p_input, @Cast("char*") BytePointer p_output, @Cast("MxU32") long p_copyLen);
+public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @Cast("char*") ByteBuffer p_output, @Cast("MxU32") long p_copyLen);
+public static native @Cast("MxBool") boolean ROIColorOverride(@Cast("const char*") BytePointer p_input, @Cast("char*") byte[] p_output, @Cast("MxU32") long p_copyLen);
+public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @Cast("char*") BytePointer p_output, @Cast("MxU32") long p_copyLen);
+public static native @Cast("MxBool") boolean ROIColorOverride(@Cast("const char*") BytePointer p_input, @Cast("char*") ByteBuffer p_output, @Cast("MxU32") long p_copyLen);
+public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @Cast("char*") byte[] p_output, @Cast("MxU32") long p_copyLen);
+
+// SYNTHETIC: LEGO1 0x1003c860
+// LegoGameState::ScoreItem::ScoreItem
+
+// #endif // LEGOGAMESTATE_H
+
+
 // Parsed from legovideomanager.h
 
 // #ifndef LEGOVIDEOMANAGER_H
@@ -1124,12 +1530,6 @@ public static class MxRect32 extends MxRectInteger {
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MxStreamer(Pointer p) { super(p); }
 }
-@Opaque public static class MxVariableTable extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxVariableTable() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxVariableTable(Pointer p) { super(p); }
-}
 @Opaque public static class MxVideoManager extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
     public MxVideoManager() { super((Pointer)null); }
@@ -1529,12 +1929,6 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
     public LegoEntity() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public LegoEntity(Pointer p) { super(p); }
-}
-@Opaque public static class LegoGameState extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public LegoGameState() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public LegoGameState(Pointer p) { super(p); }
 }
 @Opaque public static class LegoInputManager extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
