@@ -848,6 +848,105 @@ public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @C
 // #endif // MXDIRECTDRAW_H
 
 
+// Parsed from mxdiskstreamcontroller.h
+
+// #ifndef MXDISKSTREAMCONTROLLER_H
+// #define MXDISKSTREAMCONTROLLER_H
+
+// #include "decomp.h"
+// #include "mxdsbuffer.h"
+// #include "mxstl/stlcompat.h"
+// #include "mxstreamcontroller.h"
+// #include "mxtypes.h"
+
+// #include <string.h>
+
+@Opaque public static class MxDSStreamingAction extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxDSStreamingAction() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDSStreamingAction(Pointer p) { super(p); }
+}
+
+// VTABLE: LEGO1 0x100dccb8
+// VTABLE: BETA10 0x101c2818
+// SIZE 0xc8
+@NoOffset public static class MxDiskStreamController extends MxStreamController {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDiskStreamController(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxDiskStreamController(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxDiskStreamController position(long position) {
+        return (MxDiskStreamController)super.position(position);
+    }
+    @Override public MxDiskStreamController getPointer(long i) {
+        return new MxDiskStreamController((Pointer)this).offsetAddress(i);
+    }
+
+	public MxDiskStreamController() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("MxResult") int Tickle(); // vtable+0x08
+
+	// FUNCTION: LEGO1 0x100c7360
+	// FUNCTION: BETA10 0x10155c00
+	public native @Cast("const char*") BytePointer ClassName();
+
+	// FUNCTION: LEGO1 0x100c7370
+	public native @Cast("MxBool") boolean IsA(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxBool") boolean IsA(String p_name);
+
+	public native @Cast("MxResult") int Open(@Cast("const char*") BytePointer p_filename);
+	public native @Cast("MxResult") int Open(String p_filename);       // vtable+0x14
+	public native @Cast("MxResult") int VTable0x18(@Cast("undefined4") long arg0, @Cast("undefined4") long arg1); // vtable+0x18
+	public native @Cast("MxResult") int VTable0x20(MxDSAction p_action);   // vtable+0x20
+	public native @Cast("MxResult") int VTable0x24(MxDSAction p_action);   // vtable+0x24
+	public native MxDSStreamingAction VTable0x28();           // vtable+0x28
+	public native @Cast("MxResult") int VTable0x30(MxDSAction p_action);   // vtable+0x30
+	public native @Cast("MxResult") int VTable0x34(@Cast("undefined4") long arg0);              // vtable+0x34
+
+	public native @Cast("MxBool") boolean GetUnk0xc4();
+
+	public native @Cast("MxResult") int FUN_100c7890(MxDSStreamingAction p_action);
+	public native void FUN_100c7cb0(MxDSStreamingAction p_action);
+	public native void FUN_100c7f40(MxDSStreamingAction p_streamingaction);
+	public native void FUN_100c8120(MxDSAction p_action);
+	public native void InsertToList74(MxDSBuffer p_buffer);
+	public native void FUN_100c8670(MxDSStreamingAction p_streamingAction);
+}
+
+// TEMPLATE: LEGO1 0x100c14d0
+// list<MxDSObject *,allocator<MxDSObject *> >::erase
+
+// TEMPLATE: LEGO1 0x100c7330
+// list<MxDSObject *,allocator<MxDSObject *> >::_Buynode
+
+// TEMPLATE: LEGO1 0x100c7420
+// list<MxDSBuffer *,allocator<MxDSBuffer *> >::~list<MxDSBuffer *,allocator<MxDSBuffer *> >
+
+// TEMPLATE: LEGO1 0x100c7490
+// list<MxDSBuffer *,allocator<MxDSBuffer *> >::_Buynode
+
+// SYNTHETIC: LEGO1 0x100c74c0
+// MxDiskStreamController::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x100c74e0
+// List<MxDSBuffer *>::~List<MxDSBuffer *>
+
+// TEMPLATE: LEGO1 0x100c7ef0
+// list<MxNextActionDataStart *,allocator<MxNextActionDataStart *> >::insert
+
+// TEMPLATE: BETA10 0x10150e60
+// MxUtilityList<MxNextActionDataStart *>::PushBack
+
+// TEMPLATE: BETA10 0x10150ff0
+// MxUtilityList<MxDSObject *>::PushBack
+
+// #endif // MXDISKSTREAMCONTROLLER_H
+
+
 // Parsed from mxdsaction.h
 
 // #ifndef MXDSACTION_H
@@ -978,19 +1077,6 @@ public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @C
 
 // #include "decomp.h"
 // #include "mxcore.h"
-
-@Opaque public static class MxStreamController extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxStreamController() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxStreamController(Pointer p) { super(p); }
-}
-@Opaque public static class MxDSStreamingAction extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public MxDSStreamingAction() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public MxDSStreamingAction(Pointer p) { super(p); }
-}
 @Opaque public static class MxStreamChunk extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
     public MxStreamChunk() { super((Pointer)null); }
@@ -1241,6 +1327,72 @@ public static native MxDSObject CreateStreamObject(MxDSFile arg0, @Cast("MxS16")
 // MxUtilityList<MxDSObject *>::PopFront
 
 // #endif // MXDSOBJECT_H
+
+
+// Parsed from mxdssubscriber.h
+
+// #ifndef MXDSSUBSCRIBER_H
+// #define MXDSSUBSCRIBER_H
+
+// #include "decomp.h"
+// #include "mxcore.h"
+// #include "mxstreamchunklist.h"
+// #include "mxutilitylist.h"
+
+// SIZE 0x0c
+
+// VTABLE: LEGO1 0x100dc698
+// VTABLE: BETA10 0x101c1d38
+// SIZE 0x4c
+@NoOffset public static class MxDSSubscriber extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxDSSubscriber(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxDSSubscriber(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxDSSubscriber position(long position) {
+        return (MxDSSubscriber)super.position(position);
+    }
+    @Override public MxDSSubscriber getPointer(long i) {
+        return new MxDSSubscriber((Pointer)this).offsetAddress(i);
+    }
+
+	public MxDSSubscriber() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: LEGO1 0x100b7d50
+	// FUNCTION: BETA10 0x10135180
+	public native @Cast("const char*") BytePointer ClassName();
+
+	// FUNCTION: LEGO1 0x100b7d60
+	public native @Cast("MxBool") boolean IsA(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxBool") boolean IsA(String p_name);
+
+	public native @Cast("MxResult") int Create(MxStreamController p_controller, @Cast("MxU32") long p_objectId, @Cast("MxS16") short p_unk0x48);
+	public native void DestroyData();
+	public native @Cast("MxResult") int AddData(MxStreamChunk p_chunk, @Cast("MxBool") boolean p_append);
+	public native MxStreamChunk PopData();
+	public native MxStreamChunk PeekData();
+	public native void FreeDataChunk(MxStreamChunk p_chunk);
+
+	// FUNCTION: BETA10 0x101354f0
+	public native @Cast("MxU32") long GetObjectId();
+
+	// FUNCTION: BETA10 0x10135510
+	public native @Cast("MxS16") short GetUnknown48();
+}
+
+// SYNTHETIC: LEGO1 0x100b7de0
+// MxDSSubscriber::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x100b7d00
+// MxStreamChunkList::~MxStreamChunkList
+
+// TEMPLATE: BETA10 0x10150a70
+// MxUtilityList<MxDSSubscriber *>::PopFront
+
+// #endif // MXDSSUBSCRIBER_H
 
 
 // Parsed from mxticklemanager.h
@@ -2105,6 +2257,42 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 // #endif // MXMISC_H
 
 
+// Parsed from mxnextactiondatastart.h
+
+// #ifndef MXNEXTACTIONDATASTART_H
+// #define MXNEXTACTIONDATASTART_H
+
+// #include "mxcore.h"
+
+// VTABLE: LEGO1 0x100dc9a0
+// VTABLE: BETA10 0x101c26a8
+// SIZE 0x14
+@NoOffset public static class MxNextActionDataStart extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxNextActionDataStart(Pointer p) { super(p); }
+
+	// inlined constructor at 0x100c1847
+	public MxNextActionDataStart(@Cast("MxU32") long p_objectId, @Cast("MxS16") short p_unk0x24, @Cast("MxU32") long p_data) { super((Pointer)null); allocate(p_objectId, p_unk0x24, p_data); }
+	private native void allocate(@Cast("MxU32") long p_objectId, @Cast("MxS16") short p_unk0x24, @Cast("MxU32") long p_data);
+
+	// FUNCTION: LEGO1 0x100c1900
+	// FUNCTION: BETA10 0x1014f660
+	public native @Cast("const char*") BytePointer ClassName();
+
+	// FUNCTION: LEGO1 0x100c1910
+	public native @Cast("MxBool") boolean IsA(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxBool") boolean IsA(String p_name);
+
+	public native @Cast("MxU32") long GetObjectId();
+	public native @Cast("MxS16") short GetUnknown24();
+	public native @Cast("MxU32") long GetData();
+	public native void SetData(@Cast("MxU32") long p_data);
+}
+
+// #endif // MXNEXTACTIONDATASTART_H
+
+
 // Parsed from mxomnicreateflags.h
 
 // #ifndef MXOMNICREATEFLAGS_H
@@ -2235,6 +2423,147 @@ public static native void DeleteObject(@ByRef MxDSAction p_dsAction);
 // MxOmniCreateParam::~MxOmniCreateParam
 
 // #endif // MXOMNICREATEPARAM_H
+
+
+// Parsed from mxstreamcontroller.h
+
+// #ifndef MXSTREAMCONTROLLER_H
+// #define MXSTREAMCONTROLLER_H
+
+// #include "decomp.h"
+// #include "mxatom.h"
+// #include "mxcore.h"
+// #include "mxcriticalsection.h"
+// #include "mxdsobject.h"
+// #include "mxdssubscriber.h"
+// #include "mxnextactiondatastart.h"
+// #include "mxstl/stlcompat.h"
+@Opaque public static class MxStreamProvider extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public MxStreamProvider() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxStreamProvider(Pointer p) { super(p); }
+}
+
+// SIZE 0x0c
+
+// VTABLE: LEGO1 0x100dc968
+// VTABLE: BETA10 0x101c26c0
+// SIZE 0x64
+@NoOffset public static class MxStreamController extends MxCore {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MxStreamController(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MxStreamController(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MxStreamController position(long position) {
+        return (MxStreamController)super.position(position);
+    }
+    @Override public MxStreamController getPointer(long i) {
+        return new MxStreamController((Pointer)this).offsetAddress(i);
+    }
+
+	public MxStreamController() { super((Pointer)null); allocate(); }
+	private native void allocate(); // vtable+0x00
+
+	// FUNCTION: LEGO1 0x100c0f10
+	// FUNCTION: BETA10 0x10146cf0
+	public native @Cast("const char*") BytePointer ClassName();
+
+	// FUNCTION: LEGO1 0x100c0f20
+	public native @Cast("MxBool") boolean IsA(@Cast("const char*") BytePointer p_name);
+	public native @Cast("MxBool") boolean IsA(String p_name);
+
+	public native @Cast("MxResult") int Open(@Cast("const char*") BytePointer p_filename);
+	public native @Cast("MxResult") int Open(String p_filename); // vtable+0x14
+
+	// FUNCTION: LEGO1 0x100b9400
+	public native @Cast("MxResult") int VTable0x18(@Cast("undefined4") long arg0, @Cast("undefined4") long arg1); // vtable+0x18
+
+	// FUNCTION: LEGO1 0x100b9410
+	public native @Cast("MxResult") int VTable0x1c(@Cast("undefined4") long arg0, @Cast("undefined4") long arg1); // vtable+0x1c
+
+	public native @Cast("MxResult") int VTable0x20(MxDSAction p_action); // vtable+0x20
+	public native @Cast("MxResult") int VTable0x24(MxDSAction p_action); // vtable+0x24
+
+	// FUNCTION: LEGO1 0x100b9420
+	public native MxDSStreamingAction VTable0x28(); // vtable+0x28
+
+	public native @Cast("MxResult") int VTable0x2c(MxDSAction p_action, @Cast("MxU32") long p_bufferval); // vtable+0x2c
+	public native @Cast("MxResult") int VTable0x30(MxDSAction p_action);                    // vtable+0x30
+
+	public native void AddSubscriber(MxDSSubscriber p_subscriber);
+	public native void RemoveSubscriber(MxDSSubscriber p_subscriber);
+	public native @Cast("MxResult") int FUN_100c1800(MxDSAction p_action, @Cast("MxU32") long p_val);
+	public native @Cast("MxResult") int FUN_100c1a00(MxDSAction p_action, @Cast("MxU32") long p_offset);
+	public native MxPresenter FUN_100c1e70(@ByRef MxDSAction p_action);
+	public native @Cast("MxResult") int FUN_100c1f00(MxDSAction p_action);
+	public native @Cast("MxBool") boolean IsStoped(MxDSObject p_obj);
+	public native @Cast("MxResult") int InsertActionToList54(MxDSAction p_action);
+	public native MxNextActionDataStart FindNextActionDataStartFromStreamingAction(MxDSStreamingAction p_action);
+
+	public native @ByRef MxAtomId GetAtom();
+	public native MxStreamProvider GetProvider();
+}
+
+// TEMPLATE: LEGO1 0x100c0d60
+// list<MxDSObject *,allocator<MxDSObject *> >::~list<MxDSObject *,allocator<MxDSObject *> >
+
+// TEMPLATE: LEGO1 0x100c0dd0
+// list<MxDSSubscriber *,allocator<MxDSSubscriber *> >::~list<MxDSSubscriber *,allocator<MxDSSubscriber *> >
+
+// TEMPLATE: LEGO1 0x100c0e40
+// list<MxDSSubscriber *,allocator<MxDSSubscriber *> >::_Buynode
+
+// clang-format off
+// TEMPLATE: LEGO1 0x100c0e70
+// list<MxNextActionDataStart *,allocator<MxNextActionDataStart *> >::~list<MxNextActionDataStart *,allocator<MxNextActionDataStart *> >
+// clang-format on
+
+// TEMPLATE: LEGO1 0x100c0ee0
+// list<MxNextActionDataStart *,allocator<MxNextActionDataStart *> >::_Buynode
+
+// SYNTHETIC: LEGO1 0x100c0fa0
+// MxStreamController::`scalar deleting destructor'
+
+// FUNCTION: LEGO1 0x100c0fc0
+// MxDSSubscriberList::~MxDSSubscriberList
+
+// FUNCTION: LEGO1 0x100c1010
+// MxDSObjectList::~MxDSObjectList
+
+// FUNCTION: LEGO1 0x100c1060
+// MxNextActionDataStartList::~MxNextActionDataStartList
+
+// TEMPLATE: LEGO1 0x100c10b0
+// MxUtilityList<MxDSSubscriber *>::~MxUtilityList<MxDSSubscriber *>
+
+// TEMPLATE: LEGO1 0x100c1100
+// MxUtilityList<MxDSObject *>::~MxUtilityList<MxDSObject *>
+
+// TEMPLATE: LEGO1 0x100c1150
+// MxUtilityList<MxNextActionDataStart *>::~MxUtilityList<MxNextActionDataStart *>
+
+// TEMPLATE: LEGO1 0x100c11a0
+// List<MxDSSubscriber *>::~List<MxDSSubscriber *>
+
+// TEMPLATE: LEGO1 0x100c11f0
+// List<MxDSObject *>::~List<MxDSObject *>
+
+// TEMPLATE: LEGO1 0x100c1240
+// List<MxNextActionDataStart *>::~List<MxNextActionDataStart *>
+
+// TEMPLATE: LEGO1 0x100c1bc0
+// list<MxDSObject *,allocator<MxDSObject *> >::insert
+
+// TEMPLATE: BETA10 0x10150b90
+// MxUtilityList<MxDSSubscriber *>::PushBack
+
+// TEMPLATE: BETA10 0x10150cf0
+// MxUtilityList<MxDSSubscriber *>::Remove
+
+// #endif // MXSTREAMCONTROLLER_H
 
 
 // Parsed from mxstring.h

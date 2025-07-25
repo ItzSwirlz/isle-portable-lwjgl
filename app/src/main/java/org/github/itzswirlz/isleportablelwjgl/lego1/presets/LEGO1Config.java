@@ -35,15 +35,19 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "legovideomanager.h",
                 "mxcore.h",
                 "mxdirectdraw.h",
+                "mxdiskstreamcontroller.h",
                 "mxdsaction.h",
                 "mxdsbuffer.h",
                 "mxdsobject.h",
+                "mxdssubscriber.h",
                 "mxticklemanager.h",
                 "mxtimer.h",
                 "mxgeometry.h", //TODO: templates and lists
                 "mxmisc.h",
+                "mxnextactiondatastart.h",
                 "mxomnicreateflags.h",
                 "mxomnicreateparam.h",
+                "mxstreamcontroller.h",
                 "mxstring.h",
                 "mxomni.h",
                 "legomain.h",
@@ -92,7 +96,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxSize<MxS16>").define().pointerTypes("MxSizeShort"));
 
         // TODO: Lists
-        infoMap.put(new Info("MxDSObjectList").skip());
+        infoMap.put(new Info("MxDSObjectList", "MxDSSubscriberList", "MxNextActionDataStartList").skip());
         infoMap.put(new Info("MxPoint32List", "MxPoint32ListCursor", "MxSize32List", "MxPoint16List", "MxPoint16ListCursor", "MxSize16List", "MxSize32ListCursor", "MxSize16ListCursor", "MxRect16ListCursor", "MxRect16List", "MxRect32ListCursor", "MxRect32List").skip());
 
         // FIXME: disabled because lazy
