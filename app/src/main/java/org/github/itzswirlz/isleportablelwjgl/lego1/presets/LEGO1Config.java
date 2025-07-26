@@ -67,6 +67,8 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "misc.h",
 
                 "miniwin/bitflags.h",
+                "miniwin/d3d.h",
+                "miniwin/d3drm.h",
                 "miniwin/ddraw.h",
                 "miniwin/windows.h"
         },
@@ -141,6 +143,8 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxDSBuffer::GetBuffer").skip());
         infoMap.put(new Info("MxDSBuffer::SkipToData").skip());
         infoMap.put(new Info("MxStreamer::GetMemoryBlock").skip());
+        // Excuse: unless we need to do matrix stuff lets not bother
+        infoMap.put(new Info("IDirect3DRMFrame::D3DRMMATRIX4D").skip());
 
         // Manuevering around SDL stuff
         infoMap.put(new Info("LegoInputManager::GetLastInputMethod").skip());
@@ -174,6 +178,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LPLOGPALETTE").pointerTypes("@Cast(\"LOGPALETTE*\") Pointer").cppTypes("LOGPALETTE*"));
         infoMap.put(new Info("LPDDSCAPS").pointerTypes("@Cast(\"DDSCAPS*\") Pointer").cppTypes("DDSCAPS*"));
         infoMap.put(new Info("LPDDPIXELFORMAT").pointerTypes("@Cast(\"DDPIXELFORMAT*\") Pointer").cppTypes("DDPIXELFORMAT*"));
+        infoMap.put(new Info("LPDIRECT3DRMOBJECT").pointerTypes("@Cast(\"IDirect3DRMObject*\") Pointer").cppTypes("IDirect3DRMObject*"));
 
         // Enums
         infoMap.put(new Info("LegoOmni::World").enumerate());
@@ -212,6 +217,15 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MAKE_HRESULT").cppTypes("long", "long", "long", "long"));
         infoMap.put(new Info("MAKE_DDHRESULT").cppTypes("long", "long"));
 //        infoMap.put(new Info().linePatterns("^.*DDERR.*$").cppTypesskip());
+
+
+        // Direct3D enums + ints defined by enums we can skip
+        infoMap.put(new Info("DDBitDepths", "D3DDeviceDescFlags", "D3DPShadeCaps", "D3DPTextureCaps", "D3DPTextureFilterCaps", "D3DCOLORMODEL").enumerate());
+        infoMap.put(new Info("DDBD_8", "DDBD_16", "DDBD_24", "DDBD_32", "D3DDD_DEVICEZBUFFERBITDEPTH", "D3DPSHADECAPS_ALPHAFLATBLEND", "D3DPTEXTURECAPS_PERSPECTIVE", "D3DPTFILTERCAPS_LINEAR", "D3DCOLOR_NONE", "D3DCOLOR_RGB", "D3DCOLOR_MONO").skip());
+
+        // D3DRM Enums
+        infoMap.put(new Info("D3DRMCOMBINETYPE", "D3DRMPALETTEFLAGS", "D3DRMTEXTUREQUALITY", "D3DRMRENDERMODE", "D3DRMMAPPING", "D3DRMLIGHTTYPE", "D3DRMMATERIALMODE", "D3DRMRENDERQUALITY", "D3DRMPROJECTIONTYPE").enumerate());
+        infoMap.put(new Info("D3DRMCOMBINE_REPLACE", "D3DRMPALETTE_READONLY", "D3DRMTEXTURE_LINEAR", "D3DRMRENDERMODE_BLENDEDTRANSPARENCY", "D3DRMMAP_NONE", "D3DRMMAP_PERSPCORRECT", "D3DRMLIGHT_AMBIENT", "D3DRMLIGHT_POINT", "D3DRMLIGHT_SPOT", "D3DRMLIGHT_DIRECTIONAL", "D3DRMLIGHT_PARALLELPOINT", "D3DRMMATERIAL_FROMMESH", "D3DRMMATERIAL_FROMPARENT", "D3DRMMATERIAL_FROMFRAME", "D3DRMRENDER_WIREFRAME", "D3DRMRENDER_UNLITFLAT", "D3DRMRENDER_FLAT", "D3DRMRENDER_GOURAUD", "D3DRMRENDER_PHONG", "D3DRMPROJECT_PERSPECTIVE", "D3DRMPROJECT_ORTHOGRAPHIC").skip());
     }
 }
 

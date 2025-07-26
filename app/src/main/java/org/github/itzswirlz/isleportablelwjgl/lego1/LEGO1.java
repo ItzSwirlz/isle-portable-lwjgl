@@ -4251,6 +4251,893 @@ public static native void DeleteObjects(MxAtomId p_id, @Cast("MxS32") int p_firs
 // 	};
 
 
+// Parsed from miniwin/d3d.h
+
+// #pragma once
+
+// #include "miniwin/ddraw.h"
+
+// --- GUIDs ---
+
+
+// --- Enums ---
+// #define DDBD_8 DDBitDepths::BPP_8
+// #define DDBD_16 DDBitDepths::BPP_16
+// #define DDBD_24 DDBitDepths::BPP_24
+// #define DDBD_32 DDBitDepths::BPP_32
+public enum DDBitDepths {
+	BPP_8(1 << 11),
+	BPP_16(1 << 10),
+	BPP_24(1 << 9),
+	BPP_32(1 << 8);
+
+    public final int value;
+    private DDBitDepths(int v) { this.value = v; }
+    private DDBitDepths(DDBitDepths e) { this.value = e.value; }
+    public DDBitDepths intern() { for (DDBitDepths e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DDD_DEVICEZBUFFERBITDEPTH D3DDeviceDescFlags::DEVICEZBUFFERBITDEPTH
+public enum D3DDeviceDescFlags {
+	DEVICEZBUFFERBITDEPTH(1 << 8);
+
+    public final int value;
+    private D3DDeviceDescFlags(int v) { this.value = v; }
+    private D3DDeviceDescFlags(D3DDeviceDescFlags e) { this.value = e.value; }
+    public D3DDeviceDescFlags intern() { for (D3DDeviceDescFlags e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DPSHADECAPS_ALPHAFLATBLEND D3DPShadeCaps::ALPHAFLATBLEND
+public enum D3DPShadeCaps {
+	ALPHAFLATBLEND(1 << 12);
+
+    public final int value;
+    private D3DPShadeCaps(int v) { this.value = v; }
+    private D3DPShadeCaps(D3DPShadeCaps e) { this.value = e.value; }
+    public D3DPShadeCaps intern() { for (D3DPShadeCaps e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DPTEXTURECAPS_PERSPECTIVE D3DPTextureCaps::PERSPECTIVE
+public enum D3DPTextureCaps {
+	PERSPECTIVE(1 << 0);
+
+    public final int value;
+    private D3DPTextureCaps(int v) { this.value = v; }
+    private D3DPTextureCaps(D3DPTextureCaps e) { this.value = e.value; }
+    public D3DPTextureCaps intern() { for (D3DPTextureCaps e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DPTFILTERCAPS_LINEAR D3DPTextureFilterCaps::LINEAR
+public enum D3DPTextureFilterCaps {
+	LINEAR(1 << 1);
+
+    public final int value;
+    private D3DPTextureFilterCaps(int v) { this.value = v; }
+    private D3DPTextureFilterCaps(D3DPTextureFilterCaps e) { this.value = e.value; }
+    public D3DPTextureFilterCaps intern() { for (D3DPTextureFilterCaps e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DCOLOR_NONE D3DCOLORMODEL::NONE
+// #define D3DCOLOR_RGB D3DCOLORMODEL::RGB
+// #define D3DCOLOR_MONO D3DCOLORMODEL::MONO
+public enum D3DCOLORMODEL {
+	NONE(0),
+	RGB(1),
+	MONO(2);
+
+    public final int value;
+    private D3DCOLORMODEL(int v) { this.value = v; }
+    private D3DCOLORMODEL(D3DCOLORMODEL e) { this.value = e.value; }
+    public D3DCOLORMODEL intern() { for (D3DCOLORMODEL e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// --- Structs ---
+public static class D3DVECTOR extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public D3DVECTOR() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public D3DVECTOR(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public D3DVECTOR(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public D3DVECTOR position(long position) {
+        return (D3DVECTOR)super.position(position);
+    }
+    @Override public D3DVECTOR getPointer(long i) {
+        return new D3DVECTOR((Pointer)this).offsetAddress(i);
+    }
+
+	public native float x(); public native D3DVECTOR x(float setter);
+	public native float y(); public native D3DVECTOR y(float setter);
+	public native float z(); public native D3DVECTOR z(float setter);
+}
+
+public static class D3DDEVICEDESC extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public D3DDEVICEDESC() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public D3DDEVICEDESC(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public D3DDEVICEDESC(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public D3DDEVICEDESC position(long position) {
+        return (D3DDEVICEDESC)super.position(position);
+    }
+    @Override public D3DDEVICEDESC getPointer(long i) {
+        return new D3DDEVICEDESC((Pointer)this).offsetAddress(i);
+    }
+
+	public native D3DDeviceDescFlags dwFlags(); public native D3DDEVICEDESC dwFlags(D3DDeviceDescFlags setter);
+	public native DDBitDepths dwDeviceZBufferBitDepth(); public native D3DDEVICEDESC dwDeviceZBufferBitDepth(DDBitDepths setter);
+	public native D3DCOLORMODEL dcmColorModel(); public native D3DDEVICEDESC dcmColorModel(D3DCOLORMODEL setter); // D3DCOLOR_* Bit flag, but Isle think it's an enum
+	public native DDBitDepths dwDeviceRenderBitDepth(); public native D3DDEVICEDESC dwDeviceRenderBitDepth(DDBitDepths setter);
+		@Name("dpcTriCaps.dwShadeCaps") public native D3DPShadeCaps dpcTriCaps_dwShadeCaps(); public native D3DDEVICEDESC dpcTriCaps_dwShadeCaps(D3DPShadeCaps setter);
+		@Name("dpcTriCaps.dwTextureCaps") public native D3DPTextureCaps dpcTriCaps_dwTextureCaps(); public native D3DDEVICEDESC dpcTriCaps_dwTextureCaps(D3DPTextureCaps setter);
+		@Name("dpcTriCaps.dwTextureFilterCaps") public native D3DPTextureFilterCaps dpcTriCaps_dwTextureFilterCaps(); public native D3DDEVICEDESC dpcTriCaps_dwTextureFilterCaps(D3DPTextureFilterCaps setter);
+}
+
+@Opaque public static class IDirect3DDevice2 extends IUnknown {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirect3DDevice2() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DDevice2(Pointer p) { super(p); }
+}
+
+public static class LPD3DENUMDEVICESCALLBACK extends FunctionPointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public    LPD3DENUMDEVICESCALLBACK(Pointer p) { super(p); }
+    protected LPD3DENUMDEVICESCALLBACK() { allocate(); }
+    private native void allocate();
+    public native @Cast("HRESULT") long call(@Cast("GUID*") Pointer arg0, @Cast("LPSTR") String arg1, @Cast("LPSTR") String arg2, @Cast("LPD3DDEVICEDESC") D3DDEVICEDESC arg3, @Cast("LPD3DDEVICEDESC") D3DDEVICEDESC arg4, Pointer arg5);
+}
+public static class IDirect3D2 extends IUnknown {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3D2(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long CreateDevice(
+			@Const @ByRef GUID guid,
+			IDirectDrawSurface pBackBuffer,
+			@Cast("IDirect3DDevice2**") PointerPointer ppDirect3DDevice
+		);
+	public native @Cast("HRESULT") long CreateDevice(
+			@Const @ByRef GUID guid,
+			IDirectDrawSurface pBackBuffer,
+			@ByPtrPtr IDirect3DDevice2 ppDirect3DDevice
+		);
+	public native @Cast("HRESULT") long EnumDevices(LPD3DENUMDEVICESCALLBACK cb, Pointer ctx);
+}
+
+
+// Parsed from miniwin/d3drm.h
+
+// #pragma once
+
+// #include "miniwin/d3d.h"
+
+// #include <stdlib.h> // abort // FIXME: remove
+
+// --- Defines and Macros ---
+public static native @MemberGetter int D3DRM_OK();
+public static final int D3DRM_OK = D3DRM_OK();
+public static final int MAXSHORT = ((short) 0x7fff);
+// #define SUCCEEDED(hr) ((hr) >= D3DRM_OK)
+public static native @MemberGetter long D3DRMERR_NOTFOUND();
+public static final long D3DRMERR_NOTFOUND = D3DRMERR_NOTFOUND();
+
+// --- Typedefs ---
+@Namespace @Name("void") @Opaque public static class LPD3DRM_APPDATA extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LPD3DRM_APPDATA() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LPD3DRM_APPDATA(Pointer p) { super(p); }
+}
+public static class D3DRMOBJECTCALLBACK extends FunctionPointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public    D3DRMOBJECTCALLBACK(Pointer p) { super(p); }
+    protected D3DRMOBJECTCALLBACK() { allocate(); }
+    private native void allocate();
+    public native void call(IDirect3DRMObject obj, Pointer arg);
+}
+
+// --- Enums ---
+// #define D3DRMCOMBINE_REPLACE D3DRMCOMBINETYPE::REPLACE
+public enum D3DRMCOMBINETYPE {
+	REPLACE(0);
+
+    public final int value;
+    private D3DRMCOMBINETYPE(int v) { this.value = v; }
+    private D3DRMCOMBINETYPE(D3DRMCOMBINETYPE e) { this.value = e.value; }
+    public D3DRMCOMBINETYPE intern() { for (D3DRMCOMBINETYPE e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DRMPALETTE_READONLY D3DRMPALETTEFLAGS::READONLY
+public enum D3DRMPALETTEFLAGS {
+	READONLY(1);
+
+    public final int value;
+    private D3DRMPALETTEFLAGS(int v) { this.value = v; }
+    private D3DRMPALETTEFLAGS(D3DRMPALETTEFLAGS e) { this.value = e.value; }
+    public D3DRMPALETTEFLAGS intern() { for (D3DRMPALETTEFLAGS e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DRMTEXTURE_LINEAR D3DRMTEXTUREQUALITY::LINEAR
+public enum D3DRMTEXTUREQUALITY {
+	LINEAR(1);
+
+    public final int value;
+    private D3DRMTEXTUREQUALITY(int v) { this.value = v; }
+    private D3DRMTEXTUREQUALITY(D3DRMTEXTUREQUALITY e) { this.value = e.value; }
+    public D3DRMTEXTUREQUALITY intern() { for (D3DRMTEXTUREQUALITY e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DRMRENDERMODE_BLENDEDTRANSPARENCY D3DRMRENDERMODE::BLENDEDTRANSPARENCY
+public enum D3DRMRENDERMODE {
+	BLENDEDTRANSPARENCY(1);
+
+    public final int value;
+    private D3DRMRENDERMODE(int v) { this.value = v; }
+    private D3DRMRENDERMODE(D3DRMRENDERMODE e) { this.value = e.value; }
+    public D3DRMRENDERMODE intern() { for (D3DRMRENDERMODE e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DRMMAP_NONE D3DRMMAPPING::NONE
+// #define D3DRMMAP_PERSPCORRECT D3DRMMAPPING::PERSPCORRECT
+public enum D3DRMMAPPING {
+	NONE(0),
+	PERSPCORRECT(4);
+
+    public final int value;
+    private D3DRMMAPPING(int v) { this.value = v; }
+    private D3DRMMAPPING(D3DRMMAPPING e) { this.value = e.value; }
+    public D3DRMMAPPING intern() { for (D3DRMMAPPING e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DRMLIGHT_AMBIENT D3DRMLIGHTTYPE::AMBIENT
+// #define D3DRMLIGHT_POINT D3DRMLIGHTTYPE::POINT
+// #define D3DRMLIGHT_SPOT D3DRMLIGHTTYPE::SPOT
+// #define D3DRMLIGHT_DIRECTIONAL D3DRMLIGHTTYPE::DIRECTIONAL
+// #define D3DRMLIGHT_PARALLELPOINT D3DRMLIGHTTYPE::PARALLELPOINT
+public enum D3DRMLIGHTTYPE {
+	AMBIENT(0),
+	POINT(1),
+	SPOT(2),
+	DIRECTIONAL(3),
+	PARALLELPOINT(4);
+
+    public final int value;
+    private D3DRMLIGHTTYPE(int v) { this.value = v; }
+    private D3DRMLIGHTTYPE(D3DRMLIGHTTYPE e) { this.value = e.value; }
+    public D3DRMLIGHTTYPE intern() { for (D3DRMLIGHTTYPE e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DRMMATERIAL_FROMMESH D3DRMMATERIALMODE::FROMMESH
+// #define D3DRMMATERIAL_FROMPARENT D3DRMMATERIALMODE::FROMPARENT
+// #define D3DRMMATERIAL_FROMFRAME D3DRMMATERIALMODE::FROMFRAME
+public enum D3DRMMATERIALMODE {
+	FROMMESH(0),
+	FROMPARENT(1),
+	FROMFRAME(2);
+
+    public final int value;
+    private D3DRMMATERIALMODE(int v) { this.value = v; }
+    private D3DRMMATERIALMODE(D3DRMMATERIALMODE e) { this.value = e.value; }
+    public D3DRMMATERIALMODE intern() { for (D3DRMMATERIALMODE e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DRMRENDER_WIREFRAME D3DRMRENDERQUALITY::WIREFRAME
+// #define D3DRMRENDER_UNLITFLAT D3DRMRENDERQUALITY::UNLITFLAT
+// #define D3DRMRENDER_FLAT D3DRMRENDERQUALITY::FLAT
+// #define D3DRMRENDER_GOURAUD D3DRMRENDERQUALITY::GOURAUD
+// #define D3DRMRENDER_PHONG D3DRMRENDERQUALITY::PHONG
+
+public enum D3DRMRENDERQUALITY {
+	WIREFRAME(64),
+	UNLITFLAT(128),
+	FLAT(136),
+	GOURAUD(137),
+	PHONG(138);
+
+    public final int value;
+    private D3DRMRENDERQUALITY(int v) { this.value = v; }
+    private D3DRMRENDERQUALITY(D3DRMRENDERQUALITY e) { this.value = e.value; }
+    public D3DRMRENDERQUALITY intern() { for (D3DRMRENDERQUALITY e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// #define D3DRMPROJECT_PERSPECTIVE D3DRMPROJECTIONTYPE::PERSPECTIVE
+// #define D3DRMPROJECT_ORTHOGRAPHIC D3DRMPROJECTIONTYPE::ORTHOGRAPHIC
+public enum D3DRMPROJECTIONTYPE {
+	PERSPECTIVE(0),
+	ORTHOGRAPHIC(1);
+
+    public final int value;
+    private D3DRMPROJECTIONTYPE(int v) { this.value = v; }
+    private D3DRMPROJECTIONTYPE(D3DRMPROJECTIONTYPE e) { this.value = e.value; }
+    public D3DRMPROJECTIONTYPE intern() { for (D3DRMPROJECTIONTYPE e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// --- GUIDs ---
+
+
+
+
+
+
+
+
+// --- Structs ---
+public static class D3DRMVECTOR4D extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public D3DRMVECTOR4D() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public D3DRMVECTOR4D(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public D3DRMVECTOR4D(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public D3DRMVECTOR4D position(long position) {
+        return (D3DRMVECTOR4D)super.position(position);
+    }
+    @Override public D3DRMVECTOR4D getPointer(long i) {
+        return new D3DRMVECTOR4D((Pointer)this).offsetAddress(i);
+    }
+
+	public native float x(); public native D3DRMVECTOR4D x(float setter);
+	public native float y(); public native D3DRMVECTOR4D y(float setter);
+	public native float z(); public native D3DRMVECTOR4D z(float setter);
+	public native float w(); public native D3DRMVECTOR4D w(float setter);
+}
+
+public static class D3DRMPALETTEENTRY extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public D3DRMPALETTEENTRY() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public D3DRMPALETTEENTRY(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public D3DRMPALETTEENTRY(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public D3DRMPALETTEENTRY position(long position) {
+        return (D3DRMPALETTEENTRY)super.position(position);
+    }
+    @Override public D3DRMPALETTEENTRY getPointer(long i) {
+        return new D3DRMPALETTEENTRY((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("unsigned char") byte red(); public native D3DRMPALETTEENTRY red(byte setter);
+	public native @Cast("unsigned char") byte green(); public native D3DRMPALETTEENTRY green(byte setter);
+	public native @Cast("unsigned char") byte blue(); public native D3DRMPALETTEENTRY blue(byte setter);
+	public native D3DRMPALETTEFLAGS flags(); public native D3DRMPALETTEENTRY flags(D3DRMPALETTEFLAGS setter);
+}
+
+public static class D3DRMIMAGE extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public D3DRMIMAGE() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public D3DRMIMAGE(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public D3DRMIMAGE(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public D3DRMIMAGE position(long position) {
+        return (D3DRMIMAGE)super.position(position);
+    }
+    @Override public D3DRMIMAGE getPointer(long i) {
+        return new D3DRMIMAGE((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("DWORD") int width(); public native D3DRMIMAGE width(int setter);
+	public native @Cast("DWORD") int height(); public native D3DRMIMAGE height(int setter);
+	public native @Cast("DWORD") int depth(); public native D3DRMIMAGE depth(int setter);
+	public native @Cast("DWORD") int bytes_per_line(); public native D3DRMIMAGE bytes_per_line(int setter);
+	public native @Cast("DWORD") int red_mask(); public native D3DRMIMAGE red_mask(int setter);
+	public native @Cast("DWORD") int green_mask(); public native D3DRMIMAGE green_mask(int setter);
+	public native @Cast("DWORD") int blue_mask(); public native D3DRMIMAGE blue_mask(int setter);
+	public native @Cast("DWORD") int alpha_mask(); public native D3DRMIMAGE alpha_mask(int setter);
+	public native @Cast("DWORD") int palette_size(); public native D3DRMIMAGE palette_size(int setter);
+	public native D3DRMPALETTEENTRY palette(); public native D3DRMIMAGE palette(D3DRMPALETTEENTRY setter);
+	public native Pointer buffer1(); public native D3DRMIMAGE buffer1(Pointer setter);
+	public native Pointer buffer2(); public native D3DRMIMAGE buffer2(Pointer setter);
+	public native Pointer data(); public native D3DRMIMAGE data(Pointer setter);
+	public native int rgb(); public native D3DRMIMAGE rgb(int setter);
+	public native int aspectx(); public native D3DRMIMAGE aspectx(int setter);
+	public native int aspecty(); public native D3DRMIMAGE aspecty(int setter);
+	public native @Cast("DWORD") int format(); public native D3DRMIMAGE format(int setter);
+}
+
+public static class D3DRMBOX extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public D3DRMBOX() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public D3DRMBOX(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public D3DRMBOX(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public D3DRMBOX position(long position) {
+        return (D3DRMBOX)super.position(position);
+    }
+    @Override public D3DRMBOX getPointer(long i) {
+        return new D3DRMBOX((Pointer)this).offsetAddress(i);
+    }
+
+	public native @ByRef D3DVECTOR min(); public native D3DRMBOX min(D3DVECTOR setter);
+	public native @ByRef D3DVECTOR max(); public native D3DRMBOX max(D3DVECTOR setter);
+}
+
+public static class TexCoord extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public TexCoord() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public TexCoord(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public TexCoord(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public TexCoord position(long position) {
+        return (TexCoord)super.position(position);
+    }
+    @Override public TexCoord getPointer(long i) {
+        return new TexCoord((Pointer)this).offsetAddress(i);
+    }
+
+	public native float u(); public native TexCoord u(float setter);
+	public native float v(); public native TexCoord v(float setter);
+}
+
+public static class D3DRMVERTEX extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public D3DRMVERTEX() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public D3DRMVERTEX(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public D3DRMVERTEX(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public D3DRMVERTEX position(long position) {
+        return (D3DRMVERTEX)super.position(position);
+    }
+    @Override public D3DRMVERTEX getPointer(long i) {
+        return new D3DRMVERTEX((Pointer)this).offsetAddress(i);
+    }
+
+	public native @ByRef @Name("position") D3DVECTOR _position(); public native D3DRMVERTEX _position(D3DVECTOR setter);
+	public native @ByRef D3DVECTOR normal(); public native D3DRMVERTEX normal(D3DVECTOR setter);
+		public native @ByRef TexCoord texCoord(); public native D3DRMVERTEX texCoord(TexCoord setter);
+			public native @Cast("D3DVALUE") float tu(); public native D3DRMVERTEX tu(float setter);
+			public native @Cast("D3DVALUE") float tv(); public native D3DRMVERTEX tv(float setter);
+}
+
+public static class IDirect3DRMObject extends IUnknown {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMObject(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long AddDestroyCallback(D3DRMOBJECTCALLBACK callback, Pointer arg);
+	public native @Cast("HRESULT") long DeleteDestroyCallback(D3DRMOBJECTCALLBACK callback, Pointer arg);
+	public native @Cast("HRESULT") long SetAppData(LPD3DRM_APPDATA appData);
+	public native Pointer GetAppData();
+	public native @Cast("HRESULT") long SetName(@Cast("const char*") BytePointer name);
+	public native @Cast("HRESULT") long SetName(String name);
+	public native @Cast("HRESULT") long GetName(@Cast("DWORD*") int size, @Cast("char*") BytePointer name);
+	public native @Cast("HRESULT") long GetName(@Cast("DWORD*") int size, @Cast("char*") ByteBuffer name);
+	public native @Cast("HRESULT") long GetName(@Cast("DWORD*") int size, @Cast("char*") byte[] name);
+}
+
+@Opaque public static class IDirect3DRMVisual extends IDirect3DRMObject {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirect3DRMVisual() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMVisual(Pointer p) { super(p); }
+}
+
+public static class IDirect3DRMTexture extends IDirect3DRMVisual {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMTexture(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long Changed(@Cast("BOOL") boolean pixels, @Cast("BOOL") boolean palette);
+}
+
+@Opaque public static class IDirect3DRMTexture2 extends IDirect3DRMTexture {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirect3DRMTexture2() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMTexture2(Pointer p) { super(p); }
+}
+
+public static class IDirect3DRMMaterial extends IDirect3DRMObject {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMMaterial(Pointer p) { super(p); }
+
+	public native @Cast("D3DVALUE") float GetPower();
+}
+
+public static class IDirect3DRMMesh extends IDirect3DRMVisual {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMMesh(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long Clone(int flags, @ByVal GUID iid, @Cast("void**") PointerPointer object);
+	public native @Cast("HRESULT") long Clone(int flags, @ByVal GUID iid, @Cast("void**") @ByPtrPtr Pointer object);
+	public native @Cast("HRESULT") long GetBox(D3DRMBOX box);
+	public native @Cast("HRESULT") long AddGroup(
+			@Cast("unsigned int") int vertexCount,
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexPerFace,
+			@Cast("unsigned int*") IntPointer faceBuffer,
+			@Cast("D3DRMGROUPINDEX*") int groupIndex
+		);
+	public native @Cast("HRESULT") long AddGroup(
+			@Cast("unsigned int") int vertexCount,
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexPerFace,
+			@Cast("unsigned int*") IntBuffer faceBuffer,
+			@Cast("D3DRMGROUPINDEX*") int groupIndex
+		);
+	public native @Cast("HRESULT") long AddGroup(
+			@Cast("unsigned int") int vertexCount,
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexPerFace,
+			@Cast("unsigned int*") int[] faceBuffer,
+			@Cast("D3DRMGROUPINDEX*") int groupIndex
+		);
+	public native @Cast("HRESULT") long GetGroup(
+			@Cast("D3DRMGROUPINDEX") int groupIndex,
+			@Cast("unsigned int*") IntPointer vertexCount,
+			@Cast("unsigned int*") IntPointer faceCount,
+			@Cast("unsigned int*") IntPointer vertexPerFace,
+			@Cast("DWORD*") int indexCount,
+			@Cast("unsigned int*") IntPointer indices
+		);
+	public native @Cast("HRESULT") long GetGroup(
+			@Cast("D3DRMGROUPINDEX") int groupIndex,
+			@Cast("unsigned int*") IntBuffer vertexCount,
+			@Cast("unsigned int*") IntBuffer faceCount,
+			@Cast("unsigned int*") IntBuffer vertexPerFace,
+			@Cast("DWORD*") int indexCount,
+			@Cast("unsigned int*") IntBuffer indices
+		);
+	public native @Cast("HRESULT") long GetGroup(
+			@Cast("D3DRMGROUPINDEX") int groupIndex,
+			@Cast("unsigned int*") int[] vertexCount,
+			@Cast("unsigned int*") int[] faceCount,
+			@Cast("unsigned int*") int[] vertexPerFace,
+			@Cast("DWORD*") int indexCount,
+			@Cast("unsigned int*") int[] indices
+		);
+	public native @Cast("DWORD") int GetGroupCount();
+	public native @Cast("HRESULT") long SetGroupColor(@Cast("D3DRMGROUPINDEX") int groupIndex, @Cast("D3DCOLOR") int color);
+	public native @Cast("HRESULT") long SetGroupColorRGB(@Cast("D3DRMGROUPINDEX") int groupIndex, float r, float g, float b);
+	public native @Cast("HRESULT") long SetGroupTexture(@Cast("D3DRMGROUPINDEX") int groupIndex, IDirect3DRMTexture texture);
+	public native @Cast("HRESULT") long SetGroupMaterial(@Cast("D3DRMGROUPINDEX") int groupIndex, IDirect3DRMMaterial material);
+	public native @Cast("HRESULT") long SetGroupMapping(@Cast("D3DRMGROUPINDEX") int groupIndex, D3DRMMAPPING mapping);
+	public native @Cast("HRESULT") long SetGroupQuality(@Cast("D3DRMGROUPINDEX") int groupIndex, D3DRMRENDERQUALITY quality);
+	public native @Cast("HRESULT") long SetVertices(@Cast("D3DRMGROUPINDEX") int groupIndex, int offset, int count, D3DRMVERTEX vertices);
+	public native @Cast("HRESULT") long GetGroupTexture(@Cast("D3DRMGROUPINDEX") int groupIndex, @Cast("LPDIRECT3DRMTEXTURE*") PointerPointer texture);
+	public native D3DRMMAPPING GetGroupMapping(@Cast("D3DRMGROUPINDEX") int groupIndex);
+	public native @Cast("HRESULT") long GetGroupMaterial(@Cast("D3DRMGROUPINDEX") int groupIndex, @Cast("LPDIRECT3DRMMATERIAL*") PointerPointer material);
+	public native D3DRMRENDERQUALITY GetGroupQuality(@Cast("D3DRMGROUPINDEX") int groupIndex);
+	public native @Cast("D3DCOLOR") int GetGroupColor(@Cast("D3DRMGROUPINDEX") int index);
+	public native @Cast("HRESULT") long GetVertices(@Cast("D3DRMGROUPINDEX") int groupIndex, int startIndex, int count, D3DRMVERTEX vertices);
+}
+
+public static class IDirect3DRMLight extends IDirect3DRMObject {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMLight(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long SetColorRGB(float r, float g, float b);
+	public native D3DRMLIGHTTYPE GetType();
+	public native @Cast("D3DCOLOR") int GetColor();
+}
+
+public static class IDirect3DRMArray extends IUnknown {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMArray(Pointer p) { super(p); }
+
+	public native @Cast("DWORD") int GetSize();
+}
+
+public static class IDirect3DRMLightArray extends IDirect3DRMArray {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMLightArray(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long GetElement(@Cast("DWORD") int index, @Cast("IDirect3DRMLight**") PointerPointer out);
+	public native @Cast("HRESULT") long GetElement(@Cast("DWORD") int index, @ByPtrPtr IDirect3DRMLight out);
+	public native @Cast("HRESULT") long AddElement(IDirect3DRMLight in);
+	public native @Cast("HRESULT") long DeleteElement(IDirect3DRMLight element);
+}
+
+public static class IDirect3DRMVisualArray extends IDirect3DRMArray {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMVisualArray(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long GetElement(@Cast("DWORD") int index, @Cast("IDirect3DRMVisual**") PointerPointer out);
+	public native @Cast("HRESULT") long GetElement(@Cast("DWORD") int index, @ByPtrPtr IDirect3DRMVisual out);
+	public native @Cast("HRESULT") long AddElement(IDirect3DRMVisual in);
+	public native @Cast("HRESULT") long DeleteElement(IDirect3DRMVisual element);
+}
+public static class IDirect3DRMFrame extends IDirect3DRMVisual {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMFrame(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long AddChild(IDirect3DRMFrame child);
+	public native @Cast("HRESULT") long DeleteChild(IDirect3DRMFrame child);
+	public native @Cast("HRESULT") long SetSceneBackgroundRGB(float r, float g, float b);
+	public native @Cast("HRESULT") long AddLight(IDirect3DRMLight light);
+	public native @Cast("HRESULT") long GetLights(@Cast("IDirect3DRMLightArray**") PointerPointer lightArray);
+	public native @Cast("HRESULT") long GetLights(@ByPtrPtr IDirect3DRMLightArray lightArray);
+	public native @Cast("HRESULT") long GetPosition(IDirect3DRMFrame reference, D3DVECTOR _position);
+	public native @Cast("HRESULT") long AddVisual(IDirect3DRMVisual visual);
+	public native @Cast("HRESULT") long DeleteVisual(IDirect3DRMVisual visual);
+	public native @Cast("HRESULT") long GetVisuals(@Cast("IDirect3DRMVisualArray**") PointerPointer visuals);
+	public native @Cast("HRESULT") long GetVisuals(@ByPtrPtr IDirect3DRMVisualArray visuals);
+	public native @Cast("HRESULT") long SetTexture(IDirect3DRMTexture texture);
+	public native @Cast("HRESULT") long GetTexture(@Cast("IDirect3DRMTexture**") PointerPointer texture);
+	public native @Cast("HRESULT") long GetTexture(@ByPtrPtr IDirect3DRMTexture texture);
+	public native @Cast("HRESULT") long SetColor(float r, float g, float b, float a);
+	public native @Cast("HRESULT") long SetColor(@Cast("D3DCOLOR") int arg0);
+	public native @Cast("HRESULT") long SetColorRGB(float r, float g, float b);
+	public native @Cast("HRESULT") long SetMaterialMode(D3DRMMATERIALMODE mode);
+	public native @Cast("HRESULT") long GetChildren(@Cast("IDirect3DRMFrameArray**") PointerPointer children);
+	public native @Cast("HRESULT") long GetChildren(@ByPtrPtr IDirect3DRMFrameArray children);
+}
+
+public static class IDirect3DRMFrameArray extends IDirect3DRMArray {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMFrameArray(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long GetElement(@Cast("DWORD") int index, @Cast("IDirect3DRMFrame**") PointerPointer out);
+	public native @Cast("HRESULT") long GetElement(@Cast("DWORD") int index, @ByPtrPtr IDirect3DRMFrame out);
+	public native @Cast("HRESULT") long AddElement(IDirect3DRMFrame in);
+	public native @Cast("HRESULT") long DeleteElement(IDirect3DRMFrame element);
+}
+
+@Opaque public static class IDirect3DRMFrame2 extends IDirect3DRMFrame {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirect3DRMFrame2() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMFrame2(Pointer p) { super(p); }
+}
+
+public static class D3DRMPICKDESC extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public D3DRMPICKDESC() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public D3DRMPICKDESC(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public D3DRMPICKDESC(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public D3DRMPICKDESC position(long position) {
+        return (D3DRMPICKDESC)super.position(position);
+    }
+    @Override public D3DRMPICKDESC getPointer(long i) {
+        return new D3DRMPICKDESC((Pointer)this).offsetAddress(i);
+    }
+
+	public native float dist(); public native D3DRMPICKDESC dist(float setter);
+}
+
+public static class IDirect3DRMPickedArray extends IDirect3DRMArray {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMPickedArray(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long GetPick(
+			@Cast("DWORD") int index,
+			@Cast("IDirect3DRMVisual**") PointerPointer visual,
+			@Cast("IDirect3DRMFrameArray**") PointerPointer frameArray,
+			D3DRMPICKDESC desc
+		);
+	public native @Cast("HRESULT") long GetPick(
+			@Cast("DWORD") int index,
+			@ByPtrPtr IDirect3DRMVisual visual,
+			@ByPtrPtr IDirect3DRMFrameArray frameArray,
+			D3DRMPICKDESC desc
+		);
+}
+
+public static class IDirect3DRMViewport extends IDirect3DRMObject {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMViewport(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long Render(IDirect3DRMFrame group);
+	public native @Cast("HRESULT") long ForceUpdate(int x, int y, int w, int h);
+	public native @Cast("HRESULT") long Clear();
+	public native @Cast("HRESULT") long SetCamera(IDirect3DRMFrame camera);
+	public native @Cast("HRESULT") long GetCamera(@Cast("IDirect3DRMFrame**") PointerPointer camera);
+	public native @Cast("HRESULT") long GetCamera(@ByPtrPtr IDirect3DRMFrame camera);
+	public native @Cast("HRESULT") long SetProjection(D3DRMPROJECTIONTYPE type);
+	public native D3DRMPROJECTIONTYPE GetProjection();
+	public native @Cast("HRESULT") long SetFront(@Cast("D3DVALUE") float z);
+	public native @Cast("D3DVALUE") float GetFront();
+	public native @Cast("HRESULT") long SetBack(@Cast("D3DVALUE") float z);
+	public native @Cast("D3DVALUE") float GetBack();
+	public native @Cast("HRESULT") long SetField(@Cast("D3DVALUE") float field);
+	public native @Cast("D3DVALUE") float GetField();
+	public native @Cast("DWORD") int GetWidth();
+	public native @Cast("DWORD") int GetHeight();
+	public native @Cast("HRESULT") long Transform(D3DRMVECTOR4D screen, D3DVECTOR world);
+	public native @Cast("HRESULT") long InverseTransform(D3DVECTOR world, D3DRMVECTOR4D screen);
+	public native @Cast("HRESULT") long Pick(float x, float y, @Cast("LPDIRECT3DRMPICKEDARRAY*") PointerPointer pickedArray);
+}
+
+public static class IDirect3DRMViewportArray extends IDirect3DRMArray {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMViewportArray(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long GetElement(@Cast("DWORD") int index, @Cast("IDirect3DRMViewport**") PointerPointer out);
+	public native @Cast("HRESULT") long GetElement(@Cast("DWORD") int index, @ByPtrPtr IDirect3DRMViewport out);
+	public native @Cast("HRESULT") long AddElement(IDirect3DRMViewport in);
+	public native @Cast("HRESULT") long DeleteElement(IDirect3DRMViewport element);
+}
+
+public static class IDirect3DRMWinDevice extends IDirect3DRMObject {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMWinDevice(Pointer p) { super(p); }
+    /** Downcast constructor. */
+    public IDirect3DRMWinDevice(IDirect3DRMObject pointer) { super((Pointer)null); allocate(pointer); }
+    @Namespace private native @Name("dynamic_cast<IDirect3DRMWinDevice*>") void allocate(IDirect3DRMObject pointer);
+    public IDirect3DRMObject asIDirect3DRMObject() { return asIDirect3DRMObject(this); }
+    @Namespace public static native @Name("static_cast<IDirect3DRMObject*>") IDirect3DRMObject asIDirect3DRMObject(IDirect3DRMWinDevice pointer);
+
+	public native @Cast("HRESULT") long Activate();
+	public native @Cast("HRESULT") long Paint();
+	public native void HandleActivate(@Cast("WORD") short wParam);
+	public native void HandlePaint(Pointer p_dc);
+}
+
+public static class IDirect3DRMDevice extends IDirect3DRMObject {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMDevice(Pointer p) { super(p); }
+    /** Downcast constructor. */
+    public IDirect3DRMDevice(IDirect3DRMObject pointer) { super((Pointer)null); allocate(pointer); }
+    @Namespace private native @Name("dynamic_cast<IDirect3DRMDevice*>") void allocate(IDirect3DRMObject pointer);
+    public IDirect3DRMObject asIDirect3DRMObject() { return asIDirect3DRMObject(this); }
+    @Namespace public static native @Name("static_cast<IDirect3DRMObject*>") IDirect3DRMObject asIDirect3DRMObject(IDirect3DRMDevice pointer);
+
+	public native @Cast("DWORD") int GetWidth();
+	public native @Cast("DWORD") int GetHeight();
+	public native @Cast("HRESULT") long SetBufferCount(int count);
+	public native @Cast("DWORD") int GetBufferCount();
+	public native @Cast("HRESULT") long SetShades(@Cast("DWORD") int shadeCount);
+	public native @Cast("DWORD") int GetShades();
+	public native @Cast("HRESULT") long SetQuality(D3DRMRENDERQUALITY quality);
+	public native D3DRMRENDERQUALITY GetQuality();
+	public native @Cast("HRESULT") long SetDither(@Cast("BOOL") boolean dither);
+	public native @Cast("BOOL") boolean GetDither();
+	public native @Cast("HRESULT") long SetTextureQuality(D3DRMTEXTUREQUALITY quality);
+	public native D3DRMTEXTUREQUALITY GetTextureQuality();
+	public native @Cast("HRESULT") long SetRenderMode(D3DRMRENDERMODE mode);
+	public native D3DRMRENDERMODE GetRenderMode();
+	public native @Cast("HRESULT") long Update();
+	public native @Cast("HRESULT") long AddViewport(IDirect3DRMViewport viewport);
+	public native @Cast("HRESULT") long GetViewports(@Cast("IDirect3DRMViewportArray**") PointerPointer ppViewportArray);
+	public native @Cast("HRESULT") long GetViewports(@ByPtrPtr IDirect3DRMViewportArray ppViewportArray);
+}
+
+@Opaque public static class IDirect3DRMDevice2 extends IDirect3DRMDevice {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirect3DRMDevice2() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMDevice2(Pointer p) { super(p); }
+}
+
+public static class IDirect3DRM extends IUnknown {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRM(Pointer p) { super(p); }
+
+	public native @Cast("HRESULT") long CreateDeviceFromD3D(
+			@Const IDirect3D2 d3d,
+			IDirect3DDevice2 d3dDevice,
+			@Cast("IDirect3DRMDevice2**") PointerPointer outDevice
+		);
+	public native @Cast("HRESULT") long CreateDeviceFromD3D(
+			@Const IDirect3D2 d3d,
+			IDirect3DDevice2 d3dDevice,
+			@ByPtrPtr IDirect3DRMDevice2 outDevice
+		);
+	public native @Cast("HRESULT") long CreateDeviceFromSurface(
+			@Const GUID guid,
+			IDirectDraw dd,
+			IDirectDrawSurface surface,
+			@Cast("IDirect3DRMDevice2**") PointerPointer outDevice
+		);
+	public native @Cast("HRESULT") long CreateDeviceFromSurface(
+			@Const GUID guid,
+			IDirectDraw dd,
+			IDirectDrawSurface surface,
+			@ByPtrPtr IDirect3DRMDevice2 outDevice
+		);
+	public native @Cast("HRESULT") long CreateTexture(D3DRMIMAGE image, @Cast("IDirect3DRMTexture2**") PointerPointer outTexture);
+	public native @Cast("HRESULT") long CreateTexture(D3DRMIMAGE image, @ByPtrPtr IDirect3DRMTexture2 outTexture);
+	public native @Cast("HRESULT") long CreateTextureFromSurface(@Cast("IDirectDrawSurface*") Pointer surface, @Cast("IDirect3DRMTexture2**") PointerPointer outTexture);
+	public native @Cast("HRESULT") long CreateTextureFromSurface(@Cast("IDirectDrawSurface*") Pointer surface, @ByPtrPtr IDirect3DRMTexture2 outTexture);
+	public native @Cast("HRESULT") long CreateMesh(@Cast("IDirect3DRMMesh**") PointerPointer outMesh);
+	public native @Cast("HRESULT") long CreateMesh(@ByPtrPtr IDirect3DRMMesh outMesh);
+	public native @Cast("HRESULT") long CreateMaterial(@Cast("D3DVAL") float power, @Cast("IDirect3DRMMaterial**") PointerPointer outMaterial);
+	public native @Cast("HRESULT") long CreateMaterial(@Cast("D3DVAL") float power, @ByPtrPtr IDirect3DRMMaterial outMaterial);
+	public native @Cast("HRESULT") long CreateLightRGB(D3DRMLIGHTTYPE type, @Cast("D3DVAL") float r, @Cast("D3DVAL") float g, @Cast("D3DVAL") float b, @Cast("IDirect3DRMLight**") PointerPointer outLight);
+	public native @Cast("HRESULT") long CreateLightRGB(D3DRMLIGHTTYPE type, @Cast("D3DVAL") float r, @Cast("D3DVAL") float g, @Cast("D3DVAL") float b, @ByPtrPtr IDirect3DRMLight outLight);
+	public native @Cast("HRESULT") long CreateFrame(IDirect3DRMFrame parent, @Cast("IDirect3DRMFrame2**") PointerPointer outFrame);
+	public native @Cast("HRESULT") long CreateFrame(IDirect3DRMFrame parent, @ByPtrPtr IDirect3DRMFrame2 outFrame);
+	public native @Cast("HRESULT") long CreateViewport(
+			IDirect3DRMDevice2 device,
+			IDirect3DRMFrame camera,
+			int x,
+			int y,
+			int width,
+			int height,
+			@Cast("IDirect3DRMViewport**") PointerPointer outViewport
+		);
+	public native @Cast("HRESULT") long CreateViewport(
+			IDirect3DRMDevice2 device,
+			IDirect3DRMFrame camera,
+			int x,
+			int y,
+			int width,
+			int height,
+			@ByPtrPtr IDirect3DRMViewport outViewport
+		);
+	public native @Cast("HRESULT") long SetDefaultTextureShades(@Cast("DWORD") int count);
+	public native @Cast("HRESULT") long SetDefaultTextureColors(@Cast("DWORD") int count);
+}
+
+@Opaque public static class IDirect3DRM2 extends IDirect3DRM {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirect3DRM2() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRM2(Pointer p) { super(p); }
+}
+
+// Functions
+public static native @Cast("HRESULT") long Direct3DRMCreate(@Cast("IDirect3DRM**") PointerPointer direct3DRM);
+public static native @Cast("HRESULT") long Direct3DRMCreate(@ByPtrPtr IDirect3DRM direct3DRM);
+
+public static native @Cast("D3DCOLOR") int D3DRMCreateColorRGBA(@Cast("D3DVALUE") float red, @Cast("D3DVALUE") float green, @Cast("D3DVALUE") float blue, @Cast("D3DVALUE") float alpha);
+
+
 // Parsed from miniwin/ddraw.h
 
 // #pragma once
