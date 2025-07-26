@@ -20,6 +20,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "../../../../isle-portable/LEGO1/",
                 "../../../../isle-portable/LEGO1/mxdirectx/",
                 "../../../../isle-portable/LEGO1/realtime/",
+                "../../../../isle-portable/LEGO1/tgl/",
                 "../../../../isle-portable/LEGO1/lego/sources/3dmanager/",
                 "../../../../isle-portable/LEGO1/lego/legoomni/include",
                 "../../../../isle-portable/LEGO1/lego/legoomni/include/actions",
@@ -76,7 +77,9 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "miniwin/ddraw.h",
                 "miniwin/windows.h",
 
-                "tglsurface.h"
+                "tglsurface.h",
+                "tgl.h",
+                "d3drm/impl.h"
         },
         define = {"MINIWIN"},
         link = {"LEGO1"}
@@ -151,9 +154,12 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxStreamer::GetMemoryBlock").skip());
         // Excuse: unless we need to do matrix stuff lets not bother
         infoMap.put(new Info("IDirect3DRMFrame::D3DRMMATRIX4D").skip());
-        // TGL, not needed YET
+        // Excuse: TGL, not needed for ISLE stuff as far as we know. Most of these are simple definitions
         infoMap.put(new Info("LegoView1::SetLightTransform").skip());
         infoMap.put(new Info("TglSurface::GetTriangleRate").skip());
+        infoMap.put(new Info("Tgl::Group::SetTransformation", "Tgl::Light::SetTransformation", "Tgl::Camera::SetTransformation", "TglImpl::Camera::SetTransformation", "TglImpl::CameraImpl::SetTransformation", "TglImpl::LightImpl::SetTransformation", "TglImpl::GroupImpl::SetTransformation").skip());
+        infoMap.put(new Info("TglImpl::Translate").skip());
+
 
         // Manuevering around SDL stuff
         infoMap.put(new Info("LegoInputManager::GetLastInputMethod").skip());
@@ -198,6 +204,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxStreamer::OpenMode").enumerate());
         infoMap.put(new Info("LegoInputManager::TouchScheme").enumerate());
         infoMap.put(new Info("LegoInputManager::Keys").enumerate());
+        infoMap.put(new Info("Tgl::Result").enumerate());
         infoMap.put(new Info("DDPixelCaps", "DDColorKeyFlags", "DDFlipFlags", "DDCaps2Flags", "DDSCapsFlags", "DDPixelFormatFlags", "DDBLTFXFlags", "PCFlags", "DDBltFlags", "DDLockFlags", "DDBltFastFlags", "DDSCLFlags", "DDSurfaceDescFlags").enumerate());
 
         // Definition skips

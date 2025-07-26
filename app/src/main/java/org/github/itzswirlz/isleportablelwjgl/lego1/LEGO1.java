@@ -179,18 +179,6 @@ public static class Vector4 extends Vector3 {
 
 // #include "assert.h"
 // #include "lego3dview.h"
-@Namespace("Tgl") @Opaque public static class Renderer extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public Renderer() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public Renderer(Pointer p) { super(p); }
-}
-@Namespace("Tgl") @Opaque public static class Group extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public Group() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public Group(Pointer p) { super(p); }
-}
  // namespace Tgl
 
 @Opaque public static class ViewROI extends Pointer {
@@ -383,18 +371,6 @@ public static class Vector4 extends Vector3 {
 // #include "compat.h"
 // #include "decomp.h"
 // #include "tglsurface.h"
-@Namespace("Tgl") @Opaque public static class Camera extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public Camera() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public Camera(Pointer p) { super(p); }
-}
-@Namespace("Tgl") @Opaque public static class Light extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public Light() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public Light(Pointer p) { super(p); }
-}
  // namespace Tgl
 
 /////////////////////////////////////////////////////////////////////////////
@@ -6457,18 +6433,6 @@ public static native @Cast("BOOL") boolean ClientToScreen(HWND hWnd, @Cast("LPPO
 
 // #include "mxdirectx/mxstopwatch.h"
 // #include "tgl/tgl.h"
-@Namespace("Tgl") @Opaque public static class Device extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public Device() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public Device(Pointer p) { super(p); }
-}
-@Namespace("Tgl") @Opaque public static class View extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public View() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public View(Pointer p) { super(p); }
-}
  // namespace Tgl
 
 /////////////////////////////////////////////////////////////////////////////
@@ -6544,6 +6508,1411 @@ public static native @Cast("BOOL") boolean ClientToScreen(HWND hWnd, @Cast("LPPO
 // TglSurface::`scalar deleting destructor'
 
 // #endif /* _TglSurface_h */
+
+
+// Parsed from tgl.h
+
+
+// #ifndef _tgl_h
+// #define _tgl_h
+
+// #include "tglvector.h"
+
+// #ifdef MINIWIN
+// #else
+// #include <d3d.h>
+// #include <ddraw.h>
+// #endif
+
+// #ifdef MINIWIN
+// #else
+// #include <windows.h>
+// #endif
+
+/** enum Tgl::ColorModel */
+public static final int
+	// Note: Not used in shipped game, no way to verify contents.
+	Ramp = 0,
+	RGB = 1;
+
+/** enum Tgl::ShadingModel */
+public static final int
+	Wireframe = 0,
+	UnlitFlat = 1,
+	Flat = 2,
+	Gouraud = 3,
+	Phong = 4;
+
+/** enum Tgl::LightType */
+public static final int
+	Ambient = 0,
+	Point = 1,
+	Spot = 2,
+	Directional = 3,
+	ParallelPoint = 4;
+
+/** enum Tgl::ProjectionType */
+public static final int
+	Perspective = 0,
+	Orthographic = 1;
+
+/** enum Tgl::TextureMappingMode */
+public static final int
+	Linear = 0,
+	PerspectiveCorrect = 1;
+
+// Not in the Tgl leak, inferred from the assembly
+/** enum Tgl::MaterialMode */
+public static final int
+	FromParent = 0,
+	FromFrame = 1,
+	FromMesh = 2;
+
+@Namespace("Tgl") public static class PaletteEntry extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public PaletteEntry() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public PaletteEntry(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public PaletteEntry(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public PaletteEntry position(long position) {
+        return (PaletteEntry)super.position(position);
+    }
+    @Override public PaletteEntry getPointer(long i) {
+        return new PaletteEntry((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Cast("unsigned char") byte m_red(); public native PaletteEntry m_red(byte setter);
+	public native @Cast("unsigned char") byte m_green(); public native PaletteEntry m_green(byte setter);
+	public native @Cast("unsigned char") byte m_blue(); public native PaletteEntry m_blue(byte setter);
+}
+
+@Namespace("Tgl") public static class DeviceDirect3DCreateData extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public DeviceDirect3DCreateData() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DeviceDirect3DCreateData(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DeviceDirect3DCreateData(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public DeviceDirect3DCreateData position(long position) {
+        return (DeviceDirect3DCreateData)super.position(position);
+    }
+    @Override public DeviceDirect3DCreateData getPointer(long i) {
+        return new DeviceDirect3DCreateData((Pointer)this).offsetAddress(i);
+    }
+
+	public native IDirect3D2 m_pDirect3D(); public native DeviceDirect3DCreateData m_pDirect3D(IDirect3D2 setter);
+	public native IDirect3DDevice2 m_pDirect3DDevice(); public native DeviceDirect3DCreateData m_pDirect3DDevice(IDirect3DDevice2 setter);
+}
+
+@Namespace("Tgl") public static class DeviceDirectDrawCreateData extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public DeviceDirectDrawCreateData() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DeviceDirectDrawCreateData(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DeviceDirectDrawCreateData(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public DeviceDirectDrawCreateData position(long position) {
+        return (DeviceDirectDrawCreateData)super.position(position);
+    }
+    @Override public DeviceDirectDrawCreateData getPointer(long i) {
+        return new DeviceDirectDrawCreateData((Pointer)this).offsetAddress(i);
+    }
+
+	public native @Const GUID m_driverGUID(); public native DeviceDirectDrawCreateData m_driverGUID(GUID setter);
+	public native HWND m_hWnd(); public native DeviceDirectDrawCreateData m_hWnd(HWND setter);
+	public native IDirectDraw m_pDirectDraw(); public native DeviceDirectDrawCreateData m_pDirectDraw(IDirectDraw setter);
+	public native IDirectDrawSurface m_pFrontBuffer(); public native DeviceDirectDrawCreateData m_pFrontBuffer(IDirectDrawSurface setter);
+	public native IDirectDrawSurface m_pBackBuffer(); public native DeviceDirectDrawCreateData m_pBackBuffer(IDirectDrawSurface setter);
+
+	// These have possibly been removed in the shipped game
+	// (Put them back if we can verify when we find a callsite
+	// which constructs this type)
+	// IDirectDrawPalette* m_pPalette;
+	// int m_isFullScreen;
+}
+
+// Result type used for all methods in the Tgl API
+@Namespace("Tgl") public enum Result {
+	Error(0),
+	Success(1);
+
+    public final int value;
+    private Result(int v) { this.value = v; }
+    private Result(Result e) { this.value = e.value; }
+    public Result intern() { for (Result e : values()) if (e.value == value) return e; return this; }
+    @Override public String toString() { return intern().name(); }
+}
+
+// FUNCTION: BETA10 0x10169c60
+@Namespace("Tgl") public static native int Succeeded(Result result);
+
+// Forward declarations
+
+// VTABLE: LEGO1 0x100db980
+// VTABLE: BETA10 0x101c3148
+@Namespace("Tgl") public static class Object extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Object(Pointer p) { super(p); }
+
+	// FUNCTION: LEGO1 0x100a2240
+	// FUNCTION: BETA10 0x10169c90
+
+	public native Pointer ImplementationDataPtr();
+
+	// SYNTHETIC: BETA10 0x10169b50
+	// Tgl::Object::Object
+
+	// SYNTHETIC: LEGO1 0x100a2250
+	// SYNTHETIC: BETA10 0x10169cb0
+	// Tgl::Object::`scalar deleting destructor'
+}
+
+// VTABLE: LEGO1 0x100db948
+// VTABLE: BETA10 0x101c3110
+@Namespace("Tgl") public static class Renderer extends Object {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Renderer(Pointer p) { super(p); }
+
+	// vtable+0x08
+	public native Device CreateDevice(@Const @ByRef DeviceDirectDrawCreateData arg0);
+	public native Device CreateDevice(@Const @ByRef DeviceDirect3DCreateData arg0);
+
+	// vtable+0x10
+	public native View CreateView(
+			@Const Device arg0,
+			@Const Camera arg1,
+			@Cast("unsigned int") int x,
+			@Cast("unsigned int") int y,
+			@Cast("unsigned int") int width,
+			@Cast("unsigned int") int height
+		);
+	public native Camera CreateCamera();
+	public native Light CreateLight(@Cast("Tgl::LightType") int arg0, float r, float g, float b);
+	public native Group CreateGroup(@Const Group pParent/*=0*/);
+	public native Group CreateGroup();
+
+	// vtable+0x20
+	public native MeshBuilder CreateMeshBuilder();
+	public native Texture CreateTexture(
+			int width,
+			int height,
+			int bitsPerTexel,
+			@Const Pointer pTexels,
+			int pTexelsArePersistent,
+			int paletteEntryCount,
+			@Const PaletteEntry pEntries
+		);
+	public native Texture CreateTexture();
+	public native Result SetTextureDefaultShadeCount(@Cast("unsigned int") int arg0);
+
+	// vtable+0x30
+	public native Result SetTextureDefaultColorCount(@Cast("unsigned int") int arg0);
+
+	// SYNTHETIC: BETA10 0x10169ae0
+	// Tgl::Renderer::Renderer
+
+	// SYNTHETIC: LEGO1 0x100a1770
+	// SYNTHETIC: BETA10 0x10169b80
+	// Tgl::Renderer::~Renderer
+
+	// SYNTHETIC: LEGO1 0x100a17c0
+	// SYNTHETIC: BETA10 0x10169be0
+	// Tgl::Renderer::`scalar deleting destructor'
+}
+
+@Namespace("Tgl") public static native Renderer CreateRenderer();
+
+// VTABLE: LEGO1 0x100db9b8
+// VTABLE: BETA10 0x101c32b0
+@Namespace("Tgl") public static class Device extends Object {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Device(Pointer p) { super(p); }
+
+	// vtable+0x08
+	public native @Cast("unsigned int") int GetWidth();
+	public native @Cast("unsigned int") int GetHeight();
+
+	// vtable+0x10
+	public native Result SetColorModel(@Cast("Tgl::ColorModel") int arg0);
+	public native Result SetShadingModel(@Cast("Tgl::ShadingModel") int arg0);
+	public native Result SetShadeCount(@Cast("unsigned int") int arg0);
+	public native Result SetDither(int arg0);
+
+	// vtable+0x20
+	public native Result Update();
+	public native void HandleActivate(@Cast("WORD") short arg0);
+	public native void HandlePaint(Pointer arg0);
+
+	// SYNTHETIC: BETA10 0x1016b740
+	// Tgl::Device::Device
+
+	// SYNTHETIC: LEGO1 0x100a2350
+	// SYNTHETIC: BETA10 0x1016b7b0
+	// Tgl::Device::~Device
+
+	// SYNTHETIC: LEGO1 0x100a28e0
+	// SYNTHETIC: BETA10 0x1016bbc0
+	// Tgl::Device::`scalar deleting destructor'
+}
+
+// VTABLE: LEGO1 0x100dba28
+// VTABLE: BETA10 0x101c32e0
+@Namespace("Tgl") public static class View extends Object {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public View(Pointer p) { super(p); }
+
+	public native Result Add(@Const Light arg0);
+	public native Result Remove(@Const Light arg0);
+
+	// vtable+0x10
+	public native Result SetCamera(@Const Camera arg0);
+	public native Result SetProjection(@Cast("Tgl::ProjectionType") int arg0);
+	public native Result SetFrustrum(float frontClippingDistance, float backClippingDistance, float degrees);
+	public native Result SetBackgroundColor(float r, float g, float b);
+
+	// vtable+0x20
+	public native Result GetBackgroundColor(FloatPointer r, FloatPointer g, FloatPointer b);
+	public native Result GetBackgroundColor(FloatBuffer r, FloatBuffer g, FloatBuffer b);
+	public native Result GetBackgroundColor(float[] r, float[] g, float[] b);
+	public native Result Clear();
+	public native Result Render(@Const Group arg0);
+	public native Result ForceUpdate(@Cast("unsigned int") int x, @Cast("unsigned int") int y, @Cast("unsigned int") int width, @Cast("unsigned int") int height);
+
+	// vtable+0x30
+	public native Result TransformWorldToScreen(@Const FloatPointer world, FloatPointer screen);
+	public native Result TransformWorldToScreen(@Const FloatBuffer world, FloatBuffer screen);
+	public native Result TransformWorldToScreen(@Const float[] world, float[] screen);
+	public native Result TransformScreenToWorld(@Const FloatPointer screen, FloatPointer world);
+	public native Result TransformScreenToWorld(@Const FloatBuffer screen, FloatBuffer world);
+	public native Result TransformScreenToWorld(@Const float[] screen, float[] world);
+
+	// Pick():
+	//  x, y:
+	//      view coordinates
+	//
+	//  ppGroupsToPickFrom:
+	//      array of (Group*) in any order
+	//      Groups to pick from
+	//
+	//  groupsToPickFromCount:
+	//      size of ppGroupsToPickFrom
+	//
+	//  rppPickedGroups:
+	//      output parameter
+	//      array of (Group*) representing a Group hierarchy
+	//      top-down order (element 0 is root/scene)
+	//      caller must deallocate array
+	//      ref count of each element (Group*) has not been increased
+	//      an element will be 0, if a corresponding Group was not found in ppGroupsToPickFrom
+	//
+	//  rPickedGroupCount:
+	//      output parameter
+	//      size of rppPickedGroups
+	public native Result Pick(
+			int x,
+			int y,
+			@Cast("const Tgl::Group**") PointerPointer ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef IntPointer rPickedGroupCount
+		);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr Group ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef IntPointer rPickedGroupCount
+		);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr Group ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef IntBuffer rPickedGroupCount
+		);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr Group ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef int[] rPickedGroupCount
+		);
+
+	// SYNTHETIC: BETA10 0x1016b850
+	// Tgl::View::View
+
+	// SYNTHETIC: LEGO1 0x100a2430
+	// SYNTHETIC: BETA10 0x1016b8c0
+	// Tgl::View::~View
+
+	// SYNTHETIC: LEGO1 0x100a2950
+	// SYNTHETIC: BETA10 0x1016bc00
+	// Tgl::View::`scalar deleting destructor'
+}
+
+// VTABLE: LEGO1 0x100dbae8
+// VTABLE: BETA10 0x101c3320
+@Namespace("Tgl") public static class Camera extends Object {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public Camera() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public Camera(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Camera(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public Camera position(long position) {
+        return (Camera)super.position(position);
+    }
+    @Override public Camera getPointer(long i) {
+        return new Camera((Pointer)this).offsetAddress(i);
+    }
+
+	
+
+	// SYNTHETIC: BETA10 0x1016b960
+	// Tgl::Camera::Camera
+
+	// SYNTHETIC: LEGO1 0x100a25f0
+	// SYNTHETIC: BETA10 0x1016b9d0
+	// Tgl::Camera::~Camera
+
+	// SYNTHETIC: LEGO1 0x100a2a30
+	// SYNTHETIC: BETA10 0x1016bc40
+	// Tgl::Camera::`scalar deleting destructor'
+}
+
+// VTABLE: LEGO1 0x100dbb08
+// VTABLE: BETA10 0x101c3330
+@Namespace("Tgl") public static class Light extends Object {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Light(Pointer p) { super(p); }
+
+	
+	public native Result SetColor(float r, float g, float b);
+
+	// SYNTHETIC: BETA10 0x1016ba70
+	// Tgl::Light::Light
+
+	// SYNTHETIC: LEGO1 0x100a26d0
+	// SYNTHETIC: BETA10 0x1016bae0
+	// Tgl::Light::~Light
+
+	// SYNTHETIC: LEGO1 0x100a2aa0
+	// SYNTHETIC: BETA10 0x1016bc80
+	// Tgl::Light::`scalar deleting destructor'
+}
+
+// VTABLE: LEGO1 0x100dbbb0
+// VTABLE: BETA10 0x101c3360
+@Namespace("Tgl") public static class Mesh extends Object {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Mesh(Pointer p) { super(p); }
+
+	public native Result SetColor(float r, float g, float b, float a);
+	public native Result SetTexture(@Const Texture arg0);
+	public native Result GetTexture(@ByPtrRef Texture arg0);
+
+	public native Result SetTextureMappingMode(@Cast("Tgl::TextureMappingMode") int arg0);
+	public native Result SetShadingModel(@Cast("Tgl::ShadingModel") int arg0);
+
+	// Clone data in underlying group
+	public native Mesh DeepClone(MeshBuilder arg0);
+
+	// Just get another Group pointing to the same underlying data
+	public native Mesh ShallowClone(MeshBuilder arg0);
+
+	// SYNTHETIC: BETA10 0x1016fad0
+	// Tgl::Mesh::Mesh
+
+	// SYNTHETIC: LEGO1 0x100a3e10
+	// SYNTHETIC: BETA10 0x1016fb40
+	// Tgl::Mesh::~Mesh
+
+	// SYNTHETIC: LEGO1 0x100a3e60
+	// SYNTHETIC: BETA10 0x1016fbe0
+	// Tgl::Mesh::`scalar deleting destructor'
+}
+
+// VTABLE: LEGO1 0x100dbaa0
+// VTABLE: BETA10 0x101c3188
+@Namespace("Tgl") public static class Group extends Object {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Group(Pointer p) { super(p); }
+
+	
+	public native Result SetColor(float r, float g, float b, float a);
+	public native Result SetTexture(@Const Texture arg0);
+	public native Result GetTexture(@ByPtrRef Texture arg0);
+	public native Result SetMaterialMode(@Cast("Tgl::MaterialMode") int arg0);
+	public native Result Add(@Const Group arg0);
+	public native Result Add(@Const MeshBuilder arg0);
+	public native Result Remove(@Const Group arg0);
+	public native Result Remove(@Const MeshBuilder arg0);
+	public native Result RemoveAll();
+
+	// This is TransformLocalToWorld in the leak, however it seems
+	// to have been replaced by something else in the shipped code.
+	public native Result Bounds(D3DVECTOR arg0, D3DVECTOR arg1);
+
+	// SYNTHETIC: BETA10 0x1016a300
+	// Tgl::Group::Group
+
+	// SYNTHETIC: LEGO1 0x100a2510
+	// SYNTHETIC: BETA10 0x1016a370
+	// Tgl::Group::~Group
+
+	// SYNTHETIC: LEGO1 0x100a29c0
+	// SYNTHETIC: BETA10 0x1016a3d0
+	// Tgl::Group::`scalar deleting destructor'
+}
+
+// Don't know what this is. Seems like another Tgl object which
+// was not in the leaked Tgl code. My suspicion is that it's
+// some kind of builder class for creating meshes.
+// VTABLE: LEGO1 0x100dbb30
+// VTABLE: BETA10 0x101c32a0
+@Namespace("Tgl") public static class MeshBuilder extends Object {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MeshBuilder(Pointer p) { super(p); }
+
+	public native Mesh CreateMesh(
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexCount,
+			@Cast("float*") FloatPointer pPositions,
+			@Cast("float*") FloatPointer pNormals,
+			@Cast("float*") FloatPointer pTextureCoordinates,
+			@Cast("unsigned int*") IntPointer pFaceIndices,
+			@Cast("unsigned int*") IntPointer pTextureIndices,
+			@Cast("Tgl::ShadingModel") int shadingModel
+		);
+	public native Mesh CreateMesh(
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexCount,
+			@Cast("float*") FloatBuffer pPositions,
+			@Cast("float*") FloatBuffer pNormals,
+			@Cast("float*") FloatBuffer pTextureCoordinates,
+			@Cast("unsigned int*") IntBuffer pFaceIndices,
+			@Cast("unsigned int*") IntBuffer pTextureIndices,
+			@Cast("Tgl::ShadingModel") int shadingModel
+		);
+	public native Mesh CreateMesh(
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexCount,
+			@Cast("float*") float[] pPositions,
+			@Cast("float*") float[] pNormals,
+			@Cast("float*") float[] pTextureCoordinates,
+			@Cast("unsigned int*") int[] pFaceIndices,
+			@Cast("unsigned int*") int[] pTextureIndices,
+			@Cast("Tgl::ShadingModel") int shadingModel
+		);
+	public native Result GetBoundingBox(FloatPointer min, FloatPointer max);
+	public native Result GetBoundingBox(FloatBuffer min, FloatBuffer max);
+	public native Result GetBoundingBox(float[] min, float[] max);
+	public native MeshBuilder Clone();
+
+	// SYNTHETIC: BETA10 0x1016b630
+	// Tgl::MeshBuilder::MeshBuilder
+
+	// SYNTHETIC: LEGO1 0x100a27b0
+	// SYNTHETIC: BETA10 0x1016b6a0
+	// Tgl::MeshBuilder::~MeshBuilder
+
+	// SYNTHETIC: LEGO1 0x100a2b10
+	// SYNTHETIC: BETA10 0x1016bb80
+	// Tgl::MeshBuilder::`scalar deleting destructor'
+}
+
+// VTABLE: LEGO1 0x100dbb68
+// VTABLE: BETA10 0x101c3280
+@Namespace("Tgl") public static class Texture extends Object {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Texture(Pointer p) { super(p); }
+
+	// vtable+0x08
+	public native Result SetTexels(int width, int height, int bitsPerTexel, Pointer pTexels, int pTexelsArePersistent);
+	public native void FillRowsOfTexture(int y, int height, Pointer pBuffer);
+
+	// vtable+0x10
+	public native Result Changed(int texelsChanged, int paletteChanged);
+	public native Result GetBufferAndPalette(
+			IntPointer pWidth,
+			IntPointer pHeight,
+			IntPointer pDepth,
+			@Cast("void**") PointerPointer ppBuffer,
+			IntPointer pPaletteSize,
+			@Cast("unsigned char*") BytePointer pEntries
+		);
+	public native Result GetBufferAndPalette(
+			IntPointer pWidth,
+			IntPointer pHeight,
+			IntPointer pDepth,
+			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
+			IntPointer pPaletteSize,
+			@Cast("unsigned char*") BytePointer pEntries
+		);
+	public native Result GetBufferAndPalette(
+			IntBuffer pWidth,
+			IntBuffer pHeight,
+			IntBuffer pDepth,
+			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
+			IntBuffer pPaletteSize,
+			@Cast("unsigned char*") ByteBuffer pEntries
+		);
+	public native Result GetBufferAndPalette(
+			int[] pWidth,
+			int[] pHeight,
+			int[] pDepth,
+			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
+			int[] pPaletteSize,
+			@Cast("unsigned char*") byte[] pEntries
+		);
+	public native Result SetPalette(int entryCount, PaletteEntry pEntries);
+
+	// SYNTHETIC: BETA10 0x1016b520
+	// Tgl::Texture::Texture
+
+	// SYNTHETIC: LEGO1 0x100a2890
+	// SYNTHETIC: BETA10 0x1016b590
+	// Tgl::Texture::~Texture
+
+	// SYNTHETIC: LEGO1 0x100a2b80
+	// SYNTHETIC: BETA10 0x1016bb40
+	// Tgl::Texture::`scalar deleting destructor'
+}
+
+ // namespace Tgl
+
+// #endif /* _tgl_h */
+
+
+// Parsed from d3drm/impl.h
+
+// #ifndef TGL_D3DRM_IMPL_H
+// #define TGL_D3DRM_IMPL_H
+
+// #include "compat.h"
+// #include "decomp.h"
+// #include "tgl/tgl.h"
+
+// #ifdef MINIWIN
+// #else
+// #include <d3drm.h>
+// #endif
+
+// Forward declare D3D types
+@Opaque public static class IDirect3DRMMeshBuilder extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public IDirect3DRMMeshBuilder() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMMeshBuilder(Pointer p) { super(p); }
+}
+
+// Utility function used by implementations
+// FUNCTION: BETA10 0x10169cf0
+@Namespace("TglImpl") public static native Result ResultVal(@Cast("HRESULT") long result);
+
+// Forward declare implementations
+
+// VTABLE: LEGO1 0x100db910
+// VTABLE: BETA10 0x101c30d8
+@Namespace("TglImpl") @NoOffset public static class RendererImpl extends Renderer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public RendererImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public RendererImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public RendererImpl position(long position) {
+        return (RendererImpl)super.position(position);
+    }
+    @Override public RendererImpl getPointer(long i) {
+        return new RendererImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x10169a20
+	public RendererImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x10169d20
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	public native Device CreateDevice(@Const @ByRef DeviceDirectDrawCreateData arg0);
+	public native Device CreateDevice(@Const @ByRef DeviceDirect3DCreateData arg0);
+
+	// vtable+0x10
+	public native View CreateView(
+			@Const Device arg0,
+			@Const Camera arg1,
+			@Cast("unsigned int") int x,
+			@Cast("unsigned int") int y,
+			@Cast("unsigned int") int width,
+			@Cast("unsigned int") int height
+		);
+	public native Camera CreateCamera();
+	public native Light CreateLight(@Cast("Tgl::LightType") int arg0, float r, float g, float b);
+	public native Group CreateGroup(@Const Group pParent);
+
+	// vtable+0x20
+	public native MeshBuilder CreateMeshBuilder();
+	public native Texture CreateTexture(
+			int width,
+			int height,
+			int bitsPerTexel,
+			@Const Pointer pTexels,
+			int pTexelsArePersistent,
+			int paletteEntryCount,
+			@Const PaletteEntry pEntries
+		);
+	public native Texture CreateTexture();
+
+	public native Result SetTextureDefaultShadeCount(@Cast("unsigned int") int arg0);
+
+	// vtable+0x30
+	public native Result SetTextureDefaultColorCount(@Cast("unsigned int") int arg0);
+
+	public native @Cast("HRESULT") long CreateTextureFromSurface(IDirectDrawSurface pSurface, @Cast("LPDIRECT3DRMTEXTURE2*") PointerPointer pTexture2);
+
+	// FUNCTION: BETA10 0x10174c10
+	public native @Cast("TglImpl::RendererImpl::RendererDataType*") @ByRef PointerPointer ImplementationData();
+	public native Result Create();
+	public native void Destroy();
+	public native Result CreateLight(@Cast("Tgl::LightType") int type, float r, float g, float b, @ByRef LightImpl rLight);
+	public native Result CreateGroup(@Const GroupImpl pParentGroup, @ByRef GroupImpl rpGroup);
+	public native Result CreateView(
+			@Const @ByRef DeviceImpl rDevice,
+			@Const @ByRef CameraImpl rCamera,
+			@Cast("unsigned int") int x,
+			@Cast("unsigned int") int y,
+			@Cast("unsigned int") int width,
+			@Cast("unsigned int") int height,
+			@ByRef ViewImpl rView
+		);
+	public native Result CreateMeshBuilder(@ByRef MeshBuilderImpl rMesh);
+	public native Result CreateCamera(@ByRef CameraImpl rCamera);
+	public native Result CreateTexture(@ByRef TextureImpl rTexture);
+	public native Result CreateTexture(
+			@ByRef TextureImpl rTexture,
+			int width,
+			int height,
+			int bitsPerTexel,
+			@Const Pointer pTexels,
+			int texelsArePersistent,
+			int paletteEntryCount,
+			@Const PaletteEntry pEntries
+		);
+	public native Result CreateDevice(@Const @ByRef DeviceDirect3DCreateData rCreateData, @ByRef DeviceImpl rDevice);
+	public native Result CreateDevice(@Const @ByRef DeviceDirectDrawCreateData rCreateData, @ByRef DeviceImpl rDevice);
+}
+
+@Namespace("TglImpl") public static native IDirect3DRM2 g_pD3DRM(); public static native void g_pD3DRM(IDirect3DRM2 setter);
+
+// FUNCTION: BETA10 0x1016dd20
+@Namespace("TglImpl") public static native void RendererDestroy(IDirect3DRM2 pRenderer);
+
+// Inlined only
+// FUNCTION: BETA10 0x1016dce0
+
+
+// VTABLE: LEGO1 0x100db988
+// VTABLE: BETA10 0x101c31f0
+@Namespace("TglImpl") @NoOffset public static class DeviceImpl extends Device {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public DeviceImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public DeviceImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public DeviceImpl position(long position) {
+        return (DeviceImpl)super.position(position);
+    }
+    @Override public DeviceImpl getPointer(long i) {
+        return new DeviceImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1016b2e0
+	public DeviceImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x1016dd80
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	public native @Cast("unsigned int") int GetWidth();
+	public native @Cast("unsigned int") int GetHeight();
+
+	// vtable+0x10
+	public native Result SetColorModel(@Cast("Tgl::ColorModel") int arg0);
+	public native Result SetShadingModel(@Cast("Tgl::ShadingModel") int arg0);
+	public native Result SetShadeCount(@Cast("unsigned int") int arg0);
+	public native Result SetDither(int arg0);
+
+	// vtable+0x20
+	public native Result Update();
+	public native void HandleActivate(@Cast("WORD") short arg0);
+	public native void HandlePaint(Pointer arg0);
+
+	// FUNCTION: BETA10 0x101708e0
+
+	// FUNCTION: BETA10 0x100d9540
+	public native @Cast("TglImpl::DeviceImpl::DeviceDataType*") @ByRef PointerPointer ImplementationData();
+
+	public native void SetImplementationData(IDirect3DRMDevice2 device);
+
+	public native void Destroy();
+}
+
+// FUNCTION: BETA10 0x101708c0
+@Namespace("TglImpl") public static native void DeviceDestroy(IDirect3DRMDevice2 pDevice);
+
+// FUNCTION: BETA10 0x10170880
+
+
+// VTABLE: LEGO1 0x100db9e8
+// VTABLE: BETA10 0x101c3220
+@Namespace("TglImpl") @NoOffset public static class ViewImpl extends View {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public ViewImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public ViewImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public ViewImpl position(long position) {
+        return (ViewImpl)super.position(position);
+    }
+    @Override public ViewImpl getPointer(long i) {
+        return new ViewImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1016b360
+	public ViewImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x1016e5d0
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	public native Result Add(@Const Light arg0);
+	public native Result Remove(@Const Light arg0);
+
+	// vtable+0x10
+	public native Result SetCamera(@Const Camera arg0);
+	public native Result SetProjection(@Cast("Tgl::ProjectionType") int arg0);
+	public native Result SetFrustrum(float frontClippingDistance, float backClippingDistance, float degrees);
+	public native Result SetBackgroundColor(float r, float g, float b);
+
+	// vtable+0x20
+	public native Result GetBackgroundColor(FloatPointer r, FloatPointer g, FloatPointer b);
+	public native Result GetBackgroundColor(FloatBuffer r, FloatBuffer g, FloatBuffer b);
+	public native Result GetBackgroundColor(float[] r, float[] g, float[] b);
+	public native Result Clear();
+	public native Result Render(@Const Group arg0);
+	public native Result ForceUpdate(@Cast("unsigned int") int x, @Cast("unsigned int") int y, @Cast("unsigned int") int width, @Cast("unsigned int") int height);
+
+	// vtable+0x30
+	public native Result TransformWorldToScreen(@Const FloatPointer world, FloatPointer screen);
+	public native Result TransformWorldToScreen(@Const FloatBuffer world, FloatBuffer screen);
+	public native Result TransformWorldToScreen(@Const float[] world, float[] screen);
+	public native Result TransformScreenToWorld(@Const FloatPointer screen, FloatPointer world);
+	public native Result TransformScreenToWorld(@Const FloatBuffer screen, FloatBuffer world);
+	public native Result TransformScreenToWorld(@Const float[] screen, float[] world);
+	public native Result Pick(
+			int x,
+			int y,
+			@Cast("const Tgl::Group**") PointerPointer ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef IntPointer rPickedGroupCount
+		);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr Group ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef IntPointer rPickedGroupCount
+		);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr Group ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef IntBuffer rPickedGroupCount
+		);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr Group ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef int[] rPickedGroupCount
+		);
+
+	// FUNCTION: BETA10 0x101711c0
+	public native @Cast("TglImpl::ViewImpl::ViewDataType*") @ByRef PointerPointer ImplementationData();
+
+	public native void SetImplementationData(IDirect3DRMViewport viewport);
+
+	public static native Result ViewportCreateAppData(IDirect3DRM2 arg0, IDirect3DRMViewport arg1, IDirect3DRMFrame2 arg2);
+
+	public native void Destroy();
+	public native Result Add(@Const @ByRef LightImpl rLight);
+	public native Result Remove(@Const @ByRef LightImpl rLight);
+	public native Result SetCamera(@Const @ByRef CameraImpl rCamera);
+	public native Result Render(@Const @ByRef GroupImpl rScene);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr GroupImpl ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef IntPointer rPickedGroupCount
+		);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr GroupImpl ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef IntBuffer rPickedGroupCount
+		);
+	public native Result Pick(
+			int x,
+			int y,
+			@Const @ByPtrPtr GroupImpl ppGroupsToPickFrom,
+			int groupsToPickFromCount,
+			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
+			@ByRef int[] rPickedGroupCount
+		);
+}
+
+// FUNCTION: BETA10 0x101711a0
+@Namespace("TglImpl") public static native void ViewDestroy(IDirect3DRMViewport pView);
+
+// FUNCTION: BETA10 0x10171160
+
+
+// VTABLE: LEGO1 0x100dbad8
+// VTABLE: BETA10 0x101c3260
+@Namespace("TglImpl") @NoOffset public static class CameraImpl extends Camera {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public CameraImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public CameraImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public CameraImpl position(long position) {
+        return (CameraImpl)super.position(position);
+    }
+    @Override public CameraImpl getPointer(long i) {
+        return new CameraImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1016b3e0
+	public CameraImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x1016f200
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	
+
+	// FUNCTION: BETA10 0x10170960
+
+	// FUNCTION: BETA10 0x10170980
+	public native @Cast("TglImpl::CameraImpl::CameraDataType*") @ByRef PointerPointer ImplementationData();
+
+	public native void Destroy();
+}
+
+// FUNCTION: BETA10 0x10170940
+@Namespace("TglImpl") public static native void CameraDestroy(IDirect3DRMFrame2 pFrame);
+
+// FUNCTION: BETA10 0x10170900
+
+
+// VTABLE: LEGO1 0x100dbaf8
+// VTABLE: BETA10 0x101c3270
+@Namespace("TglImpl") @NoOffset public static class LightImpl extends Light {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LightImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LightImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LightImpl position(long position) {
+        return (LightImpl)super.position(position);
+    }
+    @Override public LightImpl getPointer(long i) {
+        return new LightImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1016b460
+	public LightImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x1016f5c0
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	
+	public native Result SetColor(float r, float g, float b);
+
+	// FUNCTION: BETA10 0x10171b90
+
+	// FUNCTION: BETA10 0x10171240
+	public native @Cast("TglImpl::LightImpl::LightDataType*") @ByRef PointerPointer ImplementationData();
+
+	public native void Destroy();
+}
+
+// FUNCTION: BETA10 0x10171220
+@Namespace("TglImpl") public static native void LightDestroy(IDirect3DRMFrame2 pLight);
+
+// FUNCTION: BETA10 0x101711e0
+
+
+// VTABLE: LEGO1 0x100dbb88
+// VTABLE: BETA10 0x101c3340
+@Namespace("TglImpl") @NoOffset public static class MeshImpl extends Mesh {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MeshImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MeshImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MeshImpl position(long position) {
+        return (MeshImpl)super.position(position);
+    }
+    @Override public MeshImpl getPointer(long i) {
+        return new MeshImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1016f970
+	public MeshImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x10170460
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	public native Result SetColor(float r, float g, float b, float a);
+	public native Result SetTexture(@Const Texture arg0);
+
+	// vtable+0x10
+	public native Result GetTexture(@ByPtrRef Texture arg0);
+	public native Result SetTextureMappingMode(@Cast("Tgl::TextureMappingMode") int arg0);
+	public native Result SetShadingModel(@Cast("Tgl::ShadingModel") int arg0);
+	public native Mesh DeepClone(MeshBuilder arg0);
+
+	// vtable+0x20
+	public native Mesh ShallowClone(MeshBuilder arg0);
+
+	public static class MeshData extends Pointer {
+	    static { Loader.load(); }
+	    /** Default native constructor. */
+	    public MeshData() { super((Pointer)null); allocate(); }
+	    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+	    public MeshData(long size) { super((Pointer)null); allocateArray(size); }
+	    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+	    public MeshData(Pointer p) { super(p); }
+	    private native void allocate();
+	    private native void allocateArray(long size);
+	    @Override public MeshData position(long position) {
+	        return (MeshData)super.position(position);
+	    }
+	    @Override public MeshData getPointer(long i) {
+	        return new MeshData((Pointer)this).offsetAddress(i);
+	    }
+	
+		public native IDirect3DRMMesh groupMesh(); public native MeshData groupMesh(IDirect3DRMMesh setter);
+		public native @Cast("D3DRMGROUPINDEX") int groupIndex(); public native MeshData groupIndex(int setter);
+	}
+
+	// FUNCTION: BETA10 0x10171b70
+	public native @Cast("TglImpl::MeshImpl::MeshDataType*") @ByRef PointerPointer ImplementationData();
+
+	public native void Destroy();
+	public native Mesh DeepClone(@Const @ByRef MeshBuilderImpl rMesh);
+	public native Result GetTexture(@Cast("TglImpl::TextureImpl**") PointerPointer ppTexture);
+	public native Result GetTexture(@ByPtrPtr TextureImpl ppTexture);
+	public native Result SetTexture(@Const TextureImpl pTexture);
+	public native Mesh ShallowClone(@Const @ByRef MeshBuilderImpl rMesh);
+}
+
+// FUNCTION: BETA10 0x10171b40
+@Namespace("TglImpl") public static native void MeshDestroy(@Cast("TglImpl::MeshImpl::MeshDataType") MeshImpl.MeshData pMesh);
+
+// FUNCTION: BETA10 0x10171b00
+
+
+// VTABLE: LEGO1 0x100dba68
+// VTABLE: BETA10 0x101c3150
+@Namespace("TglImpl") @NoOffset public static class GroupImpl extends Group {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public GroupImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public GroupImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public GroupImpl position(long position) {
+        return (GroupImpl)super.position(position);
+    }
+    @Override public GroupImpl getPointer(long i) {
+        return new GroupImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1016a240
+	public GroupImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x1016a410
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	
+	public native Result SetColor(float r, float g, float b, float a);
+
+	// vtable+0x10
+	public native Result SetTexture(@Const Texture arg0);
+	public native Result GetTexture(@ByPtrRef Texture arg0);
+	public native Result SetMaterialMode(@Cast("Tgl::MaterialMode") int arg0);
+	public native Result Add(@Const Group arg0);
+
+	// vtable+0x20
+	public native Result Add(@Const MeshBuilder arg0);
+	public native Result Remove(@Const Group arg0);
+	public native Result Remove(@Const MeshBuilder arg0);
+	public native Result RemoveAll();
+
+	// vtable+0x30
+	public native Result Bounds(D3DVECTOR p_min, D3DVECTOR p_max);
+
+	// FUNCTION: BETA10 0x1016fc20
+
+	// FUNCTION: BETA10 0x1016fce0
+	public native @Cast("TglImpl::GroupImpl::GroupDataType*") @ByRef PointerPointer ImplementationData();
+
+	public native void Destroy();
+	public native Result SetTexture(@Const TextureImpl pTexture);
+	public native Result GetTexture(@Cast("TglImpl::TextureImpl**") PointerPointer ppTexture);
+	public native Result GetTexture(@ByPtrPtr TextureImpl ppTexture);
+	public native Result Add(@Const @ByRef GroupImpl rGroup);
+	public native Result Add(@Const @ByRef MeshBuilderImpl rMesh);
+	public native Result Remove(@Const @ByRef GroupImpl rGroup);
+	public native Result Remove(@Const @ByRef MeshBuilderImpl rMesh);
+}
+
+// FUNCTION: BETA10 0x1016c2b0
+@Namespace("TglImpl") public static native void GroupDestroy(IDirect3DRMFrame2 pGroup);
+
+// FUNCTION: BETA10 0x1016c270
+
+
+// VTABLE: LEGO1 0x100dbb18
+// VTABLE: BETA10 0x101c31e0
+@Namespace("TglImpl") @NoOffset public static class MeshBuilderImpl extends MeshBuilder {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public MeshBuilderImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public MeshBuilderImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public MeshBuilderImpl position(long position) {
+        return (MeshBuilderImpl)super.position(position);
+    }
+    @Override public MeshBuilderImpl getPointer(long i) {
+        return new MeshBuilderImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1016b260
+	public MeshBuilderImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x1016c7e0
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	public native Mesh CreateMesh(
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexCount,
+			@Cast("float*") FloatPointer pPositions,
+			@Cast("float*") FloatPointer pNormals,
+			@Cast("float*") FloatPointer pTextureCoordinates,
+			@Cast("unsigned int*") IntPointer pFaceIndices,
+			@Cast("unsigned int*") IntPointer pTextureIndices,
+			@Cast("Tgl::ShadingModel") int shadingModel
+		);
+	public native Mesh CreateMesh(
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexCount,
+			@Cast("float*") FloatBuffer pPositions,
+			@Cast("float*") FloatBuffer pNormals,
+			@Cast("float*") FloatBuffer pTextureCoordinates,
+			@Cast("unsigned int*") IntBuffer pFaceIndices,
+			@Cast("unsigned int*") IntBuffer pTextureIndices,
+			@Cast("Tgl::ShadingModel") int shadingModel
+		);
+	public native Mesh CreateMesh(
+			@Cast("unsigned int") int faceCount,
+			@Cast("unsigned int") int vertexCount,
+			@Cast("float*") float[] pPositions,
+			@Cast("float*") float[] pNormals,
+			@Cast("float*") float[] pTextureCoordinates,
+			@Cast("unsigned int*") int[] pFaceIndices,
+			@Cast("unsigned int*") int[] pTextureIndices,
+			@Cast("Tgl::ShadingModel") int shadingModel
+		);
+	public native Result GetBoundingBox(FloatPointer min, FloatPointer max);
+	public native Result GetBoundingBox(FloatBuffer min, FloatBuffer max);
+	public native Result GetBoundingBox(float[] min, float[] max);
+
+	// vtable+0x10
+	public native MeshBuilder Clone();
+
+	// FUNCTION: BETA10 0x10170420
+
+	// FUNCTION: BETA10 0x10170440
+	public native @Cast("TglImpl::MeshBuilderImpl::MeshBuilderDataType*") @ByRef PointerPointer ImplementationData();
+
+	public native void Destroy();
+}
+
+// FUNCTION: BETA10 0x10170390
+@Namespace("TglImpl") public static native void MeshBuilderDestroy(IDirect3DRMMesh pMeshBuilder);
+
+// FUNCTION: BETA10 0x10170350
+
+
+// No vtable, this is just a simple wrapper around D3DRMIMAGE
+@Namespace("TglImpl") @NoOffset public static class TglD3DRMIMAGE extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public TglD3DRMIMAGE(Pointer p) { super(p); }
+
+	public TglD3DRMIMAGE(
+			int width,
+			int height,
+			int depth,
+			Pointer pBuffer,
+			int useBuffer,
+			int paletteSize,
+			PaletteEntry pEntries
+		) { super((Pointer)null); allocate(width, height, depth, pBuffer, useBuffer, paletteSize, pEntries); }
+	private native void allocate(
+			int width,
+			int height,
+			int depth,
+			Pointer pBuffer,
+			int useBuffer,
+			int paletteSize,
+			PaletteEntry pEntries
+		);
+
+	public native Result CreateBuffer(int width, int height, int depth, Pointer pBuffer, int useBuffer);
+	public native void Destroy();
+	public native Result FillRowsOfTexture(int y, int height, @Cast("char*") BytePointer content);
+	public native Result FillRowsOfTexture(int y, int height, @Cast("char*") ByteBuffer content);
+	public native Result FillRowsOfTexture(int y, int height, @Cast("char*") byte[] content);
+	public native Result InitializePalette(int paletteSize, PaletteEntry pEntries);
+
+	public native @ByRef D3DRMIMAGE m_image(); public native TglD3DRMIMAGE m_image(D3DRMIMAGE setter);
+	public native int m_texelsAllocatedByClient(); public native TglD3DRMIMAGE m_texelsAllocatedByClient(int setter);
+
+	// SYNTHETIC: BETA10 0x1016abb0
+	// TglImpl::TglD3DRMIMAGE::`scalar deleting destructor'
+}
+
+// VTABLE: LEGO1 0x100dbb48
+// VTABLE: BETA10 0x101c31c0
+@Namespace("TglImpl") @NoOffset public static class TextureImpl extends Texture {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public TextureImpl(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public TextureImpl(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public TextureImpl position(long position) {
+        return (TextureImpl)super.position(position);
+    }
+    @Override public TextureImpl getPointer(long i) {
+        return new TextureImpl((Pointer)this).offsetAddress(i);
+    }
+
+	// FUNCTION: BETA10 0x1016b1e0
+	public TextureImpl() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	// FUNCTION: BETA10 0x1016c2d0
+
+	public native Pointer ImplementationDataPtr();
+
+	// vtable+0x08
+	public native Result SetTexels(int width, int height, int bitsPerTexel, Pointer pTexels, int pTexelsArePersistent);
+	public native void FillRowsOfTexture(int y, int height, Pointer pBuffer);
+
+	// vtable+0x10
+	public native Result Changed(int texelsChanged, int paletteChanged);
+	public native Result GetBufferAndPalette(
+			IntPointer pWidth,
+			IntPointer pHeight,
+			IntPointer pDepth,
+			@Cast("void**") PointerPointer ppBuffer,
+			IntPointer ppPaletteSize,
+			@Cast("unsigned char*") BytePointer pEntries
+		);
+	public native Result GetBufferAndPalette(
+			IntPointer pWidth,
+			IntPointer pHeight,
+			IntPointer pDepth,
+			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
+			IntPointer ppPaletteSize,
+			@Cast("unsigned char*") BytePointer pEntries
+		);
+	public native Result GetBufferAndPalette(
+			IntBuffer pWidth,
+			IntBuffer pHeight,
+			IntBuffer pDepth,
+			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
+			IntBuffer ppPaletteSize,
+			@Cast("unsigned char*") ByteBuffer pEntries
+		);
+	public native Result GetBufferAndPalette(
+			int[] pWidth,
+			int[] pHeight,
+			int[] pDepth,
+			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
+			int[] ppPaletteSize,
+			@Cast("unsigned char*") byte[] pEntries
+		);
+	public native Result SetPalette(int entryCount, PaletteEntry entries);
+
+	// FUNCTION: BETA10 0x1016fd60
+
+	// FUNCTION: BETA10 0x1016fe20
+	public native @Cast("TglImpl::TextureImpl::TextureDataType*") @ByRef PointerPointer ImplementationData();
+
+	public native void SetImplementation(IDirect3DRMTexture pData);
+
+	public native void Destroy();
+
+	public static native Result SetImage(IDirect3DRMTexture pSelf, TglD3DRMIMAGE pImage);
+}
+
+// FUNCTION: BETA10 0x1016fd40
+@Namespace("TglImpl") public static native void TextureDestroy(IDirect3DRMTexture pTexture);
+
+// FUNCTION: BETA10 0x1016fd00
+
+
+// Used by both Mesh and MeshBuilder
+// FUNCTION: BETA10 0x10170270
+@Namespace("TglImpl") public static native Result MeshSetTextureMappingMode(MeshImpl.MeshData pMesh, @Cast("Tgl::TextureMappingMode") int mode);
+
+// Translation helpers
+// FUNCTION: BETA10 0x1016fc40
+
+
+// FUNCTION: BETA10 0x101703b0
+
+
+// Yes this function serves no purpose, originally they intended it to
+// convert from doubles to floats but ended up using floats throughout
+// the software stack.
+// FUNCTION: BETA10 0x1016fa10
+
+
+// FUNCTION: BETA10 0x1016fba0
+
+
+// FUNCTION: BETA10 0x1016fd80
+
+
+// FUNCTION: BETA10 0x101702e0
+
+
+ /* namespace TglImpl */
+
+// SYNTHETIC: LEGO1 0x100a16d0
+// SYNTHETIC: BETA10 0x10169aa0
+// TglImpl::RendererImpl::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100a22c0
+// SYNTHETIC: BETA10 0x1016b700
+// TglImpl::DeviceImpl::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100a23a0
+// SYNTHETIC: BETA10 0x1016b810
+// TglImpl::ViewImpl::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100a2480
+// SYNTHETIC: BETA10 0x1016a2c0
+// TglImpl::GroupImpl::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100a2560
+// SYNTHETIC: BETA10 0x1016b920
+// TglImpl::CameraImpl::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100a2640
+// SYNTHETIC: BETA10 0x1016ba30
+// TglImpl::LightImpl::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100a2720
+// SYNTHETIC: BETA10 0x1016b5f0
+// TglImpl::MeshBuilderImpl::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100a2800
+// SYNTHETIC: BETA10 0x1016b4e0
+// TglImpl::TextureImpl::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100a3d80
+// SYNTHETIC: BETA10 0x1016fa90
+// TglImpl::MeshImpl::`scalar deleting destructor'
+
+// SYNTHETIC: BETA10 0x10169960
+// ViewportAppData::`scalar deleting destructor'
+
+// GLOBAL: LEGO1 0x100dd1e0
+// IID_IDirect3DRMMeshBuilder
+
+// GLOBAL: LEGO1 0x100dd1f0
+// IID_IDirect3DRMMesh
+
+// #endif
 
 
 }
