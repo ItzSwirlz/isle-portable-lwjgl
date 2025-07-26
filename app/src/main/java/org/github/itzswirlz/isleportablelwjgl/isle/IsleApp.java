@@ -17,6 +17,7 @@ import org.lwjgl.system.SharedLibraryUtil;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
 import static org.github.itzswirlz.isleportablelwjgl.lego1.LEGO1.*;
 
@@ -440,12 +441,29 @@ public class IsleApp {
             SDLMessageBox.SDL_ShowSimpleMessageBox(SDLMessageBox.SDL_MESSAGEBOX_ERROR, "LEGO® Island Error", "\"LEGO® Island\" failed to start.\nPlease quit all other applications and try again.", m_windowHandle.address());
         }
 
+        /*
+         * "Currently, SDL doesn't send SDL_EVENT_MOUSE_ADDED at startup (unlike for gamepads)
+         * This will probably be fixed in the future: https://github.com/libsdl-org/SDL/issues/12815"
+         *
+         * https://github.com/isledecomp/isle-portable/blob/89f2f5cefee1a107330bbf93048f7da73f5754f7/ISLE/isleapp.cpp#L356
+         */
+        IntBuffer mice = SDLMouse.SDL_GetMice();
+        if(mice != null) {
+            System.out.println("mice is not null");
+            for(int i = 0; i < mice.capacity(); i++) {
+                if(InputManager() != null) {
+                    System.out.println("adding mice");
+                    InputManager().AddMouse(mice.get(i));
+                }
+            }
+        }
+
         SDL_Event event = SDL_Event.create();
         LegoOmni.GetInstance().CreateBackgroundAudio();
         MxDSAction ds = new MxDSAction();
         MxStreamController stream = Streamer().Open("\\lego\\scripts\\isle\\isle", MxStreamer.OpenMode.e_diskStream.ordinal());
         if(stream == null) {
-            System.out.println("Waiting");
+            System.out.println("Stream failed");
 //            return true;
         }
 
@@ -460,6 +478,50 @@ public class IsleApp {
                 case SDLEvents.SDL_EVENT_QUIT:
                     System.out.println("Quit (TODO: Handle properly)");
                     break loop;
+                case SDLEvents.SDL_EVENT_KEYBOARD_ADDED:
+                    System.out.println("ADDING KEYBOARD");
+                    if(InputManager() != null) {
+                        InputManager().AddKeyboard(event.kdevice().which());
+                    }
+                    break;
+                case SDLEvents.SDL_EVENT_KEYBOARD_REMOVED:
+                    System.out.println("REMOVING KEYBOARD");
+                    if(InputManager() != null) {
+                        InputManager().RemoveKeyboard(event.kdevice().which());
+                    }
+                    break;
+                case SDLEvents.SDL_EVENT_MOUSE_ADDED:
+                    System.out.println("ADDING MOUSE");
+                    if(InputManager() != null) {
+                        InputManager().AddMouse(event.mdevice().which());
+                    }
+                    break;
+                case SDLEvents.SDL_EVENT_MOUSE_REMOVED:
+                    System.out.println("REMOVING MOUSE");
+                    if(InputManager() != null) {
+                        InputManager().AddMouse(event.mdevice().which());
+                    }
+                    break;
+                case SDLEvents.SDL_EVENT_KEY_DOWN:
+                    if(event.key().repeat()) {
+                        break;
+                    }
+
+                    int keycode = event.key().key();
+                    // FIXME: may be wrong
+                    if(((event.key().mod() & SDLKeycode.SDL_KMOD_ALT) != 0) && (keycode == SDLKeycode.SDLK_RETURN)) {
+                        System.out.println("TODO: Set full screen");
+                    } else {
+                        if(InputManager() != null) {
+                            InputManager().QueueEvent(NotificationId.c_notificationKeyPress, (short)keycode, 0, 0, keycode);
+                        }
+                    }
+                    break;
+                case SDLEvents.SDL_EVENT_MOUSE_MOTION:
+                case SDLEvents.SDL_EVENT_MOUSE_BUTTON_DOWN:
+                case SDLEvents.SDL_EVENT_MOUSE_BUTTON_UP:
+                    System.out.println("TODO: handle mice event");
+                    break;
                 default:
 //                    System.out.println("Unknown event type: " + event.type());
                     break;

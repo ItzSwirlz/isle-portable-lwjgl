@@ -31,7 +31,9 @@ import org.bytedeco.javacpp.tools.InfoMapper;
         linkpath = {"../../../../", "../../../", "../../../../lib"},
         include = {
                 "vector.h",
+                "legoeventnotificationparam.h",
                 "legogamestate.h",
+                "legoinputmanager.h",
                 "legovideomanager.h",
                 "mxcore.h",
                 "mxdirectdraw.h",
@@ -115,6 +117,7 @@ public class LEGO1Config implements InfoMapper {
         // ---------
         // Excuse: broken (for now)
         infoMap.put(new Info("LegoOmni::GetCurrPathInfo").skip());
+        infoMap.put(new Info("LegoNotifyList", "LegoNotifyListCursor").skip());
         // Excuse: compiler error with HDC stuff. I don't think we need it anyway
         infoMap.put(new Info("IDirectDrawSurface::GetDC").skip());
         // Excuse: Something with HRESULT type data loss, but this should be fixed eventually
@@ -138,6 +141,22 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxDSBuffer::GetBuffer").skip());
         infoMap.put(new Info("MxDSBuffer::SkipToData").skip());
         infoMap.put(new Info("MxStreamer::GetMemoryBlock").skip());
+
+        // Manuevering around SDL stuff
+        infoMap.put(new Info("LegoInputManager::GetLastInputMethod").skip());
+        infoMap.put(new Info("LegoEventQueue").skip());
+        infoMap.put(new Info("SDL_Keycode").cppTypes("int").javaText("int").valueTypes("int"));
+        infoMap.put(new Info("LegoInputManager::QueueEvent").javaText("public native void QueueEvent(NotificationId p_id, @Cast(\"MxU8\") short p_modifier, @Cast(\"MxLong\") long p_x, @Cast(\"MxLong\") long p_y, @ByVal int p_key);"));
+        infoMap.put(new Info("LegoInputManager::AddKeyboard").javaText("public native void AddKeyboard(@ByVal int p_keyboardID);"));
+        infoMap.put(new Info("LegoInputManager::RemoveKeyboard").javaText("public native void RemoveKeyboard(@ByVal int p_keyboardID);"));
+        infoMap.put(new Info("LegoInputManager::AddMouse").javaText("public native void AddMouse(@ByVal int p_mouseID);"));
+        infoMap.put(new Info("LegoInputManager::RemoveMouse").javaText("public native void RemoveMouse(@ByVal int p_mouseID);"));
+        infoMap.put(new Info("LegoInputManager::AddJoystick").javaText("public native void AddJoystick(@ByVal int p_joystickID);"));
+        infoMap.put(new Info("LegoInputManager::RemoveJoystick").javaText("public native void RemoveJoystick(@ByVal int p_joystickID);"));
+        infoMap.put(new Info("LegoInputManager::HandleTouchEvent").javaText("public native @Cast(\"MxBool\") boolean HandleTouchEvent(@Cast(\"SDL_Event*\") Pointer p_event, @Cast(\"LegoInputManager::TouchScheme\") int p_touchScheme);"));
+        infoMap.put(new Info("LegoInputManager::UpdateLastInputMethod").skip());
+        infoMap.put(new Info("LegoInputManager::GetNavigationTouchStates").skip());
+        infoMap.put(new Info("LegoInputManager::GetNavigationKeyStates").skip());
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
         // FIXME: like, check all of it
@@ -163,6 +182,8 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxDSObject::Type").enumerate());
         infoMap.put(new Info("NotificationId").enumerate());
         infoMap.put(new Info("MxStreamer::OpenMode").enumerate());
+        infoMap.put(new Info("LegoInputManager::TouchScheme").enumerate());
+        infoMap.put(new Info("LegoInputManager::Keys").enumerate());
         infoMap.put(new Info("DDPixelCaps", "DDColorKeyFlags", "DDFlipFlags", "DDCaps2Flags", "DDSCapsFlags", "DDPixelFormatFlags", "DDBLTFXFlags", "PCFlags", "DDBltFlags", "DDLockFlags", "DDBltFastFlags", "DDSCLFlags", "DDSurfaceDescFlags").enumerate());
 
         // Definition skips

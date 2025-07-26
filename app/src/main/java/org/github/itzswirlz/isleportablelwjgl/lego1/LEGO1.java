@@ -172,6 +172,106 @@ public static class Vector4 extends Vector3 {
 // #endif // VECTOR_H
 
 
+// Parsed from legoeventnotificationparam.h
+
+// #ifndef LEGOEVENTNOTIFICATIONPARAM_H
+// #define LEGOEVENTNOTIFICATIONPARAM_H
+
+// #include "mxnotificationparam.h"
+// #include "mxtypes.h"
+
+// #include <SDL3/SDL_keycode.h>
+// #include <stdlib.h>
+
+@Opaque public static class LegoROI extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LegoROI() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoROI(Pointer p) { super(p); }
+}
+
+// VTABLE: LEGO1 0x100d6aa0
+// SIZE 0x20
+@NoOffset public static class LegoEventNotificationParam extends MxNotificationParam {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoEventNotificationParam(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LegoEventNotificationParam(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LegoEventNotificationParam position(long position) {
+        return (LegoEventNotificationParam)super.position(position);
+    }
+    @Override public LegoEventNotificationParam getPointer(long i) {
+        return new LegoEventNotificationParam((Pointer)this).offsetAddress(i);
+    }
+
+	/** enum LegoEventNotificationParam:: */
+	public static final int
+		c_lButtonState = 1,
+		c_rButtonState = 2,
+		c_modKey1 = 4,
+		c_modKey2 = 8,
+		c_motionHandled = 16;
+
+	// FUNCTION: LEGO1 0x10028690
+	public native MxNotificationParam Clone(); // vtable+0x04
+
+	public LegoEventNotificationParam() { super((Pointer)null); allocate(); }
+	private native void allocate();
+	public LegoEventNotificationParam(
+			NotificationId p_type,
+			MxCore p_sender,
+			@Cast("MxU8") short p_modifier,
+			@Cast("MxS32") int p_x,
+			@Cast("MxS32") int p_y,
+			int p_key
+		) { super((Pointer)null); allocate(p_type, p_sender, p_modifier, p_x, p_y, p_key); }
+	private native void allocate(
+			NotificationId p_type,
+			MxCore p_sender,
+			@Cast("MxU8") short p_modifier,
+			@Cast("MxS32") int p_x,
+			@Cast("MxS32") int p_y,
+			int p_key
+		);
+
+	public native LegoROI GetROI();
+	public native @Cast("MxU8") short GetModifier();
+	public native int GetKey();
+
+	// FUNCTION: LEGO1 0x10012190
+	// FUNCTION: BETA10 0x10024210
+	public native @Cast("MxS32") int GetX();
+
+	// FUNCTION: LEGO1 0x100121a0
+	// FUNCTION: BETA10 0x10024240
+	public native @Cast("MxS32") int GetY();
+
+	public native void SetROI(LegoROI p_roi);
+
+	// FUNCTION: BETA10 0x1007d620
+	public native void SetModifier(@Cast("MxU8") short p_modifier);
+
+	// FUNCTION: BETA10 0x1007d6b0
+	public native void SetKey(int p_key);
+
+	// FUNCTION: BETA10 0x1007d650
+	public native void SetX(@Cast("MxS32") int p_x);
+
+	// FUNCTION: BETA10 0x1007d680
+	public native void SetY(@Cast("MxS32") int p_y);
+}
+
+// SYNTHETIC: LEGO1 0x10028770
+// LegoEventNotificationParam::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x100287e0
+// LegoEventNotificationParam::~LegoEventNotificationParam
+
+// #endif // LEGOEVENTNOTIFICATIONPARAM_H
+
+
 // Parsed from legogamestate.h
 
 // #ifndef LEGOGAMESTATE_H
@@ -578,6 +678,270 @@ public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @C
 // #endif // LEGOGAMESTATE_H
 
 
+// Parsed from legoinputmanager.h
+
+// #ifndef LEGOINPUTMANAGER_H
+// #define LEGOINPUTMANAGER_H
+
+// #include "decomp.h"
+// #include "lego1_export.h"
+// #include "legoeventnotificationparam.h"
+// #include "mxlist.h"
+// #include "mxpresenter.h"
+// #include "mxqueue.h"
+
+// #include <SDL3/SDL_haptic.h>
+// #include <SDL3/SDL_joystick.h>
+// #include <SDL3/SDL_keyboard.h>
+// #include <SDL3/SDL_keycode.h>
+// #include <SDL3/SDL_timer.h>
+// #ifdef MINIWIN
+// #else
+// #include <windows.h>
+// #endif
+
+// #include <map>
+// #include <variant>
+
+@Opaque public static class LegoCameraController extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LegoCameraController() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoCameraController(Pointer p) { super(p); }
+}
+@Opaque public static class LegoControlManager extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LegoControlManager() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoControlManager(Pointer p) { super(p); }
+}
+@Opaque public static class LegoWorld extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public LegoWorld() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoWorld(Pointer p) { super(p); }
+}
+
+public static native @Cast("MxS32") int g_clickedObjectId(); public static native void g_clickedObjectId(int setter);
+public static native @Cast("const char*") BytePointer g_clickedAtom(); public static native void g_clickedAtom(BytePointer setter);
+
+// VTABLE: LEGO1 0x100d87b8
+// class MxCollection<LegoEventNotificationParam>
+
+// VTABLE: LEGO1 0x100d87d0
+// class MxList<LegoEventNotificationParam>
+
+// VTABLE: LEGO1 0x100d87e8
+// class MxQueue<LegoEventNotificationParam>
+
+// VTABLE: LEGO1 0x100d8800
+// SIZE 0x18
+
+// VTABLE: LEGO1 0x100d6a20
+// class MxCollection<MxCore*>
+
+// VTABLE: LEGO1 0x100d6a38
+// class MxList<MxCore*>
+
+// VTABLE: LEGO1 0x100d6a50
+// class MxPtrList<MxCore>
+
+// VTABLE: LEGO1 0x100d6a68
+// SIZE 0x18
+
+// VTABLE: LEGO1 0x100d6ac0
+// class MxListCursor<MxCore *>
+
+// VTABLE: LEGO1 0x100d6ad8
+// class MxPtrListCursor<MxCore>
+
+// VTABLE: LEGO1 0x100d6aa8
+// SIZE 0x10
+
+// VTABLE: LEGO1 0x100d8760
+// SIZE 0x338
+@NoOffset public static class LegoInputManager extends MxPresenter {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoInputManager(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LegoInputManager(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LegoInputManager position(long position) {
+        return (LegoInputManager)super.position(position);
+    }
+    @Override public LegoInputManager getPointer(long i) {
+        return new LegoInputManager((Pointer)this).offsetAddress(i);
+    }
+
+	public enum Keys {
+		c_left(0x01),
+		c_right(0x02),
+		c_up(0x04),
+		c_down(0x08),
+		c_ctrl(0x10),
+
+		c_leftOrRight(c_left.value | c_right.value),
+		c_upOrDown(c_up.value | c_down.value);
+
+	    public final int value;
+	    private Keys(int v) { this.value = v; }
+	    private Keys(Keys e) { this.value = e.value; }
+	    public Keys intern() { for (Keys e : values()) if (e.value == value) return e; return this; }
+	    @Override public String toString() { return intern().name(); }
+	}
+
+	public enum TouchScheme {
+		e_none(-1),
+		e_mouse(0),
+		e_arrowKeys(1),
+		e_gamepad(2);
+
+	    public final int value;
+	    private TouchScheme(int v) { this.value = v; }
+	    private TouchScheme(TouchScheme e) { this.value = e.value; }
+	    public TouchScheme intern() { for (TouchScheme e : values()) if (e.value == value) return e; return this; }
+	    @Override public String toString() { return intern().name(); }
+	}
+
+	public LegoInputManager() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native void QueueEvent(NotificationId p_id, @Cast("MxU8") short p_modifier, @Cast("MxLong") long p_x, @Cast("MxLong") long p_y, @ByVal int p_key);
+	public native void Register(MxCore arg0);
+	public native void UnRegister(MxCore arg0);
+
+	// FUNCTION: LEGO1 0x1005b8b0
+	public native @Cast("MxResult") int Tickle(); // vtable+0x08
+
+	// FUNCTION: LEGO1 0x1005b8c0
+	public native @Cast("MxResult") int PutData(); // vtable+0x4c
+
+	public native @Cast("MxResult") int Create(HWND p_hwnd);
+	public native void Destroy();
+	public native @Cast("MxResult") int GetJoystick();
+	public native @Cast("MxResult") int GetJoystickState(@Cast("MxU32*") long p_joystickX, @Cast("MxU32*") long p_joystickY, @Cast("MxU32*") long p_povPosition);
+	public native void StartAutoDragTimer();
+	public native void StopAutoDragTimer();
+	public native void EnableInputProcessing();
+	public native void SetCamera(LegoCameraController p_camera);
+	public native void ClearCamera();
+	public native void SetWorld(LegoWorld p_world);
+	public native void ClearWorld();
+
+	public native void SetUnknown88(@Cast("MxBool") boolean p_unk0x88);
+	public native void SetUnknown335(@Cast("MxBool") boolean p_unk0x335);
+	public native void SetUnknown336(@Cast("MxBool") boolean p_unk0x336);
+
+	// FUNCTION: BETA10 0x1002e290
+	public native void DisableInputProcessing();
+
+	// FUNCTION: BETA10 0x10031ba0
+	public native LegoControlManager GetControlManager();
+
+	// FUNCTION: BETA10 0x10017870
+	public native LegoWorld GetWorld();
+
+	public native LegoCameraController GetCamera();
+
+	public native void ProcessEvents();
+	public native @Cast("MxBool") boolean ProcessOneEvent(@ByRef LegoEventNotificationParam p_param);
+	public native @Cast("MxBool") boolean FUN_1005cdf0(@ByRef LegoEventNotificationParam p_param);
+	public native void GetKeyboardState();
+	
+	
+	public native void AddKeyboard(@ByVal int p_keyboardID);
+	public native void RemoveKeyboard(@ByVal int p_keyboardID);
+	public native void AddMouse(@ByVal int p_mouseID);
+	public native void RemoveMouse(@ByVal int p_mouseID);
+	public native void AddJoystick(@ByVal int p_joystickID);
+	public native void RemoveJoystick(@ByVal int p_joystickID);
+	public native @Cast("MxBool") boolean HandleTouchEvent(@Cast("SDL_Event*") Pointer p_event, @Cast("LegoInputManager::TouchScheme") int p_touchScheme);
+	public native @Cast("MxBool") boolean HandleRumbleEvent(float p_strength, float p_lowFrequencyRumble, float p_highFrequencyRumble, @Cast("MxU32") long p_milliseconds);
+	
+}
+
+// TEMPLATE: LEGO1 0x10028850
+// MxCollection<MxCore *>::Compare
+
+// TEMPLATE: LEGO1 0x10028860
+// MxCollection<MxCore *>::~MxCollection<MxCore *>
+
+// TEMPLATE: LEGO1 0x100288b0
+// MxCollection<MxCore *>::Destroy
+
+// TEMPLATE: LEGO1 0x100288c0
+// MxList<MxCore *>::~MxList<MxCore *>
+
+// SYNTHETIC: LEGO1 0x10028950
+// LegoNotifyList::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x100289c0
+// MxPtrList<MxCore>::~MxPtrList<MxCore>
+
+// SYNTHETIC: LEGO1 0x10028a10
+// MxCollection<MxCore *>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x10028a80
+// MxList<MxCore *>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x10028b30
+// MxPtrList<MxCore>::`scalar deleting destructor'
+
+// FUNCTION: LEGO1 0x10028ba0
+// LegoNotifyList::~LegoNotifyList
+
+// SYNTHETIC: LEGO1 0x10028fd0
+// LegoNotifyListCursor::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x10029040
+// MxPtrListCursor<MxCore>::~MxPtrListCursor<MxCore>
+
+// SYNTHETIC: LEGO1 0x10029090
+// MxListCursor<MxCore *>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x10029100
+// MxPtrListCursor<MxCore>::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x10029170
+// MxListCursor<MxCore *>::~MxListCursor<MxCore *>
+
+// TEMPLATE: LEGO1 0x100291c0
+// LegoNotifyListCursor::~LegoNotifyListCursor
+
+// TEMPLATE: LEGO1 0x1005bb80
+// MxCollection<LegoEventNotificationParam>::Compare
+
+// TEMPLATE: LEGO1 0x1005bbe0
+// MxCollection<LegoEventNotificationParam>::~MxCollection<LegoEventNotificationParam>
+
+// TEMPLATE: LEGO1 0x1005bc30
+// MxCollection<LegoEventNotificationParam>::Destroy
+
+// TEMPLATE: LEGO1 0x1005bc80
+// MxList<LegoEventNotificationParam>::~MxList<LegoEventNotificationParam>
+
+// SYNTHETIC: LEGO1 0x1005bd50
+// MxCollection<LegoEventNotificationParam>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x1005bdc0
+// MxList<LegoEventNotificationParam>::`scalar deleting destructor'
+
+// SYNTHETIC: LEGO1 0x1005beb0
+// LegoEventQueue::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x1005bf20
+// MxQueue<LegoEventNotificationParam>::~MxQueue<LegoEventNotificationParam>
+
+// SYNTHETIC: LEGO1 0x1005bf70
+// MxQueue<LegoEventNotificationParam>::`scalar deleting destructor'
+
+// TEMPLATE: LEGO1 0x1005d010
+// MxListEntry<LegoEventNotificationParam>::GetValue
+
+// #endif // LEGOINPUTMANAGER_H
+
+
 // Parsed from legovideomanager.h
 
 // #ifndef LEGOVIDEOMANAGER_H
@@ -600,12 +964,6 @@ public static native @Cast("MxBool") boolean ROIColorOverride(String p_input, @C
     public Lego3DManager() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public Lego3DManager(Pointer p) { super(p); }
-}
-@Opaque public static class LegoROI extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public LegoROI() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public LegoROI(Pointer p) { super(p); }
 }
 @Opaque public static class MxDirect3D extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
@@ -3037,12 +3395,6 @@ public enum NotificationId {
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public LegoEntity(Pointer p) { super(p); }
 }
-@Opaque public static class LegoInputManager extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public LegoInputManager() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public LegoInputManager(Pointer p) { super(p); }
-}
 @Opaque public static class LegoNavController extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
     public LegoNavController() { super((Pointer)null); }
@@ -3078,12 +3430,6 @@ public enum NotificationId {
     public LegoTextureContainer() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public LegoTextureContainer(Pointer p) { super(p); }
-}
-@Opaque public static class LegoWorld extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public LegoWorld() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public LegoWorld(Pointer p) { super(p); }
 }
 @Opaque public static class LegoWorldList extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
@@ -3845,12 +4191,6 @@ public static final String ISLE_PROP_WINDOW_CREATE_VIDEO_PARAM = "ISLE.window.cr
 // #include "lego/legoomni/include/actions/actionsfwd.h"
 // #include "lego1_export.h"
 // #include "mxtypes.h"
-@Opaque public static class LegoControlManager extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public LegoControlManager() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public LegoControlManager(Pointer p) { super(p); }
-}
 @Opaque public static class ViewManager extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
     public ViewManager() { super((Pointer)null); }
