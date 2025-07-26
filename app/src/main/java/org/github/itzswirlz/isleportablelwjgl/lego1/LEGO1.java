@@ -4684,12 +4684,10 @@ public static class IDirect3D2 extends IUnknown {
 // #include <stdlib.h> // abort // FIXME: remove
 
 // --- Defines and Macros ---
-public static native @MemberGetter int D3DRM_OK();
-public static final int D3DRM_OK = D3DRM_OK();
+// #define D3DRM_OK DD_OK
 public static final int MAXSHORT = ((short) 0x7fff);
 // #define SUCCEEDED(hr) ((hr) >= D3DRM_OK)
-public static native @MemberGetter long D3DRMERR_NOTFOUND();
-public static final long D3DRMERR_NOTFOUND = D3DRMERR_NOTFOUND();
+// #define D3DRMERR_NOTFOUND MAKE_DDHRESULT(785)
 
 // --- Typedefs ---
 @Namespace @Name("void") @Opaque public static class LPD3DRM_APPDATA extends Pointer {
@@ -6047,6 +6045,24 @@ public static native HPALETTE CreatePalette(LOGPALETTE lpLogPalette);
 public static native int SelectPalette(HDC hdc, HPALETTE hpal, @Cast("BOOL") boolean bForceBackground);
 
 public static native int RealizePalette(HDC hdc);
+
+
+// Parsed from miniwin/miniwindevice.h
+
+// #pragma once
+
+// #include <SDL3/SDL_events.h>
+
+
+
+public static class IDirect3DRMMiniwinDevice extends IUnknown {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public IDirect3DRMMiniwinDevice(Pointer p) { super(p); }
+
+	public native @Cast("bool") boolean ConvertEventToRenderCoordinates(@Cast("SDL_Event*") Pointer event);
+	public native @Cast("bool") boolean ConvertRenderToWindowCoordinates(@Cast("Sint32") int inX, @Cast("Sint32") int inY, @Cast("Sint32*") int outX, @Cast("Sint32*") int outY);
+}
 
 
 // Parsed from miniwin/windows.h

@@ -75,6 +75,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "miniwin/d3d.h",
                 "miniwin/d3drm.h",
                 "miniwin/ddraw.h",
+                "miniwin/miniwindevice.h",
                 "miniwin/windows.h",
 
                 "tglsurface.h",
@@ -97,7 +98,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LegoChar", "MxS8").cast().valueTypes("char"));
         infoMap.put(new Info("BYTE").cast().valueTypes("byte"));
         infoMap.put(new Info("MxS16", "MxU8", "undefined", "WORD").cast().valueTypes("short"));
-        infoMap.put(new Info("MxS32", "MxU16", "MxResult", "LegoResult", "LegoTime", "undefined2", "MxTime", "DWORD").cast().valueTypes("int"));
+        infoMap.put(new Info("MxS32", "MxU16", "MxResult", "LegoResult", "LegoTime", "undefined2", "MxTime", "DWORD", "Sint32").cast().valueTypes("int"));
         infoMap.put(new Info("MxU32", "MxLong", "Uint32", "LegoU32", "MxULong", "undefined4", "LONG", "UINT", "HRESULT").cast().valueTypes("long"));
         infoMap.put(new Info("LegoFloat", "MxFloat").cast().valueTypes("float"));
         infoMap.put(new Info("LPSTR").cast().valueTypes("String"));
@@ -176,6 +177,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LegoInputManager::UpdateLastInputMethod").skip());
         infoMap.put(new Info("LegoInputManager::GetNavigationTouchStates").skip());
         infoMap.put(new Info("LegoInputManager::GetNavigationKeyStates").skip());
+        infoMap.put(new Info("IDirect3DRMMiniwinDevice::ConvertEventToRenderCoordinates").javaText("public native @Cast(\"bool\") boolean ConvertEventToRenderCoordinates(@Cast(\"SDL_Event*\") Pointer event);"));
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
         // FIXME: like, check all of it
@@ -233,6 +235,9 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MAKE_HRESULT").cppTypes("long", "long", "long", "long"));
         infoMap.put(new Info("MAKE_DDHRESULT").cppTypes("long", "long"));
 //        infoMap.put(new Info().linePatterns("^.*DDERR.*$").cppTypesskip());
+
+        // more stuff that causes unsatisfied link errors
+        infoMap.put(new Info("D3DRM_OK", "D3DRMERR_NOTFOUND").skip());
 
 
         // Direct3D enums + ints defined by enums we can skip

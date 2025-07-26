@@ -422,6 +422,65 @@ public class IsleApp {
         return 0;
     }
 
+    private static IDirect3DRMMiniwinDevice GetD3DRMMiniwinDevice() {
+        LegoOmni omni = LegoOmni.GetInstance();
+        if(omni == null) {
+            System.out.println("Omni is null");
+            return null;
+        }
+
+        // FIXME: Original grabs from LegoOmni::GetInstance, but the VM returned is a MxVideoManager?
+        LegoVideoManager videoManager = VideoManager();
+        if(videoManager == null) {
+            System.out.println("VideoManager is null");
+            return null;
+        }
+
+        Lego3DManager lego3DManager = videoManager.Get3DManager();
+        if(lego3DManager == null) {
+            System.out.println("Lego3DManager is null");
+            return null;
+        }
+
+        Lego3DView lego3DView = lego3DManager.GetLego3DView();
+        if(lego3DView == null) {
+            System.out.println("Lego3DView is null");
+            return null;
+        }
+
+        DeviceImpl tgl_device = (DeviceImpl) lego3DView.GetDevice();
+        if(tgl_device == null) {
+            System.out.println("TGL device is null");
+            return null;
+        }
+
+        IDirect3DRMDevice2 d3drmdev = new IDirect3DRMDevice2(tgl_device.ImplementationData());
+        if(d3drmdev == null) {
+            System.out.println("d3drmdev is null");
+            return null;
+        }
+
+        IDirect3DRMMiniwinDevice d3drmMiniwinDev = new IDirect3DRMMiniwinDevice(new Pointer() {});
+        GUID guid = new GUID();
+        // probably wrong
+        guid = guid.m_data1(0x6eb09673).m_data2((short)0x8d30).m_data3((short)0x4d8a)
+                .m_data4(0, (byte) 0x8d)
+                .m_data4(1, (byte) 0x81)
+                .m_data4(2, (byte) 0x34)
+                .m_data4(3, (byte) 0xea)
+                .m_data4(4, (byte) 0x69)
+                .m_data4(5, (byte) 0x30)
+                .m_data4(6, (byte) 0x12)
+                .m_data4(7, (byte) 0x01);
+        if(d3drmdev.QueryInterface(guid, d3drmMiniwinDev) != 0) {
+            System.out.println("d3drmdev.QueryInterface failed");
+            return null;
+        }
+
+        System.out.println("somehow succeeded");
+        return d3drmMiniwinDev;
+    }
+
     public static void main(String[] args) {
         SDLHints.SDL_SetHint(SDLHints.SDL_HINT_MOUSE_TOUCH_EVENTS, "0");
         SDLHints.SDL_SetHint(SDLHints.SDL_HINT_TOUCH_MOUSE_EVENTS, "0");
@@ -521,6 +580,15 @@ public class IsleApp {
                 case SDLEvents.SDL_EVENT_MOUSE_BUTTON_DOWN:
                 case SDLEvents.SDL_EVENT_MOUSE_BUTTON_UP:
                     System.out.println("TODO: handle mice event");
+                    IDirect3DRMMiniwinDevice device = GetD3DRMMiniwinDevice();
+                    if(device != null) {
+                        Pointer p = new Pointer() {
+                            { address = event.address();}
+                        };
+                        if(!device.ConvertEventToRenderCoordinates(p)) {
+                            System.out.println("Failed to convert event to render coordinates: " + SDLError.SDL_GetError());
+                        }
+                    }
                     break;
                 default:
 //                    System.out.println("Unknown event type: " + event.type());
