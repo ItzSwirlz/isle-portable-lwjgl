@@ -400,7 +400,6 @@ public static class Vector4 extends Vector3 {
 	public native void Destroy(); // vtable+0x08
 
 	public native Group GetScene();
-	public native Camera GetCamera();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1440,7 +1439,7 @@ public static native @Cast("const char*") BytePointer g_clickedAtom(); public st
 			int width,
 			int height,
 			int bpp,
-			@Const PALETTEENTRY pPaletteEntries,
+			@Cast("PALETTEENTRY*") Pointer pPaletteEntries,
 			int paletteEntryCount
 		);                                      // vtable+0x04
 	public native void Destroy();                 // vtable+0x08
@@ -5848,29 +5847,6 @@ public static class DDSURFACEDESC extends Pointer {
 	public native @ByRef DDSCAPS ddsCaps(); public native DDSURFACEDESC ddsCaps(DDSCAPS setter);
 }
 
-public static class PALETTEENTRY extends Pointer {
-    static { Loader.load(); }
-    /** Default native constructor. */
-    public PALETTEENTRY() { super((Pointer)null); allocate(); }
-    /** Native array allocator. Access with {@link Pointer#position(long)}. */
-    public PALETTEENTRY(long size) { super((Pointer)null); allocateArray(size); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public PALETTEENTRY(Pointer p) { super(p); }
-    private native void allocate();
-    private native void allocateArray(long size);
-    @Override public PALETTEENTRY position(long position) {
-        return (PALETTEENTRY)super.position(position);
-    }
-    @Override public PALETTEENTRY getPointer(long i) {
-        return new PALETTEENTRY((Pointer)this).offsetAddress(i);
-    }
-
-	public native @Cast("BYTE") byte peRed(); public native PALETTEENTRY peRed(byte setter);
-	public native @Cast("BYTE") byte peGreen(); public native PALETTEENTRY peGreen(byte setter);
-	public native @Cast("BYTE") byte peBlue(); public native PALETTEENTRY peBlue(byte setter);
-	public native PCFlags peFlags(); public native PALETTEENTRY peFlags(PCFlags setter);
-}
-
 public static class LOGPALETTE extends Pointer {
     static { Loader.load(); }
     /** Default native constructor. */
@@ -5890,16 +5866,16 @@ public static class LOGPALETTE extends Pointer {
 
 	public native @Cast("WORD") short palVersion(); public native LOGPALETTE palVersion(short setter);
 	public native @Cast("WORD") short palNumEntries(); public native LOGPALETTE palNumEntries(short setter);
-	public native @ByRef PALETTEENTRY palPalEntry(int i); public native LOGPALETTE palPalEntry(int i, PALETTEENTRY setter);
-	@MemberGetter public native PALETTEENTRY palPalEntry();
+	public native @ByRef @Cast("PALETTEENTRY*") Pointer palPalEntry(int i); public native LOGPALETTE palPalEntry(int i, Pointer setter);
+	@MemberGetter public native @Cast("PALETTEENTRY*") Pointer palPalEntry();
 }
 public static class IDirectDrawPalette extends IUnknown {
     static { Loader.load(); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public IDirectDrawPalette(Pointer p) { super(p); }
 
-	public native @Cast("HRESULT") long GetEntries(@Cast("DWORD") int dwFlags, @Cast("DWORD") int dwBase, @Cast("DWORD") int dwNumEntries, @Cast("LPPALETTEENTRY") PALETTEENTRY lpEntries);
-	public native @Cast("HRESULT") long SetEntries(@Cast("DWORD") int dwFlags, @Cast("DWORD") int dwStartingEntry, @Cast("DWORD") int dwCount, @Cast("LPPALETTEENTRY") PALETTEENTRY lpEntries);
+	public native @Cast("HRESULT") long GetEntries(@Cast("DWORD") int dwFlags, @Cast("DWORD") int dwBase, @Cast("DWORD") int dwNumEntries, @Cast("PALETTEENTRY*") Pointer lpEntries);
+	public native @Cast("HRESULT") long SetEntries(@Cast("DWORD") int dwFlags, @Cast("DWORD") int dwStartingEntry, @Cast("DWORD") int dwCount, @Cast("PALETTEENTRY*") Pointer lpEntries);
 }
 
 public static class IDirectDrawClipper extends IUnknown {
@@ -5982,13 +5958,13 @@ public static class IDirectDraw extends IUnknown {
 	public native @Cast("HRESULT") long CreateClipper(@Cast("DWORD") int dwFlags, @Cast("LPDIRECTDRAWCLIPPER*") PointerPointer lplpDDClipper, IUnknown pUnkOuter);
 	public native @Cast("HRESULT") long CreatePalette(
 			DDPixelCaps dwFlags,
-			@Cast("LPPALETTEENTRY") PALETTEENTRY lpColorTable,
+			@Cast("PALETTEENTRY*") Pointer lpColorTable,
 			@Cast("IDirectDrawPalette**") PointerPointer lplpDDPalette,
 			IUnknown pUnkOuter
 		);
 	public native @Cast("HRESULT") long CreatePalette(
 			DDPixelCaps dwFlags,
-			@Cast("LPPALETTEENTRY") PALETTEENTRY lpColorTable,
+			@Cast("PALETTEENTRY*") Pointer lpColorTable,
 			@ByPtrPtr IDirectDrawPalette lplpDDPalette,
 			IUnknown pUnkOuter
 		);
@@ -6038,7 +6014,7 @@ public static class LPDDENUMCALLBACKA extends FunctionPointer {
 }
 public static native @Cast("HRESULT") long DirectDrawEnumerate(LPDDENUMCALLBACKA cb, Pointer context);
 
-public static native @Cast("UINT") long GetSystemPaletteEntries(HDC hdc, @Cast("UINT") long iStart, @Cast("UINT") long cEntries, @Cast("LPPALETTEENTRY") PALETTEENTRY pPalEntries);
+public static native @Cast("UINT") long GetSystemPaletteEntries(HDC hdc, @Cast("UINT") long iStart, @Cast("UINT") long cEntries, @Cast("PALETTEENTRY*") Pointer pPalEntries);
 
 public static native HPALETTE CreatePalette(LOGPALETTE lpLogPalette);
 
@@ -6061,7 +6037,7 @@ public static class IDirect3DRMMiniwinDevice extends IUnknown {
     public IDirect3DRMMiniwinDevice(Pointer p) { super(p); }
 
 	public native @Cast("bool") boolean ConvertEventToRenderCoordinates(@Cast("SDL_Event*") Pointer event);
-	public native @Cast("bool") boolean ConvertRenderToWindowCoordinates(@Cast("Sint32") int inX, @Cast("Sint32") int inY, @Cast("Sint32*") int outX, @Cast("Sint32*") int outY);
+	public native @Cast("bool") boolean ConvertRenderToWindowCoordinates(int inX, int inY, int outX, int outY);
 }
 
 
@@ -6706,15 +6682,6 @@ public static final int
 	public native Device CreateDevice(@Const @ByRef DeviceDirect3DCreateData arg0);
 
 	// vtable+0x10
-	public native View CreateView(
-			@Const Device arg0,
-			@Const Camera arg1,
-			@Cast("unsigned int") int x,
-			@Cast("unsigned int") int y,
-			@Cast("unsigned int") int width,
-			@Cast("unsigned int") int height
-		);
-	public native Camera CreateCamera();
 	public native Light CreateLight(@Cast("Tgl::LightType") int arg0, float r, float g, float b);
 	public native Group CreateGroup(@Const Group pParent/*=0*/);
 	public native Group CreateGroup();
@@ -6795,7 +6762,6 @@ public static final int
 	public native Result Remove(@Const Light arg0);
 
 	// vtable+0x10
-	public native Result SetCamera(@Const Camera arg0);
 	public native Result SetProjection(@Cast("Tgl::ProjectionType") int arg0);
 	public native Result SetFrustrum(float frontClippingDistance, float backClippingDistance, float degrees);
 	public native Result SetBackgroundColor(float r, float g, float b);
@@ -6838,38 +6804,7 @@ public static final int
 	//  rPickedGroupCount:
 	//      output parameter
 	//      size of rppPickedGroups
-	public native Result Pick(
-			int x,
-			int y,
-			@Cast("const Tgl::Group**") PointerPointer ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef IntPointer rPickedGroupCount
-		);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr Group ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef IntPointer rPickedGroupCount
-		);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr Group ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef IntBuffer rPickedGroupCount
-		);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr Group ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef int[] rPickedGroupCount
-		);
+	
 
 	// SYNTHETIC: BETA10 0x1016b850
 	// Tgl::View::View
@@ -6885,36 +6820,6 @@ public static final int
 
 // VTABLE: LEGO1 0x100dbae8
 // VTABLE: BETA10 0x101c3320
-@Namespace("Tgl") public static class Camera extends Object {
-    static { Loader.load(); }
-    /** Default native constructor. */
-    public Camera() { super((Pointer)null); allocate(); }
-    /** Native array allocator. Access with {@link Pointer#position(long)}. */
-    public Camera(long size) { super((Pointer)null); allocateArray(size); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public Camera(Pointer p) { super(p); }
-    private native void allocate();
-    private native void allocateArray(long size);
-    @Override public Camera position(long position) {
-        return (Camera)super.position(position);
-    }
-    @Override public Camera getPointer(long i) {
-        return new Camera((Pointer)this).offsetAddress(i);
-    }
-
-	
-
-	// SYNTHETIC: BETA10 0x1016b960
-	// Tgl::Camera::Camera
-
-	// SYNTHETIC: LEGO1 0x100a25f0
-	// SYNTHETIC: BETA10 0x1016b9d0
-	// Tgl::Camera::~Camera
-
-	// SYNTHETIC: LEGO1 0x100a2a30
-	// SYNTHETIC: BETA10 0x1016bc40
-	// Tgl::Camera::`scalar deleting destructor'
-}
 
 // VTABLE: LEGO1 0x100dbb08
 // VTABLE: BETA10 0x101c3330
@@ -7014,36 +6919,7 @@ public static final int
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MeshBuilder(Pointer p) { super(p); }
 
-	public native Mesh CreateMesh(
-			@Cast("unsigned int") int faceCount,
-			@Cast("unsigned int") int vertexCount,
-			@Cast("float*") FloatPointer pPositions,
-			@Cast("float*") FloatPointer pNormals,
-			@Cast("float*") FloatPointer pTextureCoordinates,
-			@Cast("unsigned int*") IntPointer pFaceIndices,
-			@Cast("unsigned int*") IntPointer pTextureIndices,
-			@Cast("Tgl::ShadingModel") int shadingModel
-		);
-	public native Mesh CreateMesh(
-			@Cast("unsigned int") int faceCount,
-			@Cast("unsigned int") int vertexCount,
-			@Cast("float*") FloatBuffer pPositions,
-			@Cast("float*") FloatBuffer pNormals,
-			@Cast("float*") FloatBuffer pTextureCoordinates,
-			@Cast("unsigned int*") IntBuffer pFaceIndices,
-			@Cast("unsigned int*") IntBuffer pTextureIndices,
-			@Cast("Tgl::ShadingModel") int shadingModel
-		);
-	public native Mesh CreateMesh(
-			@Cast("unsigned int") int faceCount,
-			@Cast("unsigned int") int vertexCount,
-			@Cast("float*") float[] pPositions,
-			@Cast("float*") float[] pNormals,
-			@Cast("float*") float[] pTextureCoordinates,
-			@Cast("unsigned int*") int[] pFaceIndices,
-			@Cast("unsigned int*") int[] pTextureIndices,
-			@Cast("Tgl::ShadingModel") int shadingModel
-		);
+	
 	public native Result GetBoundingBox(FloatPointer min, FloatPointer max);
 	public native Result GetBoundingBox(FloatBuffer min, FloatBuffer max);
 	public native Result GetBoundingBox(float[] min, float[] max);
@@ -7074,38 +6950,7 @@ public static final int
 
 	// vtable+0x10
 	public native Result Changed(int texelsChanged, int paletteChanged);
-	public native Result GetBufferAndPalette(
-			IntPointer pWidth,
-			IntPointer pHeight,
-			IntPointer pDepth,
-			@Cast("void**") PointerPointer ppBuffer,
-			IntPointer pPaletteSize,
-			@Cast("unsigned char*") BytePointer pEntries
-		);
-	public native Result GetBufferAndPalette(
-			IntPointer pWidth,
-			IntPointer pHeight,
-			IntPointer pDepth,
-			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
-			IntPointer pPaletteSize,
-			@Cast("unsigned char*") BytePointer pEntries
-		);
-	public native Result GetBufferAndPalette(
-			IntBuffer pWidth,
-			IntBuffer pHeight,
-			IntBuffer pDepth,
-			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
-			IntBuffer pPaletteSize,
-			@Cast("unsigned char*") ByteBuffer pEntries
-		);
-	public native Result GetBufferAndPalette(
-			int[] pWidth,
-			int[] pHeight,
-			int[] pDepth,
-			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
-			int[] pPaletteSize,
-			@Cast("unsigned char*") byte[] pEntries
-		);
+	
 	public native Result SetPalette(int entryCount, PaletteEntry pEntries);
 
 	// SYNTHETIC: BETA10 0x1016b520
@@ -7152,6 +6997,12 @@ public static final int
 @Namespace("TglImpl") public static native Result ResultVal(@Cast("HRESULT") long result);
 
 // Forward declare implementations
+@Namespace("TglImpl") @Opaque public static class CameraImpl extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public CameraImpl() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public CameraImpl(Pointer p) { super(p); }
+}
 
 // VTABLE: LEGO1 0x100db910
 // VTABLE: BETA10 0x101c30d8
@@ -7182,15 +7033,6 @@ public static final int
 	public native Device CreateDevice(@Const @ByRef DeviceDirect3DCreateData arg0);
 
 	// vtable+0x10
-	public native View CreateView(
-			@Const Device arg0,
-			@Const Camera arg1,
-			@Cast("unsigned int") int x,
-			@Cast("unsigned int") int y,
-			@Cast("unsigned int") int width,
-			@Cast("unsigned int") int height
-		);
-	public native Camera CreateCamera();
 	public native Light CreateLight(@Cast("Tgl::LightType") int arg0, float r, float g, float b);
 	public native Group CreateGroup(@Const Group pParent);
 
@@ -7339,7 +7181,6 @@ public static final int
 	public native Result Remove(@Const Light arg0);
 
 	// vtable+0x10
-	public native Result SetCamera(@Const Camera arg0);
 	public native Result SetProjection(@Cast("Tgl::ProjectionType") int arg0);
 	public native Result SetFrustrum(float frontClippingDistance, float backClippingDistance, float degrees);
 	public native Result SetBackgroundColor(float r, float g, float b);
@@ -7359,38 +7200,7 @@ public static final int
 	public native Result TransformScreenToWorld(@Const FloatPointer screen, FloatPointer world);
 	public native Result TransformScreenToWorld(@Const FloatBuffer screen, FloatBuffer world);
 	public native Result TransformScreenToWorld(@Const float[] screen, float[] world);
-	public native Result Pick(
-			int x,
-			int y,
-			@Cast("const Tgl::Group**") PointerPointer ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef IntPointer rPickedGroupCount
-		);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr Group ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef IntPointer rPickedGroupCount
-		);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr Group ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef IntBuffer rPickedGroupCount
-		);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr Group ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef int[] rPickedGroupCount
-		);
+	
 
 	// FUNCTION: BETA10 0x101711c0
 	public native @Cast("TglImpl::ViewImpl::ViewDataType*") @ByRef PointerPointer ImplementationData();
@@ -7404,30 +7214,7 @@ public static final int
 	public native Result Remove(@Const @ByRef LightImpl rLight);
 	public native Result SetCamera(@Const @ByRef CameraImpl rCamera);
 	public native Result Render(@Const @ByRef GroupImpl rScene);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr GroupImpl ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef IntPointer rPickedGroupCount
-		);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr GroupImpl ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef IntBuffer rPickedGroupCount
-		);
-	public native Result Pick(
-			int x,
-			int y,
-			@Const @ByPtrPtr GroupImpl ppGroupsToPickFrom,
-			int groupsToPickFromCount,
-			@Cast("const Tgl::Group**&") @ByRef PointerPointer rppPickedGroups,
-			@ByRef int[] rPickedGroupCount
-		);
+	
 }
 
 // FUNCTION: BETA10 0x101711a0
@@ -7438,38 +7225,6 @@ public static final int
 
 // VTABLE: LEGO1 0x100dbad8
 // VTABLE: BETA10 0x101c3260
-@Namespace("TglImpl") @NoOffset public static class CameraImpl extends Camera {
-    static { Loader.load(); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public CameraImpl(Pointer p) { super(p); }
-    /** Native array allocator. Access with {@link Pointer#position(long)}. */
-    public CameraImpl(long size) { super((Pointer)null); allocateArray(size); }
-    private native void allocateArray(long size);
-    @Override public CameraImpl position(long position) {
-        return (CameraImpl)super.position(position);
-    }
-    @Override public CameraImpl getPointer(long i) {
-        return new CameraImpl((Pointer)this).offsetAddress(i);
-    }
-
-	// FUNCTION: BETA10 0x1016b3e0
-	public CameraImpl() { super((Pointer)null); allocate(); }
-	private native void allocate();
-
-	// FUNCTION: BETA10 0x1016f200
-
-	public native Pointer ImplementationDataPtr();
-
-	// vtable+0x08
-	
-
-	// FUNCTION: BETA10 0x10170960
-
-	// FUNCTION: BETA10 0x10170980
-	public native @Cast("TglImpl::CameraImpl::CameraDataType*") @ByRef PointerPointer ImplementationData();
-
-	public native void Destroy();
-}
 
 // FUNCTION: BETA10 0x10170940
 @Namespace("TglImpl") public static native void CameraDestroy(IDirect3DRMFrame2 pFrame);
@@ -7683,36 +7438,7 @@ public static final int
 	public native Pointer ImplementationDataPtr();
 
 	// vtable+0x08
-	public native Mesh CreateMesh(
-			@Cast("unsigned int") int faceCount,
-			@Cast("unsigned int") int vertexCount,
-			@Cast("float*") FloatPointer pPositions,
-			@Cast("float*") FloatPointer pNormals,
-			@Cast("float*") FloatPointer pTextureCoordinates,
-			@Cast("unsigned int*") IntPointer pFaceIndices,
-			@Cast("unsigned int*") IntPointer pTextureIndices,
-			@Cast("Tgl::ShadingModel") int shadingModel
-		);
-	public native Mesh CreateMesh(
-			@Cast("unsigned int") int faceCount,
-			@Cast("unsigned int") int vertexCount,
-			@Cast("float*") FloatBuffer pPositions,
-			@Cast("float*") FloatBuffer pNormals,
-			@Cast("float*") FloatBuffer pTextureCoordinates,
-			@Cast("unsigned int*") IntBuffer pFaceIndices,
-			@Cast("unsigned int*") IntBuffer pTextureIndices,
-			@Cast("Tgl::ShadingModel") int shadingModel
-		);
-	public native Mesh CreateMesh(
-			@Cast("unsigned int") int faceCount,
-			@Cast("unsigned int") int vertexCount,
-			@Cast("float*") float[] pPositions,
-			@Cast("float*") float[] pNormals,
-			@Cast("float*") float[] pTextureCoordinates,
-			@Cast("unsigned int*") int[] pFaceIndices,
-			@Cast("unsigned int*") int[] pTextureIndices,
-			@Cast("Tgl::ShadingModel") int shadingModel
-		);
+	
 	public native Result GetBoundingBox(FloatPointer min, FloatPointer max);
 	public native Result GetBoundingBox(FloatBuffer min, FloatBuffer max);
 	public native Result GetBoundingBox(float[] min, float[] max);
@@ -7803,38 +7529,7 @@ public static final int
 
 	// vtable+0x10
 	public native Result Changed(int texelsChanged, int paletteChanged);
-	public native Result GetBufferAndPalette(
-			IntPointer pWidth,
-			IntPointer pHeight,
-			IntPointer pDepth,
-			@Cast("void**") PointerPointer ppBuffer,
-			IntPointer ppPaletteSize,
-			@Cast("unsigned char*") BytePointer pEntries
-		);
-	public native Result GetBufferAndPalette(
-			IntPointer pWidth,
-			IntPointer pHeight,
-			IntPointer pDepth,
-			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
-			IntPointer ppPaletteSize,
-			@Cast("unsigned char*") BytePointer pEntries
-		);
-	public native Result GetBufferAndPalette(
-			IntBuffer pWidth,
-			IntBuffer pHeight,
-			IntBuffer pDepth,
-			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
-			IntBuffer ppPaletteSize,
-			@Cast("unsigned char*") ByteBuffer pEntries
-		);
-	public native Result GetBufferAndPalette(
-			int[] pWidth,
-			int[] pHeight,
-			int[] pDepth,
-			@Cast("void**") @ByPtrPtr Pointer ppBuffer,
-			int[] ppPaletteSize,
-			@Cast("unsigned char*") byte[] pEntries
-		);
+	
 	public native Result SetPalette(int entryCount, PaletteEntry entries);
 
 	// FUNCTION: BETA10 0x1016fd60

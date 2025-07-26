@@ -160,6 +160,13 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("TglSurface::GetTriangleRate").skip());
         infoMap.put(new Info("Tgl::Group::SetTransformation", "Tgl::Light::SetTransformation", "Tgl::Camera::SetTransformation", "TglImpl::Camera::SetTransformation", "TglImpl::CameraImpl::SetTransformation", "TglImpl::LightImpl::SetTransformation", "TglImpl::GroupImpl::SetTransformation").skip());
         infoMap.put(new Info("TglImpl::Translate").skip());
+        infoMap.put(new Info("Tgl::Texture::GetBufferAndPalette", "TglImpl::TextureImpl::GetBufferAndPalette").skip());
+        infoMap.put(new Info("Tgl::Group::Pick", "TglImpl::GroupImpl::Pick").skip());
+        infoMap.put(new Info("Tgl::View::Pick", "TglImpl::ViewImpl::Pick").skip());
+        infoMap.put(new Info("Tgl::MeshBuilder::CreateMesh", "TglImpl::MeshBuilderImpl::CreateMesh").skip());
+
+        // ???????
+        infoMap.put(new Info("Tgl::Camera").skip());
 
 
         // Manuevering around SDL stuff
@@ -178,6 +185,7 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LegoInputManager::GetNavigationTouchStates").skip());
         infoMap.put(new Info("LegoInputManager::GetNavigationKeyStates").skip());
         infoMap.put(new Info("IDirect3DRMMiniwinDevice::ConvertEventToRenderCoordinates").javaText("public native @Cast(\"bool\") boolean ConvertEventToRenderCoordinates(@Cast(\"SDL_Event*\") Pointer event);"));
+        infoMap.put(new Info("IDirect3DRMMiniwinDevice::ConvertRenderToWindowCoordinates").javaText("public native @Cast(\"bool\") boolean ConvertRenderToWindowCoordinates(int inX, int inY, int outX, int outY);"));
 
         // TODO: Check this. This may be unnecessary as we include more of miniwin
         // FIXME: like, check all of it
@@ -196,6 +204,11 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("LPDDSCAPS").pointerTypes("@Cast(\"DDSCAPS*\") Pointer").cppTypes("DDSCAPS*"));
         infoMap.put(new Info("LPDDPIXELFORMAT").pointerTypes("@Cast(\"DDPIXELFORMAT*\") Pointer").cppTypes("DDPIXELFORMAT*"));
         infoMap.put(new Info("LPDIRECT3DRMOBJECT").pointerTypes("@Cast(\"IDirect3DRMObject*\") Pointer").cppTypes("IDirect3DRMObject*"));
+
+        // FIXME: PALETTEENTRY pointerTypes probably wrong
+        infoMap.put(new Info("PALETTEENTRY").javaNames("PaletteEntry").pointerTypes("@Cast(\"PALETTEENTRY*\") Pointer").cppTypes("PALETTEENTRY"));
+        // (this is probably correct?)
+        infoMap.put(new Info("LPPALETTEENTRY").javaNames("PaletteEntry").pointerTypes("@Cast(\"PALETTEENTRY*\") Pointer").cppTypes("PALETTEENTRY*"));
 
         // Enums
         infoMap.put(new Info("LegoOmni::World").enumerate());
