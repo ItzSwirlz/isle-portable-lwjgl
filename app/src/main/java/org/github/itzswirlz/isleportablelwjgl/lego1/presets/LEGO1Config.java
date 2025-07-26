@@ -20,6 +20,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "../../../../isle-portable/LEGO1/",
                 "../../../../isle-portable/LEGO1/mxdirectx/",
                 "../../../../isle-portable/LEGO1/realtime/",
+                "../../../../isle-portable/LEGO1/lego/sources/3dmanager/",
                 "../../../../isle-portable/LEGO1/lego/legoomni/include",
                 "../../../../isle-portable/LEGO1/lego/legoomni/include/actions",
                 "../../../../isle-portable/util",
@@ -31,6 +32,9 @@ import org.bytedeco.javacpp.tools.InfoMapper;
         linkpath = {"../../../../", "../../../", "../../../../lib"},
         include = {
                 "vector.h",
+                "lego3dmanager.h",
+                "lego3dview.h",
+                "legoview1.h",
                 "legoeventnotificationparam.h",
                 "legogamestate.h",
                 "legoinputmanager.h",
@@ -70,7 +74,9 @@ import org.bytedeco.javacpp.tools.InfoMapper;
                 "miniwin/d3d.h",
                 "miniwin/d3drm.h",
                 "miniwin/ddraw.h",
-                "miniwin/windows.h"
+                "miniwin/windows.h",
+
+                "tglsurface.h"
         },
         define = {"MINIWIN"},
         link = {"LEGO1"}
@@ -145,6 +151,9 @@ public class LEGO1Config implements InfoMapper {
         infoMap.put(new Info("MxStreamer::GetMemoryBlock").skip());
         // Excuse: unless we need to do matrix stuff lets not bother
         infoMap.put(new Info("IDirect3DRMFrame::D3DRMMATRIX4D").skip());
+        // TGL, not needed YET
+        infoMap.put(new Info("LegoView1::SetLightTransform").skip());
+        infoMap.put(new Info("TglSurface::GetTriangleRate").skip());
 
         // Manuevering around SDL stuff
         infoMap.put(new Info("LegoInputManager::GetLastInputMethod").skip());

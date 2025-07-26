@@ -172,6 +172,310 @@ public static class Vector4 extends Vector3 {
 // #endif // VECTOR_H
 
 
+// Parsed from lego3dmanager.h
+
+// #ifndef _Lego3DManager_h
+// #define _Lego3DManager_h
+
+// #include "assert.h"
+// #include "lego3dview.h"
+@Namespace("Tgl") @Opaque public static class Renderer extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public Renderer() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Renderer(Pointer p) { super(p); }
+}
+@Namespace("Tgl") @Opaque public static class Group extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public Group() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Group(Pointer p) { super(p); }
+}
+ // namespace Tgl
+
+@Opaque public static class ViewROI extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public ViewROI() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public ViewROI(Pointer p) { super(p); }
+}
+
+// ??? for now
+@Opaque public static class ViewLODListManager extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public ViewLODListManager() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public ViewLODListManager(Pointer p) { super(p); }
+}
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Lego3DManager
+
+// VTABLE: LEGO1 0x100dbfa4
+// SIZE 0x10
+@NoOffset public static class Lego3DManager extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Lego3DManager(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public Lego3DManager(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public Lego3DManager position(long position) {
+        return (Lego3DManager)super.position(position);
+    }
+    @Override public Lego3DManager getPointer(long i) {
+        return new Lego3DManager((Pointer)this).offsetAddress(i);
+    }
+
+	// SIZE 0x28
+	public static class CreateStruct extends Pointer {
+	    static { Loader.load(); }
+	    /** Default native constructor. */
+	    public CreateStruct() { super((Pointer)null); allocate(); }
+	    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+	    public CreateStruct(long size) { super((Pointer)null); allocateArray(size); }
+	    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+	    public CreateStruct(Pointer p) { super(p); }
+	    private native void allocate();
+	    private native void allocateArray(long size);
+	    @Override public CreateStruct position(long position) {
+	        return (CreateStruct)super.position(position);
+	    }
+	    @Override public CreateStruct getPointer(long i) {
+	        return new CreateStruct((Pointer)this).offsetAddress(i);
+	    }
+	
+		public native @Const GUID m_pDriverGUID(); public native CreateStruct m_pDriverGUID(GUID setter);          // 0x00
+		public native HWND m_hWnd(); public native CreateStruct m_hWnd(HWND setter);                        // 0x04
+		public native IDirectDraw m_pDirectDraw(); public native CreateStruct m_pDirectDraw(IDirectDraw setter);         // 0x08
+		public native IDirectDrawSurface m_pFrontBuffer(); public native CreateStruct m_pFrontBuffer(IDirectDrawSurface setter); // 0x0c
+		public native IDirectDrawSurface m_pBackBuffer(); public native CreateStruct m_pBackBuffer(IDirectDrawSurface setter);  // 0x10
+		public native IDirectDrawPalette m_pPalette(); public native CreateStruct m_pPalette(IDirectDrawPalette setter);     // 0x14
+		public native @Cast("BOOL") boolean m_isFullScreen(); public native CreateStruct m_isFullScreen(boolean setter);                // 0x18
+		public native @Cast("BOOL") boolean m_isWideViewAngle(); public native CreateStruct m_isWideViewAngle(boolean setter);             // 0x1c
+		public native IDirect3D2 m_direct3d(); public native CreateStruct m_direct3d(IDirect3D2 setter);             // 0x20
+		public native IDirect3DDevice2 m_d3dDevice(); public native CreateStruct m_d3dDevice(IDirect3DDevice2 setter);      // 0x24
+	}
+	public Lego3DManager() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("BOOL") boolean Create(@ByRef CreateStruct arg0);
+	public native void Destroy();
+
+	public native @Cast("BOOL") boolean Add(@ByRef ViewROI arg0);
+	public native @Cast("BOOL") boolean Remove(@ByRef ViewROI arg0);
+	public native @Cast("BOOL") boolean Moved(@ByRef ViewROI arg0);
+	public native @Cast("BOOL") boolean SetPointOfView(@ByRef ViewROI arg0);
+
+	public native double Render(double p_und);
+
+	public native int SetFrustrum(float p_fov, float p_front, float p_bback);
+
+	public native Renderer GetRenderer();
+	public native Group GetScene();
+	public native Lego3DView GetLego3DView();
+	// ??? for now
+	public native ViewLODListManager GetViewLODListManager();
+}
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Lego3DManager implementaion
+
+// FUNCTION: BETA10 0x10079bd0
+
+
+// FUNCTION: BETA10 0x10037430
+
+
+// FUNCTION: BETA10 0x100d8990
+
+
+// FUNCTION: BETA10 0x1004af70
+
+
+
+
+
+
+// FUNCTION: BETA10 0x10011840
+
+
+
+
+// #endif /* _Lego3DManager_h */
+
+
+// Parsed from lego3dview.h
+
+// #ifndef _Lego3DView_h
+// #define _Lego3DView_h
+
+// #include "decomp.h"
+// #include "legoview1.h"
+
+@Opaque public static class ViewManager extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public ViewManager() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public ViewManager(Pointer p) { super(p); }
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Lego3DView
+
+// VTABLE: LEGO1 0x100dbf78
+// SIZE 0xa8
+@NoOffset public static class Lego3DView extends LegoView1 {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Lego3DView(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public Lego3DView(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public Lego3DView position(long position) {
+        return (Lego3DView)super.position(position);
+    }
+    @Override public Lego3DView getPointer(long i) {
+        return new Lego3DView((Pointer)this).offsetAddress(i);
+    }
+
+	public Lego3DView() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("BOOL") boolean Create(@Const @ByRef CreateStruct arg0, Renderer arg1);
+	public native void Destroy(); // vtable+0x08
+
+	public native @Cast("BOOL") boolean Add(@ByRef ViewROI arg0);
+	public native @Cast("BOOL") boolean Remove(@ByRef ViewROI arg0);
+	public native @Cast("BOOL") boolean Moved(@ByRef ViewROI arg0);
+	public native @Cast("BOOL") boolean SetPointOfView(@ByRef ViewROI arg0);
+
+	public native double Render(double p_und);
+
+	public native ViewROI Pick(int x, int y);
+
+	public native ViewROI GetPointOfView();
+	public native ViewManager GetViewManager();
+}
+
+// SYNTHETIC: LEGO1 0x100aaf10
+// Lego3DView::`scalar deleting destructor'
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Lego3DView implementation
+
+// FUNCTION: BETA10 0x10011810
+
+
+
+
+// #endif /* _Lego3DView_h */
+
+
+// Parsed from legoview1.h
+
+// #ifndef _LegoView1_h
+// #define _LegoView1_h
+
+// #include "compat.h"
+// #include "decomp.h"
+// #include "tglsurface.h"
+@Namespace("Tgl") @Opaque public static class Camera extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public Camera() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Camera(Pointer p) { super(p); }
+}
+@Namespace("Tgl") @Opaque public static class Light extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public Light() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Light(Pointer p) { super(p); }
+}
+ // namespace Tgl
+
+/////////////////////////////////////////////////////////////////////////////
+// LegoView
+
+// VTABLE: LEGO1 0x100dc000
+// VTABLE: BETA10 0x101c3578
+// SIZE 0x78
+@NoOffset public static class LegoView extends TglSurface {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoView(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LegoView(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LegoView position(long position) {
+        return (LegoView)super.position(position);
+    }
+    @Override public LegoView getPointer(long i) {
+        return new LegoView((Pointer)this).offsetAddress(i);
+    }
+
+	public LegoView() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("BOOL") boolean Create(@Const @ByRef CreateStruct arg0, Renderer arg1);
+	public native void Destroy(); // vtable+0x08
+
+	public native Group GetScene();
+	public native Camera GetCamera();
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// LegoView implementation
+
+
+
+
+
+// SYNTHETIC: LEGO1 0x100ab580
+// SYNTHETIC: BETA10 0x1017cb80
+// LegoView::`scalar deleting destructor'
+
+/////////////////////////////////////////////////////////////////////////////
+// LegoView1
+
+// VTABLE: LEGO1 0x100dc018
+// VTABLE: BETA10 0x101c3590
+// SIZE 0x88
+@NoOffset public static class LegoView1 extends LegoView {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public LegoView1(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public LegoView1(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public LegoView1 position(long position) {
+        return (LegoView1)super.position(position);
+    }
+    @Override public LegoView1 getPointer(long i) {
+        return new LegoView1((Pointer)this).offsetAddress(i);
+    }
+
+	public LegoView1() { super((Pointer)null); allocate(); }
+	private native void allocate();
+
+	public native @Cast("BOOL") boolean AddLightsToViewport();
+	public native @Cast("BOOL") boolean Create(@Const @ByRef CreateStruct arg0, Renderer arg1);
+	public native void Destroy(); // vtable+0x08
+
+	
+	public native void SetLightColor(@Cast("BOOL") boolean bDirectionalLight, float red, float green, float blue);
+}
+
+// SYNTHETIC: LEGO1 0x100ab7a0
+// SYNTHETIC: BETA10 0x1017cc00
+// LegoView1::`scalar deleting destructor'
+
+// #endif /* _LegoView1_h */
+
+
 // Parsed from legoeventnotificationparam.h
 
 // #ifndef LEGOEVENTNOTIFICATIONPARAM_H
@@ -958,13 +1262,6 @@ public static native @Cast("const char*") BytePointer g_clickedAtom(); public st
 // #include <d3drm.h>
 // #include <ddraw.h>
 // #endif
-
-@Opaque public static class Lego3DManager extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public Lego3DManager() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public Lego3DManager(Pointer p) { super(p); }
-}
 @Opaque public static class MxDirect3D extends Pointer {
     /** Empty constructor. Calls {@code super((Pointer)null)}. */
     public MxDirect3D() { super((Pointer)null); }
@@ -982,12 +1279,6 @@ public static native @Cast("const char*") BytePointer g_clickedAtom(); public st
     public ViewportAppData() { super((Pointer)null); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public ViewportAppData(Pointer p) { super(p); }
-}
-@Namespace("Tgl") @Opaque public static class Renderer extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public Renderer() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public Renderer(Pointer p) { super(p); }
 }
 
 
@@ -3449,12 +3740,6 @@ public enum NotificationId {
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
     public MxBackgroundAudioManager(Pointer p) { super(p); }
 }
-@Opaque public static class ViewLODListManager extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public ViewLODListManager() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public ViewLODListManager(Pointer p) { super(p); }
-}
 
 // VTABLE: LEGO1 0x100d8638
 // VTABLE: BETA10 0x101bc8b8
@@ -4191,12 +4476,6 @@ public static final String ISLE_PROP_WINDOW_CREATE_VIDEO_PARAM = "ISLE.window.cr
 // #include "lego/legoomni/include/actions/actionsfwd.h"
 // #include "lego1_export.h"
 // #include "mxtypes.h"
-@Opaque public static class ViewManager extends Pointer {
-    /** Empty constructor. Calls {@code super((Pointer)null)}. */
-    public ViewManager() { super((Pointer)null); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public ViewManager(Pointer p) { super(p); }
-}
 
 public static native @Cast("MxBool") boolean g_isWorldActive(); public static native void g_isWorldActive(boolean setter);
 
@@ -6169,6 +6448,102 @@ public static native @Cast("BOOL") boolean AdjustWindowRectEx(RECT lpRect, @Cast
 public static native int SetRect(RECT rc, int left, int top, int right, int bottom);
 
 public static native @Cast("BOOL") boolean ClientToScreen(HWND hWnd, @Cast("LPPOINT") tagPOINT lpPoint);
+
+
+// Parsed from tglsurface.h
+
+// #ifndef _TglSurface_h
+// #define _TglSurface_h
+
+// #include "mxdirectx/mxstopwatch.h"
+// #include "tgl/tgl.h"
+@Namespace("Tgl") @Opaque public static class Device extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public Device() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Device(Pointer p) { super(p); }
+}
+@Namespace("Tgl") @Opaque public static class View extends Pointer {
+    /** Empty constructor. Calls {@code super((Pointer)null)}. */
+    public View() { super((Pointer)null); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public View(Pointer p) { super(p); }
+}
+ // namespace Tgl
+
+/////////////////////////////////////////////////////////////////////////////
+// TglSurface
+
+// VTABLE: LEGO1 0x100dc060
+// VTABLE: BETA10 0x101c3648
+// SIZE 0x70
+@NoOffset public static class TglSurface extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public TglSurface(Pointer p) { super(p); }
+
+	// SIZE 0x28
+	public static class CreateStruct extends Pointer {
+	    static { Loader.load(); }
+	    /** Default native constructor. */
+	    public CreateStruct() { super((Pointer)null); allocate(); }
+	    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+	    public CreateStruct(long size) { super((Pointer)null); allocateArray(size); }
+	    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+	    public CreateStruct(Pointer p) { super(p); }
+	    private native void allocate();
+	    private native void allocateArray(long size);
+	    @Override public CreateStruct position(long position) {
+	        return (CreateStruct)super.position(position);
+	    }
+	    @Override public CreateStruct getPointer(long i) {
+	        return new CreateStruct((Pointer)this).offsetAddress(i);
+	    }
+	
+		public native @Const GUID m_pDriverGUID(); public native CreateStruct m_pDriverGUID(GUID setter);          // 0x00
+		public native HWND m_hWnd(); public native CreateStruct m_hWnd(HWND setter);                        // 0x04
+		public native IDirectDraw m_pDirectDraw(); public native CreateStruct m_pDirectDraw(IDirectDraw setter);         // 0x08
+		public native IDirectDrawSurface m_pFrontBuffer(); public native CreateStruct m_pFrontBuffer(IDirectDrawSurface setter); // 0x0c
+		public native IDirectDrawSurface m_pBackBuffer(); public native CreateStruct m_pBackBuffer(IDirectDrawSurface setter);  // 0x10
+		public native IDirectDrawPalette m_pPalette(); public native CreateStruct m_pPalette(IDirectDrawPalette setter);     // 0x14
+		public native @Cast("BOOL") boolean m_isFullScreen(); public native CreateStruct m_isFullScreen(boolean setter);                // 0x18
+		public native @Cast("BOOL") boolean m_isWideViewAngle(); public native CreateStruct m_isWideViewAngle(boolean setter);             // 0x1c
+		public native IDirect3D2 m_direct3d(); public native CreateStruct m_direct3d(IDirect3D2 setter);             // 0x20
+		public native IDirect3DDevice2 m_d3dDevice(); public native CreateStruct m_d3dDevice(IDirect3DDevice2 setter);      // 0x24
+	}
+
+	public native @Cast("BOOL") boolean Create(@Const @ByRef CreateStruct arg0, Renderer arg1, Group pScene); // vtable+0x04
+	public native void Destroy();                                                       // vtable+0x08
+	public native double Render(); // render time in seconds // vtable+0x0c
+
+	public native Renderer GetRenderer();
+	public native Device GetDevice();
+
+	// FUNCTION: BETA10 0x100d5570
+	public native View GetView();
+
+	public native Group GetScene();
+
+	// FUNCTION: BETA10 0x1017cbc0
+	public native @Cast("unsigned int") int GetWidth();
+
+	// FUNCTION: BETA10 0x1017cbe0
+	public native @Cast("unsigned int") int GetHeight();
+
+	public native double GetRenderingRate();
+	public native double GetFrameRate();
+	public native @Cast("unsigned int") int GetFrameCount();
+// #ifdef _DEBUG
+	
+}
+
+/////////////////////////////////////////////////////////////////////////////
+
+// SYNTHETIC: LEGO1 0x100abcf0
+// SYNTHETIC: BETA10 0x1017de00
+// TglSurface::`scalar deleting destructor'
+
+// #endif /* _TglSurface_h */
 
 
 }
